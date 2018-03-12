@@ -66,29 +66,39 @@
   },
   "@graph": [
     {
-      "@id": "4b5bdd52-0c3f-4a65-a79e-f9a739e8d415",
-      "@type": "GeoCoordinates",
-      "latitude": "-33.7152",
-      "longitude": "150.30119"
-    },
-    {
       "@id": "EPL1",
+      "@type": "Equipment",
       "description": "Olympus camera with Panasonic 20mm lens",
       "identifier": "EPL1",
       "name": "EPL1 Camera"
     },
     {
+      "@id": "e36c39ef-cc40-4489-a2a6-3aff855a2434",
+      "@type": "GeoCoordinates",
+      "latitude": "-33.7152",
+      "longitude": "150.30119"
+    },
+    {
+      "@id": "http://ands.org.au",
+      "@type": "Organization",
+      "description": "The core purpose iof the Australian National Data Service (ANDS) is to make Australia’s research data assets more valuable for researchers, research institutions and the nation.",
+      "identifier": "http://ands.org.au",
+      "name": "Australian National Data Service"
+    },
+    {
       "@id": "http://dx.doi.org/10.1000/123456",
-      "@type": "ScholarlyWork",
-      "dC:CREATOR": "Peter Sefton",
-      "identifier": "http://dx.doi.org/10.1000/123456"
+      "@type": "ScholarlyArticle",
+      "creator": {
+        "@id": "http://orcid.org/0000-0002-3545-944X"
+      },
+      "datePublished": "2018",
+      "identifier": "http://dx.doi.org/10.1000/123456",
+      "name": "This is an example publication with a dodgy DOI"
     },
     {
       "@id": "http://dx.doi.org/10.5281/zenodo.1009240",
       "@type": "Dataset",
-      "outputOf": {
-        "@id": "https://github.com/UTS-eResearch/datacrate"
-      },
+      "outputOf": "DataCrate",
       "contact": {
         "@id": "http://orcid.org/0000-0002-3545-944X"
       },
@@ -118,6 +128,21 @@
       "temporalCoverage": "2017"
     },
     {
+      "@id": "http://eresearch.uts.edu.au/projects/provisioner",
+      "@type": "Project ",
+      "description": "The University of Technology Sydney Provisioner project is ",
+      "funder": [
+        {
+          "@id": "http://uts.edu.au"
+        },
+        {
+          "@id": "http://ands.org.au"
+        }
+      ],
+      "identifier": "http://eresearch.uts.edu.au/projects/provisioner",
+      "name": "Provisioner"
+    },
+    {
       "@id": "http://orcid.org/0000-0002-3545-944X",
       "@type": "Person",
       "affiliation": {
@@ -129,7 +154,7 @@
     },
     {
       "@id": "http://uts.edu.au",
-      "@type": "Organisation",
+      "@type": "Organization",
       "identifier": "http://uts.edu.au",
       "name": "University of Technology Sydney"
     },
@@ -138,26 +163,26 @@
       "@type": "Place",
       "description": "Catalina Park is a disused motor racing venue, located at Katoomba, in the Blue Mountains, New South Wales, Australia, and is recognised as an Aboriginal Place due to the long association of the local Gundungarra and Darug clans to the area.",
       "geo": {
-        "@id": "4b5bdd52-0c3f-4a65-a79e-f9a739e8d415"
+        "@id": "e36c39ef-cc40-4489-a2a6-3aff855a2434"
       },
       "identifier": "http://www.geonames.org/8152662/catalina-park.html",
       "name": "Catalina Park"
     },
     {
       "@id": "https://creativecommons.org/licenses/by-nc-sa/3.0/au/",
-      "description": "Attribution-NonCommercial-ShareAlike 3.0 Australia (CC BY-NC-SA 3.0 AU)\r\n\r\n\r\n\r\nThis is a human-readable summary of (and not a substitute for) the license. Disclaimer.\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\nYou are free to:\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\nShare — copy and redistribute the material in any medium or format\r\n\r\n\r\n\r\nAdapt — remix, transform, and build upon the material\r\n\r\n\r\n\r\nThe licensor cannot revoke these freedoms as long as you follow the license terms.\r\n\r\n\r\n\r\nUnder the following terms:\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\nAttribution — You must give appropriate credit, provide a link to the license, and indicate if changes were made. You may do so in any reasonable manner, but not in any way that suggests the licensor endorses you or your use.\r\n\r\n\r\n\r\nNon-Commercial — You may not use the material for commercial purposes.\r\n\r\n\r\n\r\nShareAlike — If you remix, transform, or build upon the material, you must distribute your contributions under the same license as the original.\r\n\r\n\r\n\r\nNo additional restrictions — You may not apply legal terms or technological measures that legally restrict others from doing anything the license permits.",
+      "description": "Attribution-NonCommercial-ShareAlike 3.0 Australia (CC BY-NC-SA 3.0 AU)\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\nThis is a human-readable summary of (and not a substitute for) the license. Disclaimer.\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\nYou are free to:\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\nShare — copy and redistribute the material in any medium or format\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\nAdapt — remix, transform, and build upon the material\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\nThe licensor cannot revoke these freedoms as long as you follow the license terms.\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\nUnder the following terms:\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\nAttribution — You must give appropriate credit, provide a link to the license, and indicate if changes were made. You may do so in any reasonable manner, but not in any way that suggests the licensor endorses you or your use.\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\nNon-Commercial — You may not use the material for commercial purposes.\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\nShareAlike — If you remix, transform, or build upon the material, you must distribute your contributions under the same license as the original.\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\nNo additional restrictions — You may not apply legal terms or technological measures that legally restrict others from doing anything the license permits.",
       "identifier": "https://creativecommons.org/licenses/by-nc-sa/3.0/au/",
       "name": "CC BY-NC-SA 3.0 AU"
     },
     {
-      "@id": "https://github.com/UTS-eResearch/datacrate",
+      "@id": "https://github.com/UTS-eResearch/projects/datacrate",
       "@type": "Project",
-      "description": "The DataCrate project is to write the spec for DataCrate, of which this is an example.",
+      "description": "The DataCrate project is to write the spec for DataCrate, of which this is an example. The DataCrate project is part of the University of Technology Sydney's Provisioner project.",
       "funder": {
         "@id": "http://uts.edu.au"
       },
-      "identifier": "https://github.com/UTS-eResearch/datacrate",
-      "name": "DataCrate"
+      "identifier": "https://github.com/UTS-eResearch/projects/datacrate",
+      "name": "DataCrate Project"
     },
     {
       "@id": "lots_of_little_files",
@@ -171,19 +196,17 @@
       "@type": "Dataset",
       "path": "pics",
       "description": "This directory contains the images for the research project",
-      "hasPart": [
-        {
-          "@id": "pics/19093074_10155469333581584_5707039334816454031_o.jpg"
-        },
-        {
-          "@id": "pics/CATALOG_pics.xlsx"
-        }
-      ],
+      "hasPart": {
+        "@id": "pics/19093074_10155469333581584_5707039334816454031_o.jpg"
+      },
       "identifier": "pics"
     },
     {
       "@id": "pics/19093074_10155469333581584_5707039334816454031_o.jpg",
       "@type": "File",
+      "contentLocation": {
+        "@id": "http://www.geonames.org/8152662/catalina-park.html"
+      },
       "contentSize": "132765",
       "path": "pics/19093074_10155469333581584_5707039334816454031_o.jpg",
       "creator": {
@@ -196,14 +219,6 @@
         "@id": "https://creativecommons.org/licenses/by-nc-sa/3.0/au/"
       },
       "relation:Contributor": "EPL1"
-    },
-    {
-      "@id": "pics/CATALOG_pics.xlsx",
-      "@type": "File",
-      "contentSize": "16875",
-      "path": "pics/CATALOG_pics.xlsx",
-      "encodingFormat": "Microsoft Excel Non-XML Binary Workbook",
-      "fileFormat": "http://www.nationalarchives.gov.uk/PRONOM/fmt/595"
     }
   ]
 }

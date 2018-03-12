@@ -97,8 +97,8 @@ module.exports = function(){
         var index_maker = new Index();
         index_maker.make_index_html(this.json_ld);
         citer = new Datacite();
-        text_citation = citer.make_citation("./" + path.join(this.dir, "CATALOG.json"), path.join(this.dir, "index.html"));
-        index_maker.write_html("defaults/catalog_template.html", path.join(this.dir, "index.html"), text_citation);
+        text_citation = citer.make_citation(this.json_ld, path.join(this.dir, "index.html"));
+        index_maker.write_html(path.join(__dirname, "defaults/catalog_template.html"), path.join(this.dir, "index.html"), text_citation);
     },
 
     to_json : function to_json(graph) {

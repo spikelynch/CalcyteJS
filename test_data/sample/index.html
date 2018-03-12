@@ -64,9 +64,7 @@ A machine-readable version of this page is available:
     </tr>
     <tr>
       <th>OutputOf</th>
-      <td>
-        <a href="#https://github.com/UTS-eResearch/datacrate">DataCrate</a>
-      </td>
+      <td>DataCrate</td>
     </tr>
     <tr>
       <th>Contact</th>
@@ -125,6 +123,19 @@ A machine-readable version of this page is available:
       <td>2017</td>
     </tr>
   </table>
+  <h1>Contextual info: Equipment</h1>
+  <table>
+    <tr>
+      <th>@id</th>
+      <th>Description</th>
+      <th>Name</th>
+    </tr>
+    <tr id="EPL1">
+      <td>EPL1</td>
+      <td>Olympus camera with Panasonic 20mm lens</td>
+      <td>EPL1 Camera</td>
+    </tr>
+  </table>
   <h1>Contextual info: GeoCoordinates</h1>
   <table>
     <tr>
@@ -132,20 +143,29 @@ A machine-readable version of this page is available:
       <th>Latitude</th>
       <th>Longitude</th>
     </tr>
-    <tr id="4b5bdd52-0c3f-4a65-a79e-f9a739e8d415">
-      <td>4b5bdd52-0c3f-4a65-a79e-f9a739e8d415</td>
+    <tr id="e36c39ef-cc40-4489-a2a6-3aff855a2434">
+      <td>e36c39ef-cc40-4489-a2a6-3aff855a2434</td>
       <td>-33.7152</td>
       <td>150.30119</td>
     </tr>
   </table>
-  <h1>Contextual info: Organisation</h1>
+  <h1>Contextual info: Organization</h1>
   <table>
     <tr>
       <th>@id</th>
+      <th>Description</th>
       <th>Name</th>
+    </tr>
+    <tr id="http://ands.org.au">
+      <td>http://ands.org.au</td>
+      <td>The core purpose iof the Australian National Data Service (ANDS) is to make Australia’s research data assets more valuable for researchers, research institutions and the nation.</td>
+      <td>
+        <a href="http://ands.org.au">Australian National Data Service</a>
+      </td>
     </tr>
     <tr id="http://uts.edu.au">
       <td>http://uts.edu.au</td>
+      <td/>
       <td>
         <a href="http://uts.edu.au">University of Technology Sydney</a>
       </td>
@@ -182,10 +202,10 @@ A machine-readable version of this page is available:
       <td>http://www.geonames.org/8152662/catalina-park.html</td>
       <td>Catalina Park is a disused motor racing venue, located at Katoomba, in the Blue Mountains, New South Wales, Australia, and is recognised as an Aboriginal Place due to the long association of the local Gundungarra and Darug clans to the area.</td>
       <td>
-        <table id="4b5bdd52-0c3f-4a65-a79e-f9a739e8d415">
+        <table id="e36c39ef-cc40-4489-a2a6-3aff855a2434">
           <tr>
             <th>@id</th>
-            <td>4b5bdd52-0c3f-4a65-a79e-f9a739e8d415</td>
+            <td>e36c39ef-cc40-4489-a2a6-3aff855a2434</td>
           </tr>
           <tr>
             <th>@type</th>
@@ -214,26 +234,55 @@ A machine-readable version of this page is available:
       <th>Funder</th>
       <th>Name</th>
     </tr>
-    <tr id="https://github.com/UTS-eResearch/datacrate">
-      <td>https://github.com/UTS-eResearch/datacrate</td>
-      <td>The DataCrate project is to write the spec for DataCrate, of which this is an example.</td>
+    <tr id="https://github.com/UTS-eResearch/projects/datacrate">
+      <td>https://github.com/UTS-eResearch/projects/datacrate</td>
+      <td>The DataCrate project is to write the spec for DataCrate, of which this is an example. The DataCrate project is part of the University of Technology Sydney's Provisioner project.</td>
       <td>
         <a href="#http://uts.edu.au">University of Technology Sydney</a>
       </td>
       <td>
-        <a href="https://github.com/UTS-eResearch/datacrate">DataCrate</a>
+        <a href="https://github.com/UTS-eResearch/projects/datacrate">DataCrate Project</a>
       </td>
     </tr>
   </table>
-  <h1>Contextual info: ScholarlyWork</h1>
+  <h1>Contextual info: Project </h1>
   <table>
     <tr>
       <th>@id</th>
-      <th>DC:CREATOR</th>
+      <th>Description</th>
+      <th>Funder</th>
+      <th>Name</th>
+    </tr>
+    <tr id="http://eresearch.uts.edu.au/projects/provisioner">
+      <td>http://eresearch.uts.edu.au/projects/provisioner</td>
+      <td>The University of Technology Sydney Provisioner project is </td>
+      <td>
+        <a href="#http://uts.edu.au">University of Technology Sydney</a>
+        , 
+        <a href="#http://ands.org.au">Australian National Data Service</a>
+      </td>
+      <td>
+        <a href="http://eresearch.uts.edu.au/projects/provisioner">Provisioner</a>
+      </td>
+    </tr>
+  </table>
+  <h1>Contextual info: ScholarlyArticle</h1>
+  <table>
+    <tr>
+      <th>@id</th>
+      <th>Creator</th>
+      <th>DatePublished</th>
+      <th>Name</th>
     </tr>
     <tr id="http://dx.doi.org/10.1000/123456">
       <td>http://dx.doi.org/10.1000/123456</td>
-      <td>Peter Sefton</td>
+      <td>
+        <a href="#http://orcid.org/0000-0002-3545-944X">Peter Sefton</a>
+      </td>
+      <td>2018</td>
+      <td>
+        <a href="http://dx.doi.org/10.1000/123456">This is an example publication with a dodgy DOI</a>
+      </td>
     </tr>
   </table>
 </div>

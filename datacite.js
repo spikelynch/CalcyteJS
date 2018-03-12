@@ -5,7 +5,7 @@ module.exports = function(){
   return(
   {
 
-  make_citation : function make_citation(json_path, out_path) {
+  make_citation : function make_citation(crate_data, out_path) {
     /* Return a datacite citation in XML format """
     # Check we have the metadata we need as per DataCrate spec
 
@@ -20,7 +20,9 @@ module.exports = function(){
     """
     */
     //console.log(Object.keys(this.json_by_url));
-    var crate_data = require(json_path);
+    if (!crate_data['@graph']) {
+      crate_data = require(crate_data);
+    }
     this.json_by_id = {};
     this.json_by_url = {};
     this.json_by_type = {};

@@ -14,23 +14,34 @@ via automatically generated spreadsheets and for creating static HTML repositori
 Calcyte targets the [Draft DataCrate Packaging format v0.2](https://github.com/UTS-eResearch/datacrate/blob/new_draft/0.2/spec/0.2/data_crate_specification_v0.2.md).  
 At this stage Calcyte does not Bag content, it jsut creates *Working DataCrates*.
 
-## Installation
-(TODO)
+## Installation (untested)
+
+-  Install [node.js](https://nodejs.org/en/)
 
 -  Install Siegfreid using the [instructions](https://github.com/richardlehane/siegfried/wiki/Getting-started).
 
+-  Get the code:
+    git clone https://code.research.uts.edu.au/eresearch/CalcyteJS.git
+
+-  Install the node pacakge:
+   npm install -g
 
 ## Usage / instructions
 
-To run calcyte on a group of directories pass it a list of directories
+This version Calcyte doesn't have any options or proper argument handling or help.
 
+To run Calcyte on a group of directories pass it a list of directories
+
+One:
 
 ```
-./calcyte test_data/sample
+calcyte test_data/sample
 ```
 
+More:
+
 ```
-./calcyte test_data/*
+calcyte test_data/*
 
 ```
 

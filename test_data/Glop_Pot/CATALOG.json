@@ -66,27 +66,27 @@
   },
   "@graph": [
     {
-      "@id": "1c48a4cd-c67b-4b91-9612-17ee1dd86cb0",
+      "@id": "07ad1e37-2eda-4f87-9007-d74f0be0af89",
       "@type": "GeoCoordinates",
       "latitude": "-35.623592",
       "longitude": "148.683836"
     },
     {
-      "@id": "28289002-71e1-45eb-b5fb-997ab5dccf63",
-      "@type": "Place",
-      "description": "Located in the Snowy Mountains Region of NSW, nearest town Tumut 2720",
-      "geo": {
-        "@id": "1c48a4cd-c67b-4b91-9612-17ee1dd86cb0"
-      },
-      "name": "Glop Pot"
-    },
-    {
-      "@id": "7e447e85-8177-4760-9093-6635a82f9887",
+      "@id": "353df8b0-a2fc-4fd1-a19d-24c034f60186",
       "@type": "Format",
       "eXTENSION:": ".svx",
       "description": "Survex is a multi-platform open-source cave surveying package.",
       "name": "Survex file",
       "mIME:": "text/plain"
+    },
+    {
+      "@id": "63ef54a9-e87b-4b9d-9a2f-0f89449f8686",
+      "@type": "Place",
+      "description": "Located in the Snowy Mountains Region of NSW, nearest town Tumut 2720",
+      "geo": {
+        "@id": "07ad1e37-2eda-4f87-9007-d74f0be0af89"
+      },
+      "name": "Glop Pot"
     },
     {
       "@id": "Keir Vaughan-Taylor",
@@ -132,20 +132,9 @@
         },
         {
           "@id": "asf/CATALOG_asf.xlsx"
-        },
-        {
-          "@id": "asf/.DS_Store"
         }
       ],
       "identifier": "asf"
-    },
-    {
-      "@id": "asf/.DS_Store",
-      "@type": "File",
-      "contentSize": "6148",
-      "path": "asf/.DS_Store",
-      "encodingFormat": "DS_store file (MAC)",
-      "fileFormat": "http://www.nationalarchives.gov.uk/PRONOM/fmt/394"
     },
     {
       "@id": "asf/CATALOG_asf.xlsx",
@@ -316,7 +305,7 @@
         "@id": "http://orcid.org/0000-0003-4953-0830"
       },
       "contentLocation": {
-        "@id": "28289002-71e1-45eb-b5fb-997ab5dccf63"
+        "@id": "63ef54a9-e87b-4b9d-9a2f-0f89449f8686"
       },
       "path": "./",
       "creator": {
