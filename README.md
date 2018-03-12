@@ -23,8 +23,8 @@ At this stage Calcyte does not Bag content, it jsut creates *Working DataCrates*
 -  Get the code:
     git clone https://code.research.uts.edu.au/eresearch/CalcyteJS.git
 
--  Install the node pacakge:
-   npm install -g
+-  Link the binary for development use:
+   npm link
 
 ## Usage / instructions
 
