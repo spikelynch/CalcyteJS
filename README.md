@@ -1,6 +1,6 @@
 # CalcyteJS
 
-This is a port
+This is a work-in-progress port of the python-based [Calcyte tool](https://codeine.research.uts.edu.au/eresearch/calcyte).
 
 ## Status
 
