@@ -1,0 +1,460 @@
+{
+  "@context": {
+    "name": "schema:name",
+    "file": "schema:mediaObject",
+    "path": "schema:contentUrl",
+    "contentSize": "schema:contentSize",
+    "copyright": "schema:copyrightHolder",
+    "publisher": "schema:publisher",
+    "journal": "schema:periodical",
+    "issn": "schema:issn",
+    "datePublished": "schema:datePublished",
+    "identifier": "schema:identifier",
+    "description": "schema:description",
+    "license": "schema:license",
+    "creator": "schema:creator",
+    "contributor": "schema:contributor",
+    "outputOf": "frapo:outputOf",
+    "related": "schema:relatedLink",
+    "sameAs": "schema:sameAs",
+    "basedOn": "schema:isBasedOn",
+    "translator": "schema:translator",
+    "translationOf": "schema:translationOf",
+    "funder": "schema:funder",
+    "Person": "schema:Person",
+    "contact": "schema:accountablePerson",
+    "email": "schema:email",
+    "phone": "schema:telephone",
+    "Dataset": "schema:Dataset",
+    "fileFormat": "schema:fileFormat",
+    "encodingFormat": "schema:encodingFormat",
+    "temporalCoverage": "schema:temporalCoverage",
+    "spatialCoverage": "schema:spatialCoverage",
+    "contentLocation": "schema:contentLocation",
+    "keywords": "schema:keywords",
+    "subject": "schema:subject",
+    "givenName": "schema:givenName",
+    "familyName": "schema:familyName",
+    "Place": "schema:Place",
+    "Organization": "schema:Organization",
+    "Project": "frapo:Project",
+    "affiliation": "schema:affiliation",
+    "Funder": "schema:Funder",
+    "GeoShape": "schema:GeoShape",
+    "GeoCoordinates": "schema:GeoCoordinates",
+    "geo": "schema:geo",
+    "latitude": "schema:latitude",
+    "longitude": "schema:longitude",
+    "Box": "schema:Box",
+    "CreativeWork": "schema:CreativeWork",
+    "MediaObject": "schema:MediaObject",
+    "isOutputOf": "frap:isOutputOf",
+    "Equipment": "frapo:Equipment",
+    "ScholarlyArticle": "schema:ScholarlyArticle",
+    "SoftwareApplication": "schema:SoftwareApplication",
+    "interviewee": "bibo:interviewee",
+    "interviewer": "bibo:interviewer",
+    "hasPart": "schema:hasPart",
+    "bibo": "http://purl.org/ontology/bibo/",
+    "cc": "http://creativecommons.org/ns#",
+    "dct": "http://purl.org/dc/terms/",
+    "foaf": "http://xmlns.com/foaf/0.1/",
+    "rdf": "http://www.w3.org/1999/02/22-rdf-syntax-ns#",
+    "rdfa": "http://www.w3.org/ns/rdfa#",
+    "rdfs": "http://www.w3.org/2000/01/rdf-schema#",
+    "schema": "http://schema.org/"
+  },
+  "@graph": [
+    {
+      "@id": "1c48a4cd-c67b-4b91-9612-17ee1dd86cb0",
+      "@type": "GeoCoordinates",
+      "latitude": "-35.623592",
+      "longitude": "148.683836"
+    },
+    {
+      "@id": "28289002-71e1-45eb-b5fb-997ab5dccf63",
+      "@type": "Place",
+      "description": "Located in the Snowy Mountains Region of NSW, nearest town Tumut 2720",
+      "geo": {
+        "@id": "1c48a4cd-c67b-4b91-9612-17ee1dd86cb0"
+      },
+      "name": "Glop Pot"
+    },
+    {
+      "@id": "7e447e85-8177-4760-9093-6635a82f9887",
+      "@type": "Format",
+      "eXTENSION:": ".svx",
+      "description": "Survex is a multi-platform open-source cave surveying package.",
+      "name": "Survex file",
+      "mIME:": "text/plain"
+    },
+    {
+      "@id": "Keir Vaughan-Taylor",
+      "@type": "Person",
+      "email": "keir@example.com",
+      "familyName": "Vaughan-Taylor",
+      "givenName": "Keir",
+      "identifier": "Keir Vaughan-Taylor",
+      "name": "Keir Vaughan-Taylor"
+    },
+    {
+      "@id": "SUSS",
+      "@type": "Organization",
+      "identifier": "SUSS",
+      "name": "Sydney University Speleological Society "
+    },
+    {
+      "@id": "asf",
+      "@type": "Dataset",
+      "path": "asf",
+      "description": [],
+      "hasPart": [
+        {
+          "@id": "asf/README.txt"
+        },
+        {
+          "@id": "asf/asf3.svx"
+        },
+        {
+          "@id": "asf/asf4.svx"
+        },
+        {
+          "@id": "asf/asf5.svx"
+        },
+        {
+          "@id": "asf/asf6.svx"
+        },
+        {
+          "@id": "asf/asf7.svx"
+        },
+        {
+          "@id": "asf/asf8.svx"
+        },
+        {
+          "@id": "asf/CATALOG_asf.xlsx"
+        },
+        {
+          "@id": "asf/.DS_Store"
+        }
+      ],
+      "identifier": "asf"
+    },
+    {
+      "@id": "asf/.DS_Store",
+      "@type": "File",
+      "contentSize": "6148",
+      "path": "asf/.DS_Store",
+      "encodingFormat": "DS_store file (MAC)",
+      "fileFormat": "http://www.nationalarchives.gov.uk/PRONOM/fmt/394"
+    },
+    {
+      "@id": "asf/CATALOG_asf.xlsx",
+      "@type": "File",
+      "contentSize": "16871",
+      "path": "asf/CATALOG_asf.xlsx",
+      "encodingFormat": "Microsoft Excel Non-XML Binary Workbook",
+      "fileFormat": "http://www.nationalarchives.gov.uk/PRONOM/fmt/595"
+    },
+    {
+      "@id": "asf/README.txt",
+      "@type": "File",
+      "contentSize": "401",
+      "path": "asf/README.txt",
+      "encodingFormat": "Plain Text File",
+      "fileFormat": "http://www.nationalarchives.gov.uk/PRONOM/x-fmt/111"
+    },
+    {
+      "@id": "asf/asf3.svx",
+      "@type": "File",
+      "contentSize": "406",
+      "path": "asf/asf3.svx",
+      "encodingFormat": "Plain Text File",
+      "fileFormat": "http://www.nationalarchives.gov.uk/PRONOM/x-fmt/111"
+    },
+    {
+      "@id": "asf/asf4.svx",
+      "@type": "File",
+      "contentSize": "386",
+      "path": "asf/asf4.svx",
+      "encodingFormat": "Plain Text File",
+      "fileFormat": "http://www.nationalarchives.gov.uk/PRONOM/x-fmt/111"
+    },
+    {
+      "@id": "asf/asf5.svx",
+      "@type": "File",
+      "contentSize": "390",
+      "path": "asf/asf5.svx",
+      "encodingFormat": "Plain Text File",
+      "fileFormat": "http://www.nationalarchives.gov.uk/PRONOM/x-fmt/111"
+    },
+    {
+      "@id": "asf/asf6.svx",
+      "@type": "File",
+      "contentSize": "400",
+      "path": "asf/asf6.svx",
+      "encodingFormat": "Plain Text File",
+      "fileFormat": "http://www.nationalarchives.gov.uk/PRONOM/x-fmt/111"
+    },
+    {
+      "@id": "asf/asf7.svx",
+      "@type": "File",
+      "contentSize": "402",
+      "path": "asf/asf7.svx",
+      "encodingFormat": "Plain Text File",
+      "fileFormat": "http://www.nationalarchives.gov.uk/PRONOM/x-fmt/111"
+    },
+    {
+      "@id": "asf/asf8.svx",
+      "@type": "File",
+      "contentSize": "418",
+      "path": "asf/asf8.svx",
+      "encodingFormat": "Plain Text File",
+      "fileFormat": "http://www.nationalarchives.gov.uk/PRONOM/x-fmt/111"
+    },
+    {
+      "@id": "cp7glop.ai",
+      "@type": "File",
+      "contentSize": "383766",
+      "path": "cp7glop.ai",
+      "creator": {
+        "@id": "http://orcid.org/0000-0003-4953-9114"
+      },
+      "description": "Illustrator file for Glop Pot",
+      "encodingFormat": "Acrobat PDF 1.5 - Portable Document Format",
+      "fileFormat": "http://www.nationalarchives.gov.uk/PRONOM/fmt/19",
+      "license": {
+        "@id": "https://creativecommons.org/licenses/by/3.0/au/"
+      }
+    },
+    {
+      "@id": "cp7glop.svx",
+      "@type": "File",
+      "contentSize": "2058",
+      "path": "cp7glop.svx",
+      "creator": {
+        "@id": "http://orcid.org/0000-0003-4953-9114"
+      },
+      "description": "Survex data file for Glop Pot",
+      "encodingFormat": "Plain Text File",
+      "fileFormat": "http://www.nationalarchives.gov.uk/PRONOM/x-fmt/111",
+      "license": {
+        "@id": "https://creativecommons.org/licenses/by/3.0/au/"
+      }
+    },
+    {
+      "@id": "datasheets",
+      "@type": "Dataset",
+      "path": "datasheets",
+      "hasPart": [
+        {
+          "@id": "datasheets/CP7Glopdata01.jpg"
+        },
+        {
+          "@id": "datasheets/CP7Glopdata02.jpg"
+        },
+        {
+          "@id": "datasheets/CATALOG_datasheets.xlsx"
+        }
+      ],
+      "identifier": "datasheets"
+    },
+    {
+      "@id": "datasheets/CATALOG_datasheets.xlsx",
+      "@type": "File",
+      "contentSize": "17202",
+      "path": "datasheets/CATALOG_datasheets.xlsx",
+      "encodingFormat": "Microsoft Excel Non-XML Binary Workbook",
+      "fileFormat": "http://www.nationalarchives.gov.uk/PRONOM/fmt/595"
+    },
+    {
+      "@id": "datasheets/CP7Glopdata01.jpg",
+      "@type": "File",
+      "contentSize": "135193",
+      "path": "datasheets/CP7Glopdata01.jpg",
+      "creator": [
+        {
+          "@id": "Keir Vaughan-Taylor"
+        },
+        {
+          "@id": "http://orcid.org/0000-0003-4953-9114"
+        },
+        {
+          "@id": "http://orcid.org/0000-0002-2038-7922"
+        }
+      ],
+      "description": "Sump 2 downstream to sump 1",
+      "encodingFormat": "JPEG File Interchange Format",
+      "fileFormat": "http://www.nationalarchives.gov.uk/PRONOM/fmt/43",
+      "license": {
+        "@id": "https://creativecommons.org/licenses/by/3.0/au/"
+      }
+    },
+    {
+      "@id": "datasheets/CP7Glopdata02.jpg",
+      "@type": "File",
+      "contentSize": "199121",
+      "path": "datasheets/CP7Glopdata02.jpg",
+      "creator": [
+        {
+          "@id": "http://orcid.org/0000-0003-4953-9114"
+        },
+        {
+          "@id": "http://orcid.org/0000-0002-2038-7922"
+        }
+      ],
+      "description": "Sump 1 to ladder, Tag to ladder",
+      "encodingFormat": "JPEG File Interchange Format",
+      "fileFormat": "http://www.nationalarchives.gov.uk/PRONOM/fmt/43",
+      "license": {
+        "@id": "https://creativecommons.org/licenses/by/3.0/au/"
+      }
+    },
+    {
+      "@id": "http://dx.doi.org/10.1016/something",
+      "@type": "Dataset",
+      "contact": {
+        "@id": "http://orcid.org/0000-0003-4953-0830"
+      },
+      "contentLocation": {
+        "@id": "28289002-71e1-45eb-b5fb-997ab5dccf63"
+      },
+      "path": "./",
+      "creator": {
+        "@id": "http://orcid.org/0000-0003-4953-9114"
+      },
+      "datePublished": "2017",
+      "description": "Sketchsheets and data from the Glop Pot cave survey",
+      "hasPart": [
+        {
+          "@id": "cp7glop.svx"
+        },
+        {
+          "@id": "cp7glop.ai"
+        },
+        {
+          "@id": "asf"
+        },
+        {
+          "@id": "datasheets"
+        },
+        {
+          "@id": "sketchsheets"
+        }
+      ],
+      "identifier": "http://dx.doi.org/10.1016/something",
+      "name": "Glop Pot data",
+      "publisher": "University of Technology Sydney"
+    },
+    {
+      "@id": "http://orcid.org/0000-0002-2038-7922",
+      "@type": "Person",
+      "email": "andreas@example.com",
+      "familyName": "Klocker",
+      "givenName": "Andreas",
+      "identifier": "http://orcid.org/0000-0002-2038-7922",
+      "name": "Andreas Klocker"
+    },
+    {
+      "@id": "http://orcid.org/0000-0003-4953-0830",
+      "@type": "Person",
+      "email": "mike.lake@uts.edu.au",
+      "familyName": "Lake",
+      "givenName": "Mike",
+      "identifier": "http://orcid.org/0000-0003-4953-0830",
+      "name": "Mike Lake"
+    },
+    {
+      "@id": "http://orcid.org/0000-0003-4953-9114",
+      "@type": "Person",
+      "email": "phil@example.com",
+      "familyName": "Maynard",
+      "givenName": "Phil",
+      "identifier": "http://orcid.org/0000-0003-4953-9114",
+      "name": "Phil Maynard"
+    },
+    {
+      "@id": "https://creativecommons.org/licenses/by/3.0/au/",
+      "description": "Attribution 3.0 Australia (CC BY 3.0 AU)\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\nThis is a human-readable summary of (and not a substitute for) the license. \r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\nDisclaimer. au\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\nYou are free to:\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\nShare — copy and redistribute the material in any medium or format\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\nAdapt — remix, transform, and build upon the material\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\nfor any purpose, even commercially.\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n This license is acceptable for Free Cultural Works.\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\nThe licensor cannot revoke these freedoms as long as you follow the license terms.\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\nUnder the following terms:\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\nAttribution — You must give appropriate credit, provide a link to the license, and indicate if changes were made. You may do so in any reasonable manner, but not in any way that suggests the licensor endorses you or your use.\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\nNo additional restrictions — You may not apply legal terms or technological measures that legally restrict others from doing anything the license permits.\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\nNotices:\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\nYou do not have to comply with the license for elements of the material in the public domain or where your use is permitted by an applicable exception or limitation.\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\nNo warranties are given. The license may not give you all of the permissions necessary for your intended use. For example, other rights such as publicity, privacy, or moral rights may limit how you use the material.",
+      "identifier": "https://creativecommons.org/licenses/by/3.0/au/",
+      "name": "CC-BY"
+    },
+    {
+      "@id": "sketchsheets",
+      "@type": "Dataset",
+      "path": "sketchsheets",
+      "description": "Metadata file for Glop Pot sketch sheets",
+      "hasPart": [
+        {
+          "@id": "sketchsheets/CP7Glopsketch01.jpg"
+        },
+        {
+          "@id": "sketchsheets/CP7Glopsketch02.jpg"
+        },
+        {
+          "@id": "sketchsheets/CP7Glopsketch03.jpg"
+        }
+      ],
+      "identifier": "sketchsheets"
+    },
+    {
+      "@id": "sketchsheets/CP7Glopsketch01.jpg",
+      "@type": "File",
+      "contentSize": "179640",
+      "path": "sketchsheets/CP7Glopsketch01.jpg",
+      "creator": [
+        {
+          "@id": "http://orcid.org/0000-0003-4953-9114"
+        },
+        {
+          "@id": "http://orcid.org/0000-0002-2038-7922"
+        }
+      ],
+      "description": "Downstream from sump 2 to sump 1",
+      "encodingFormat": "JPEG File Interchange Format",
+      "fileFormat": "http://www.nationalarchives.gov.uk/PRONOM/fmt/43",
+      "license": {
+        "@id": "https://creativecommons.org/licenses/by/3.0/au/"
+      }
+    },
+    {
+      "@id": "sketchsheets/CP7Glopsketch02.jpg",
+      "@type": "File",
+      "contentSize": "105936",
+      "path": "sketchsheets/CP7Glopsketch02.jpg",
+      "creator": [
+        {
+          "@id": "http://orcid.org/0000-0003-4953-9114"
+        },
+        {
+          "@id": "http://orcid.org/0000-0002-2038-7922"
+        }
+      ],
+      "description": "Downstream from sump 1 to ladder",
+      "encodingFormat": "JPEG File Interchange Format",
+      "fileFormat": "http://www.nationalarchives.gov.uk/PRONOM/fmt/43",
+      "license": {
+        "@id": "https://creativecommons.org/licenses/by/3.0/au/"
+      }
+    },
+    {
+      "@id": "sketchsheets/CP7Glopsketch03.jpg",
+      "@type": "File",
+      "contentSize": "97729",
+      "path": "sketchsheets/CP7Glopsketch03.jpg",
+      "creator": [
+        {
+          "@id": "http://orcid.org/0000-0003-4953-9114"
+        },
+        {
+          "@id": "http://orcid.org/0000-0002-2038-7922"
+        }
+      ],
+      "description": "In from tag to ladder",
+      "encodingFormat": "JPEG File Interchange Format",
+      "fileFormat": "http://www.nationalarchives.gov.uk/PRONOM/fmt/43",
+      "license": {
+        "@id": "https://creativecommons.org/licenses/by/3.0/au/"
+      }
+    }
+  ]
+}

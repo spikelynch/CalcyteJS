@@ -1,0 +1,109 @@
+{
+  "@context": {
+    "HasPart": "schema:hasPart",
+    "ID": "schema:identifier",
+    "Identifier": "schema:identifier",
+    "Description": "schema:description",
+    "License": "schema:license",
+    "Title": "schema:name",
+    "Name": "schema:name",
+    "Creator": "schema:creator",
+    "Contributor": "schema:contributor",
+    "Funder": "schema:funder",
+    "Person": "schema:Person",
+    "Contact": "schema:accountablePerson",
+    "Email": "schema:email",
+    "Phone": "schema:telephone",
+    "Dataset": "schema:Dataset",
+    "fileFormat": "schema:fileFormat",
+    "TemporalCoverage": "schema:TemporalCoverage",
+    "SpatialCoverage": "schema:spatialCoverage",
+    "ContentLocation": "schema:contentLocation",
+    "Keywords": "schema:keywords",
+    "Subject": "schema:subject",
+    "GivenName": "schema:givenName",
+    "FamilyName": "schema:familyName",
+    "HasFile": "pcdm:hasFile",
+    "fileOf": "pcdm:fileOf",
+    "MemberOf": "pcdm:memberOf",
+    "HasMember": "pcdm:hasMember",
+    "Object": "pcdm:Object",
+    "Collection": "pcdm:Collection",
+    "Place": "schema:Place",
+    "Organization": "schema:Organization",
+    "GeoShape": "schema:GeoShape",
+    "GeoCoordinates": "schema:GeoCoordinates",
+    "geo": "schema:geo",
+    "Latitude": "schema:latitude",
+    "Longitude": "schema:longitude",
+    "Box": "schema:Box",
+    "CreativeWork": "schema:CreativeWork",
+    "MediaObject": "schema:MediaObject",
+    "Project": "vivo:Project",
+    "Format": "formats:Format",
+    "formats": "http://www.w3.org/ns/formats/",
+    "Interviewee": "bibo:interviewee",
+    "bibo": "http://purl.org/ontology/bibo/",
+    "cc": "http://creativecommons.org/ns#",
+    "dct": "http://purl.org/dc/terms/",
+    "foaf": "http://xmlns.com/foaf/0.1/",
+    "pcdm": "http://pcdm.org/models#",
+    "rdf": "http://www.w3.org/1999/02/22-rdf-syntax-ns#",
+    "rdfa": "http://www.w3.org/ns/rdfa#",
+    "rdfs": "http://www.w3.org/2000/01/rdf-schema#",
+    "schema": "http://schema.org/",
+    "vivo": "http://vivoweb.org/ontology/core#"
+  },
+  "@graph": [
+   
+    {
+      "@id": "#glop_pot",
+      "@type": [
+        "CreativeWork",
+        "Place"
+      ],
+      "Description": "Located in the Snowy Mountains Region of NSW, nearest town Tumut 2720",
+      "geo": {
+        "@id": "_:b0"
+      },
+      "ID": "glop_pot",
+      "Name": "Glop Pot"
+    },
+   
+    {
+      "@id": "http://orcid.org/0000-0003-4953-0830",
+      "@type": [
+        "CreativeWork",
+        "Person"
+      ],
+      "Email": "mike.lake@uts.edu.au",
+      "ID": "http://orcid.org/0000-0003-4953-0830",
+      "Name": "Mike Lake",
+      "Phone": "+61 (0)2 9514 2238"
+    },
+    {
+      "@id": "#Glop%20Pot",
+      "@type": "Dataset",
+      "Contact": {
+        "@id": "http://orcid.org/0000-0003-4953-0830"
+      },
+      "ContentLocation": {
+        "@id": "#glop_pot"
+      },
+      "Description": "Sketchsheets and data from the Glop Pot cave survey",
+      "HasPart": [
+        {
+          "@id": "http://orcid.org/0000-0003-4953-0830"
+        },
+        
+        {
+          "@id": "#glop_pot"
+        }
+       
+      ],
+      "ID": "Glop Pot",
+      "Name": "Glop Pot data"
+    }
+  
+  ]
+}

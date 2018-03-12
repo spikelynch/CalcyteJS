@@ -1,0 +1,27 @@
+#!/usr/bin/env node
+
+
+const Collection = require("./collection.js");
+const args = require('minimist')(process.argv.slice(2));
+const shell = require('shelljs')
+
+var dirs = args._
+
+console.log(dirs);
+console.log(args.b);
+
+dirs.forEach(function(dir) {
+
+  if (shell.test('-d', dir)) {
+      var c = new Collection();
+    c.read(dir);
+    c.to_json_ld().then(
+    function() {
+      c.to_html();
+    },
+    function(err) {
+      console.log(err)
+    });
+  }
+
+});
