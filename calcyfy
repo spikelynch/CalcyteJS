@@ -1,14 +1,19 @@
 #!/usr/bin/env node
-
-
 const Collection = require("./collection.js");
 const args = require('minimist')(process.argv.slice(2));
 const shell = require('shelljs')
+const program = require('commander');
 
-var dirs = args._
+var dirs;
+program
+ .arguments('<directories...>')
+ .action(function(directories) {
+   console.log(directories);
+   dirs = directories;
+ })
+ .parse(process.argv);
 
 console.log(dirs);
-console.log(args.b);
 
 dirs.forEach(function(dir) {
 

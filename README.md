@@ -24,21 +24,34 @@ At this stage Calcyte does not Bag content, it jsut creates *Working DataCrates*
     git clone https://code.research.uts.edu.au/eresearch/CalcyteJS.git
 
 -  Link the binary for development use:
-   npm link
+
+    npm link
 
 ## Usage / instructions
 
-This version Calcyte doesn't have any options or proper argument handling or help.
+Usage:
+
+```
+> calcyfy --help
+
+  Usage: calcyfy [options] <directories...>
+
+
+  Options:
+
+    -h, --help  output usage information
+```
+
 
 To run Calcyte on a group of directories pass it a list of directories
 
-One:
+One directory:
 
 ```
 calcyte test_data/sample
 ```
 
-More:
+All the sample directories:
 
 ```
 calcyte test_data/*

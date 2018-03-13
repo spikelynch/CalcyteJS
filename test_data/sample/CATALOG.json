@@ -73,7 +73,7 @@
       "name": "EPL1 Camera"
     },
     {
-      "@id": "e36c39ef-cc40-4489-a2a6-3aff855a2434",
+      "@id": "c16af678-e3d0-47f2-93ca-d9fcd6581613",
       "@type": "GeoCoordinates",
       "latitude": "-33.7152",
       "longitude": "150.30119"
@@ -163,7 +163,7 @@
       "@type": "Place",
       "description": "Catalina Park is a disused motor racing venue, located at Katoomba, in the Blue Mountains, New South Wales, Australia, and is recognised as an Aboriginal Place due to the long association of the local Gundungarra and Darug clans to the area.",
       "geo": {
-        "@id": "e36c39ef-cc40-4489-a2a6-3aff855a2434"
+        "@id": "c16af678-e3d0-47f2-93ca-d9fcd6581613"
       },
       "identifier": "http://www.geonames.org/8152662/catalina-park.html",
       "name": "Catalina Park"
