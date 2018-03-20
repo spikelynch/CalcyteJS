@@ -146,7 +146,6 @@ describe("Glop Plot data", function(){
     c.read("test_data/Glop_Pot")
     assert.equal(c.collection_metadata.properties["name"].data , "Glop Pot data");
     assert.equal(c.children.length, 3);
-    console.log("ITEMS --------------------------", c.children[0].items);
     //assert.equal(c.children[0].collection_metadata.properties["Description"].data, "NOT THIS");
 
     assert.equal(c.children[0].children.length, 0 );
