@@ -33,9 +33,18 @@ module.exports = function(){
     var item_json = {}
 
     for (var i=0; i < raw_collection_metadata.length ; i++) {
+
       var name_value = raw_collection_metadata[i];
-      item_json[name_value['Name']] =  name_value['Value'];
+      if (item_json[name_value['Name']]) {
+        //console.log("VALUE", name_value['Name'] );
+        item_json[name_value['Name']].push(name_value['Value']);
       }
+      else {
+       item_json[name_value['Name']] =  [name_value['Value']];
+      }
+     }
+
+
      item_json["TYPE:"] = "Dataset";
      item_json["path"] = collection.rel_path;
      if (!(collection.rel_path === "./")) {
@@ -180,7 +189,7 @@ module.exports = function(){
           fs.writeFileSync(path.join(collection.dir, "CATALOG.json"), JSON.stringify(flattenated, null, 2),
            function(err) {
               if(err) {
-                return console.log(err, "Error wirting in", collection.dir);
+                return console.log(err, "Error writing in", collection.dir);
               }
            log("The file was saved!" + path.join(collection.dir, "CATALOG.json"));
           });

@@ -1,6 +1,9 @@
 {
   "@context": {
     "name": "schema:name",
+    "givenName": "schema:givenName",
+    "familyName": "schema:familyName",
+    "description": "schema:description",
     "file": "schema:mediaObject",
     "path": "schema:contentUrl",
     "contentSize": "schema:contentSize",
@@ -10,7 +13,6 @@
     "issn": "schema:issn",
     "datePublished": "schema:datePublished",
     "identifier": "schema:identifier",
-    "description": "schema:description",
     "license": "schema:license",
     "creator": "schema:creator",
     "contributor": "schema:contributor",
@@ -33,10 +35,10 @@
     "contentLocation": "schema:contentLocation",
     "keywords": "schema:keywords",
     "subject": "schema:subject",
-    "givenName": "schema:givenName",
-    "familyName": "schema:familyName",
     "Place": "schema:Place",
     "Organization": "schema:Organization",
+    "memberOf": "schema:memberOf",
+    "member": "schema:hasMember",
     "Project": "frapo:Project",
     "affiliation": "schema:affiliation",
     "Funder": "schema:Funder",
@@ -66,17 +68,17 @@
   },
   "@graph": [
     {
+      "@id": "6061ed82-46f7-4934-a0b5-14d59838b017",
+      "@type": "GeoCoordinates",
+      "latitude": "-33.7152",
+      "longitude": "150.30119"
+    },
+    {
       "@id": "EPL1",
       "@type": "Equipment",
       "description": "Olympus camera with Panasonic 20mm lens",
       "identifier": "EPL1",
       "name": "EPL1 Camera"
-    },
-    {
-      "@id": "c16af678-e3d0-47f2-93ca-d9fcd6581613",
-      "@type": "GeoCoordinates",
-      "latitude": "-33.7152",
-      "longitude": "150.30119"
     },
     {
       "@id": "http://ands.org.au",
@@ -163,7 +165,7 @@
       "@type": "Place",
       "description": "Catalina Park is a disused motor racing venue, located at Katoomba, in the Blue Mountains, New South Wales, Australia, and is recognised as an Aboriginal Place due to the long association of the local Gundungarra and Darug clans to the area.",
       "geo": {
-        "@id": "c16af678-e3d0-47f2-93ca-d9fcd6581613"
+        "@id": "6061ed82-46f7-4934-a0b5-14d59838b017"
       },
       "identifier": "http://www.geonames.org/8152662/catalina-park.html",
       "name": "Catalina Park"

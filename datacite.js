@@ -61,36 +61,42 @@ module.exports = function(){
         if (!Array.isArray(creators)){
             creators = [creators]
           }
-
         var creators_el = xml.ele('creators');
         //console.log(xml.end({ pretty: true }));
 
         for (var i = 0; i < creators.length; i++) {
             var found_creator = false;
             var creator_names = "";
-            var creator = this.json_by_id[creators[i]["@id"]];
-            var creator_el;
-            //console.log("Looking at creator", creators[i])
-              if  (creator["familyName"] && creator["givenName"]) {
-              //console.log("Got names");
-              creator_el = creators_el.ele("creator");
-              creator_names = creator["familyName"] + ", " + creator["givenName"];
-              creator_el.ele("creatorName", creator_names) ;
-              creator_el.ele('givenName', creator["givenName"]);
-              creator_el.ele('familyName', creator["familyName"]);
+            if (!this.json_by_id[creators[i]["@id"]]) {
+              creator_el = creators_el.ele("creator").ele("creatorName", creators[i]);
               found_creator = true;
-              creators_strings.push(creator_names);
-            } else if (creator["name"]) {
-              //console.log("Got a name");
-              creator_el = creators_el.ele("creator").ele("creatorName", creator["name"]);
-              creators_strings.push(creator["name"]);
-              creator_names = creator["name"];
-              found_creator = true;
+              creators_strings.push(creators[i]);
             }
-            if (found_creator && creator["@id"] && creator["@id"].match("https?://orcid.org/")) {
-              var name_id_el = creator_el.ele("nameIdentifier", creator["@id"]);
-              name_id_el.att("schemeURI","http://orcid.org");
-              name_id_el.att("nameIdentifierScheme", "ORCID");
+            else {
+              var creator = this.json_by_id[creators[i]["@id"]];
+              var creator_el;
+              //console.log("Looking at creator", creators[i])
+                if  (creator["familyName"] && creator["givenName"]) {
+                //console.log("Got names");
+                creator_el = creators_el.ele("creator");
+                creator_names = creator["familyName"] + ", " + creator["givenName"];
+                creator_el.ele("creatorName", creator_names) ;
+                creator_el.ele('givenName', creator["givenName"]);
+                creator_el.ele('familyName', creator["familyName"]);
+                found_creator = true;
+                creators_strings.push(creator_names);
+              } else if (creator["name"]) {
+                //console.log("Got a name");
+                creator_el = creators_el.ele("creator").ele("creatorName", creator["name"]);
+                creators_strings.push(creator["name"]);
+                creator_names = creator["name"];
+                found_creator = true;
+              }
+              if (found_creator && creator["@id"] && creator["@id"].match("https?://orcid.org/")) {
+                var name_id_el = creator_el.ele("nameIdentifier", creator["@id"]);
+                name_id_el.att("schemeURI","http://orcid.org");
+                name_id_el.att("nameIdentifierScheme", "ORCID");
+              }
             }
 
             }
@@ -102,13 +108,15 @@ module.exports = function(){
       }
     if (root["@id"]){
       var identifier = root["@id"];
-      if (identifier.startsWith('http://dx.doi.org/10.')) {
+      console.log("ID", identifier)
+      if (identifier.match(/http:\/\/(dx\.)?doi.org\/10\./)) {
           //<identifier identifierType="DOI">10.5072/example-full</identifier>
           id_el = xml.ele("identifier", identifier.replace("http://dx.doi.org/",""))
           id_el. att("identifierType", "DOI");
         }
       else {
           can_cite = false;
+          report += "Collection needs to have a DOI as an ID";
         }
       }
       else
@@ -168,7 +176,7 @@ module.exports = function(){
           //Creator (PublicationYear): Title. Version. Publisher. ResourceType. Identifier
           //console.log(creators_strings);
 
-          this.citation += creators_strings.join(", ");
+          this.citation += creators_strings.join("; ");
           this.citation += ` (${published}) `;
           this.citation += `${name}. `;
           this.citation += `${publisher}. `;

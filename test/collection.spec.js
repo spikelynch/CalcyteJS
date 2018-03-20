@@ -197,10 +197,7 @@ describe("Sample data details", function(){
         assert.equal(c.json_by_id["http://www.geonames.org/8152662/catalina-park.html"].name, 'Catalina Park');
         console.log("Place data", c.json_by_id["http://www.geonames.org/8152662/catalina-park.html"])
         var catalina_location_id = c.json_by_id["http://www.geonames.org/8152662/catalina-park.html"].geo['@id'];
-        console.log("CATALINA location", catalina_location_id);
-
         var catalina_geo = c.json_by_id[catalina_location_id];
-        console.log("CATALINA GEO XXXXXXXXXXXX", catalina_geo);
         assert.equal(catalina_geo.latitude, '-33.7152');
         assert.equal(catalina_geo.longitude, '150.30119');
 
@@ -246,7 +243,7 @@ describe("Datacite", function(){
       function () {
       citer = new Datacite();
       text_citation = citer.make_citation("./test_data/Glop_Pot/CATALOG.json", "./test_data/Glop_pot/datacite.xml")
-      assert.equal(text_citation, "Maynard, Phil (2017) Glop Pot data. University of Technology Sydney. Datacrate. http://dx.doi.org/10.1016/something");
+      assert.equal(text_citation, "Lake, Mike; Vaughan-Taylor, Keir; Klocker, Andreas; Maynard, Phil (2017) Glop Pot data. University of Technology Sydney. Datacrate. http://dx.doi.org/10.1016/something");
 
     },
     function(err) {

@@ -1,6 +1,7 @@
 const builder = require('xmlbuilder');
 var fs = require('fs');
 var ejs = require('ejs');
+context = require('./defaults/context.json');
 
 module.exports = function(){
   return(
@@ -15,88 +16,100 @@ module.exports = function(){
     }
 
   },
+  sort_keys : function(keys) {
+    // Sort a set or array of keys to be in the same order as those in context.json
+    // Returns set
+    keys = new Set(keys);
+    return new Set(Object.keys(context).filter(function (k){return keys.has(k)}))
+  },
   items_to_html : function items_to_html(node, html, toc) {
-    var table_el = html.ele("table");
+    var table_el = html.ele("table").att("class", "table table-striped");
     // Find all the keys
-    keys = []
+    keys = [];
     for (let [_, f] of Object.entries(node)) {
       keys = keys.concat(Object.keys(f));
     }
-    key_set = new Set(keys);
+    key_set = this.sort_keys(keys);
 
     key_set.delete('@type');
+    key_set.delete('@id');
     key_set.delete('identifier');
     key_set.delete('fileFormat');
-    var header_row_el = table_el.ele("tr");
+    var thead_l = table_el.ele("thead").att("class","thead-inverse");
+    var header_row_el = thead_l.ele("tr");
     for (let k of key_set) {
       header_row_el.ele("th", k[0].toUpperCase() + k.substring(1));
     }
-    for (let [_, f] of Object.entries(node)) {
-      var row_el = table_el.ele("tr").att("id", f['@id']);
-      for (let k of key_set) {
+    body_el = table_el.ele("tbody").att("class","table-striped");
+    for (let [_, property] of Object.entries(node)) {
+      var row_el = table_el.ele("tr").att("id", property['@id']);
+      for (let key of key_set) {
         td_ele = row_el.ele("td");
-        var data = f[k];
-        if (!Array.isArray(data)) {
-            data = [data];
-        }
-        var i = 0;
-        for (let [_, part] of Object.entries(data)) {
-          //console.log("PART", part)
-          if (part === undefined) {
 
-          } else if ((k === 'name' || k === 'path') && f["@id"].match(/^https?:\/\//i)) {
-            td_ele.ele("a", part).att('href', f["@id"]);
-          } else if (k === 'encodingFormat' && f.fileFormat && f.fileFormat.match(/^https?:\/\//i)){
-            td_ele.ele("a", part).att('href', f.fileFormat);
-          } else if (
-            this.json_by_id[part['@id']] &&
-            !(this.json_by_id[part['@id']].name || this.json_by_id[part['@id']].description)) {
-            // Embed small bits of info that don't have a name or description
-            this.dataset_to_html(this.json_by_id[part['@id']], td_ele);
-          } else if (part['@id'] && this.json_by_id[part['@id']]) {
-            var target_name = this.json_by_id[part['@id']].name ? this.json_by_id[part['@id']].name : value[part['@id']];
-            td_ele.ele('a',target_name).att('href', '#' + part['@id']);
-          }
-          else {
-            td_ele.txt(part);
-          }
-          i++;
-          if (i < data.length) {
-            td_ele.txt(", ");
-          }
+        this.format_cell(property, key, td_ele);
+
       }
 
+      }
+    },
+
+  format_cell : function(f, k, td_ele) {
+    var data = f[k];
+    if (!Array.isArray(data)) {
+        data = [data];
+    }
+    var i = 0;
+    for (let [_, part] of data.entries()) {
+      //console.log("PART", part)
+      if (part === undefined) {
+
+      } else if ((k === 'name' || k === 'path') && f["@id"].match(/^https?:\/\//i)) {
+        td_ele.ele("a", part).att('href', f["@id"]);
+      } else if (k === 'encodingFormat' && f.fileFormat && f.fileFormat.match(/^https?:\/\//i)){
+        td_ele.ele("a", part).att('href', f.fileFormat);
+      } else if (
+        this.json_by_id[part['@id']] &&
+        !(this.json_by_id[part['@id']].name || this.json_by_id[part['@id']].description)) {
+        // Embed small bits of info that don't have a name or description
+        this.dataset_to_html(this.json_by_id[part['@id']], td_ele);
+      } else if (part['@id'] && this.json_by_id[part['@id']]) {
+        var target_name = this.json_by_id[part['@id']].name ? this.json_by_id[part['@id']].name : value[part['@id']];
+        td_ele.ele('a',target_name).att('href', '#' + part['@id']);
+      }
+      else {
+        td_ele.txt(part);
+      }
+      i++;
+      if (i < data.length) {
+        td_ele.txt(", ");
       }
     }
-
   },
 
   dataset_to_html : function dataset_to_html(node, html, toc) {
-    var table_el = html.ele("table")
+    var table_el = html.ele("table").att("class", "table")
     if (node["@id"]) {
        table_el.att("id", node["@id"]);
      }
 
-    var keys = Object.keys(node).filter(k => !(/HasPart/.test(k)));
+    var keys = new Set(Object.keys(node).filter(k => !(/hasPart/.test(k))));
+    keys.delete("@id");
+    keys.delete("identifier");
+    keys.delete("@type");
+    key = this.sort_keys(keys);
     for (let key of keys) {
       var value = node[key];
       var row_el = table_el.ele("tr")
       row_el.ele("th", key[0].toUpperCase() + key.substring(1));
-      if (value['@id']) {
-        var target_name = this.json_by_id[value['@id']].name ? this.json_by_id[value['@id']].name : value['@id'];
-        row_el.ele("td").ele('a',target_name).att('href', '#' + value['@id']);
-      }
-      else {
-        row_el.ele("td", value); // TODO look for linking and embedding
-      }
+      this.format_cell(node, key, row_el.ele("td"))
     }
-    if (node.HasPart) {
-      if (!Array.isArray(node.HasPart)) {
-        node.HasPart = [node.HasPart];
+    if (node.hasPart) {
+      if (!Array.isArray(node.hasPart)) {
+        node.hasPart = [node.hasPart];
       }
       var files = [];
       var datasets = [];
-      for (let [key, value] of Object.entries(node.HasPart)) {
+      for (let [key, value] of Object.entries(node.hasPart)) {
         if (value["@id"] && this.json_by_id[value["@id"]]) {
           var child = this.json_by_id[value["@id"]];
           if (child['@type']) {

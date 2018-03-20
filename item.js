@@ -15,14 +15,14 @@ module.exports = function(){
   this.nested_items = {};
 
   function links_to_id(string, collection) {
-    var links_to_id = undefined;
+    var links_to = undefined;
     if (collection.id_lookup[string]) {
-      links_to_id = collection.id_lookup[string].id;
+      links_to = collection.id_lookup[string].id;
     }
     else if (collection.name_lookup[string]){
-      links_to_id = collection.name_lookup[string].id;
+      links_to = collection.name_lookup[string].id;
     }
-    return links_to_id;
+    return links_to;
   }
 
   function make_link(string, collection, el) {
@@ -57,7 +57,8 @@ module.exports = function(){
 
   "to_json_ld_fragment" : function to_json_ld_fragment() {
       //console.log("Keys at start of output", Object.keys(this.properties));
-      var frag = {"@id" : this.id};
+
+      var frag = {"@id" : String(this.id)};
       //console.log("Setting id", this.id, this.name, this.nested_items);
       //console.log(" NAMELOOKUPS",  this.collection.name_lookup);
       for (let [key, i] of Object.entries(this.nested_items)) {
@@ -68,7 +69,7 @@ module.exports = function(){
           types = f.data; //Don't output now
         } else if  (f.name != "ID"){
           frag[f.name] = [];
-          //console.log(f.name);
+          if (!Array.isArray(f.data)) {f.data=[f.data]}
           for (var k = 0; k < f.data.length ; k++){
               var link_id = f.links_to ? f.links_to: links_to_id(f.data[k], this.collection);
               //console.log("link_id", link_id, "relational", f.is_relational)

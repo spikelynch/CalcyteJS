@@ -63,7 +63,6 @@ module.exports = function(){
 
       if (this.name ===  "ID"){
           this.name = 'identifier';
-          console.log("GOT ID", this.name)
         }
       else if (this.name ===  "TYPE:"){
           this.is_type  =  true;
@@ -134,7 +133,8 @@ module.exports = function(){
           if (this.is_repeating || this.is_type) {
             this.data = this.data.replace(/, +/g, ",").split(",");
             //console.log("SPLIT", this.type, this.name, this.data)
-          } else {
+          } else if(!Array.isArray(this.data)) {
+            
             this.data = [this.data];
           }
 

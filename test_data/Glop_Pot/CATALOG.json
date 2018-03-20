@@ -1,6 +1,9 @@
 {
   "@context": {
     "name": "schema:name",
+    "givenName": "schema:givenName",
+    "familyName": "schema:familyName",
+    "description": "schema:description",
     "file": "schema:mediaObject",
     "path": "schema:contentUrl",
     "contentSize": "schema:contentSize",
@@ -10,7 +13,6 @@
     "issn": "schema:issn",
     "datePublished": "schema:datePublished",
     "identifier": "schema:identifier",
-    "description": "schema:description",
     "license": "schema:license",
     "creator": "schema:creator",
     "contributor": "schema:contributor",
@@ -33,10 +35,10 @@
     "contentLocation": "schema:contentLocation",
     "keywords": "schema:keywords",
     "subject": "schema:subject",
-    "givenName": "schema:givenName",
-    "familyName": "schema:familyName",
     "Place": "schema:Place",
     "Organization": "schema:Organization",
+    "memberOf": "schema:memberOf",
+    "member": "schema:hasMember",
     "Project": "frapo:Project",
     "affiliation": "schema:affiliation",
     "Funder": "schema:Funder",
@@ -66,13 +68,7 @@
   },
   "@graph": [
     {
-      "@id": "07ad1e37-2eda-4f87-9007-d74f0be0af89",
-      "@type": "GeoCoordinates",
-      "latitude": "-35.623592",
-      "longitude": "148.683836"
-    },
-    {
-      "@id": "353df8b0-a2fc-4fd1-a19d-24c034f60186",
+      "@id": "1cb61b78-b1b9-4744-90e5-71c4cec66783",
       "@type": "Format",
       "eXTENSION:": ".svx",
       "description": "Survex is a multi-platform open-source cave surveying package.",
@@ -80,11 +76,11 @@
       "mIME:": "text/plain"
     },
     {
-      "@id": "63ef54a9-e87b-4b9d-9a2f-0f89449f8686",
+      "@id": "90490bfb-a7ee-4e50-bb25-7db1d6ff3163",
       "@type": "Place",
       "description": "Located in the Snowy Mountains Region of NSW, nearest town Tumut 2720",
       "geo": {
-        "@id": "07ad1e37-2eda-4f87-9007-d74f0be0af89"
+        "@id": "f5968c35-9cb0-4bf9-9ef6-7ccede1ea8e6"
       },
       "name": "Glop Pot"
     },
@@ -107,7 +103,6 @@
       "@id": "asf",
       "@type": "Dataset",
       "path": "asf",
-      "description": [],
       "hasPart": [
         {
           "@id": "asf/README.txt"
@@ -299,18 +294,35 @@
       }
     },
     {
+      "@id": "f5968c35-9cb0-4bf9-9ef6-7ccede1ea8e6",
+      "@type": "GeoCoordinates",
+      "latitude": "-35.623592",
+      "longitude": "148.683836"
+    },
+    {
       "@id": "http://dx.doi.org/10.1016/something",
       "@type": "Dataset",
       "contact": {
         "@id": "http://orcid.org/0000-0003-4953-0830"
       },
       "contentLocation": {
-        "@id": "63ef54a9-e87b-4b9d-9a2f-0f89449f8686"
+        "@id": "90490bfb-a7ee-4e50-bb25-7db1d6ff3163"
       },
       "path": "./",
-      "creator": {
-        "@id": "http://orcid.org/0000-0003-4953-9114"
-      },
+      "creator": [
+        {
+          "@id": "http://orcid.org/0000-0003-4953-0830"
+        },
+        {
+          "@id": "Keir Vaughan-Taylor"
+        },
+        {
+          "@id": "http://orcid.org/0000-0002-2038-7922"
+        },
+        {
+          "@id": "http://orcid.org/0000-0003-4953-9114"
+        }
+      ],
       "datePublished": "2017",
       "description": "Sketchsheets and data from the Glop Pot cave survey",
       "hasPart": [
