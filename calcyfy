@@ -1,32 +1,53 @@
 #!/usr/bin/env node
-const Collection = require("./collection.js");
+const Collection = require('./collection.js');
+const Index = require('./index_html.js');
+const Datacite = require('./datacite.js');
 const args = require('minimist')(process.argv.slice(2));
-const shell = require('shelljs')
+const shell = require('shelljs');
 const program = require('commander');
+const path = require('path');
 
-var dirs;
+var dirs = undefined;
 program
- .arguments('<directories...>')
- .action(function(directories) {
-   console.log(directories);
-   dirs = directories;
- })
- .parse(process.argv);
+  .version('0.1.0')
+  .description('To run calcyfy on a group of directories pass it a list of directories')
+  .arguments('<directories...>')
+  .action(function (directories) {
+    dirs = directories;
+  })
+  .option('-g, --generate-html', 'Generate HTML from a "CATALOG.json" in a directory');
 
-console.log(dirs);
+program.parse(process.argv);
+if (!program.rawArgs.length || !dirs) program.help();
 
-dirs.forEach(function(dir) {
-
-  if (shell.test('-d', dir)) {
+if (program.generateHtml) {
+  console.log('generate html');
+  dirs.forEach(function (dir) {
+    if (shell.test('-d', dir)) {
+      if(!path.isAbsolute(dir)) {
+        dir = path.join(process.cwd(), dir);
+      }
+      var catalog = path.join(dir, 'CATALOG.json');
+      var index_maker = new Index();
+      index_maker.make_index_html(catalog);
+      var citer = new Datacite();
+      var text_citation = citer.make_citation(catalog, path.join(dir, 'datacite.xml'));
+      index_maker.write_html('defaults/catalog_template.html', path.join(dir, 'index.html'), text_citation);
+    }
+  })
+} else {
+  console.log(dirs);
+  dirs.forEach(function (dir) {
+    if (shell.test('-d', dir)) {
       var c = new Collection();
-    c.read(dir);
-    c.to_json_ld().then(
-    function() {
-      c.to_html();
-    },
-    function(err) {
-      console.log(err)
-    });
-  }
-
-});
+      c.read(dir);
+      c.to_json_ld().then(
+        function () {
+          c.to_html();
+        },
+        function (err) {
+          console.log(err)
+        });
+    }
+  });
+}
