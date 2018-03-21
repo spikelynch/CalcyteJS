@@ -148,8 +148,7 @@ module.exports = function(){
          if (!collection_json['hasPart']) {
              collection_json['hasPart'] = [];
            }
-          //console.log("Pushing part", child.collection_metadata.id)
-          collection_json['hasPart'].push(
+        collection_json['hasPart'].push(
             {
             "@id": child.collection_metadata.id
             //"@type": "@id"
@@ -185,7 +184,6 @@ module.exports = function(){
               collection.json_by_url[item.path] = item;
             }
           }
-          console.log("Writing in", collection.dir);
           fs.writeFileSync(path.join(collection.dir, "CATALOG.json"), JSON.stringify(flattenated, null, 2),
            function(err) {
               if(err) {
@@ -236,7 +234,7 @@ module.exports = function(){
         var catalogs = items.filter(item => /^CATALOG.*xlsx$/.test(item))
         this.existing_catalogs = this.existing_catalogs.concat(catalogs);
         if (catalogs.length > 1) {
-          console.log("More than one catalog, using this one: ", catalogs[0])
+            console.log("More than one catalog, using this one: ", catalogs[0])
         }
         items = items.filter(item => !(/^CATALOG.*(xlsx|html|json)$/.test(item)));
         items = items.filter(item => !(/(^index.html$)|(^~)|(^\.)|(datacite.xml)/.test(item)));
@@ -261,13 +259,12 @@ module.exports = function(){
         }
         if (catalogs.length  >  0){
             if (items.length < 100) {
-              this.file_info = JSON.parse(shell.exec('sf -nr -json "' + dir + '"').stdout);
+              this.file_info = JSON.parse(shell.exec('sf -nr -json "' + dir + '"', {silent:true}).stdout);
               //console.log("FILES", JSON.stringify(this.file_info.files, null, 2));
               this.file_info_by_filename = {}
               for(var i = 0; i < this.file_info.files.length; i++) {
                 var f = this.file_info.files[i];
                 this.file_info_by_filename[f.filename.replace(/.*\//, "")] = f;
-
                 }
               }
           //console.log(dir, catalogs[0]);
@@ -323,16 +320,16 @@ module.exports = function(){
 
             //console.log("COLLECTION METADATA:", this.collection_metadata);
           }
+
         }
 
         var subdirs = fs.readdirSync(dir).filter(item => (fs.lstatSync(path.join(dir, item)).isDirectory() && !(item.match(ignore)) ));
         //console.log("Subdirs", subdirs)
         if (subdirs.length > 0) {
           for (var i=0; i < subdirs.length; i++) {
-            //console.log("Looking at subdirs", subdirs[i]);
-            child = new module.exports();
-            if (child.read(path.join(dir, subdirs[i]), path.join(this.rel_path, subdirs[i]), this));
-            this.existing_catalogs = this.existing_catalogs.concat(child.existing_catalogs);
+            var child = new module.exports();
+            child.read(path.join(dir, subdirs[i]), path.join(this.rel_path, subdirs[i]), this);
+            this.existing_catalogs = child.existing_catalogs;
             this.children.push(child);
 
         }

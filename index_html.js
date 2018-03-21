@@ -63,8 +63,10 @@ module.exports = function(){
       //console.log("PART", part)
       if (part === undefined) {
 
-      } else if ((k === 'name' || k === 'path') && f["@id"].match(/^https?:\/\//i)) {
+      } else if (k === 'name' && f["@id"].match(/^https?:\/\//i)) {
         td_ele.ele("a", part).att('href', f["@id"]);
+      } else if (k === 'path') {
+        td_ele.ele("a", part.split('/').pop()).att('href', part) ;
       } else if (k === 'encodingFormat' && f.fileFormat && f.fileFormat.match(/^https?:\/\//i)){
         td_ele.ele("a", part).att('href', f.fileFormat);
       } else if (

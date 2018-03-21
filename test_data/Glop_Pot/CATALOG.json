@@ -68,23 +68,6 @@
   },
   "@graph": [
     {
-      "@id": "1cb61b78-b1b9-4744-90e5-71c4cec66783",
-      "@type": "Format",
-      "eXTENSION:": ".svx",
-      "description": "Survex is a multi-platform open-source cave surveying package.",
-      "name": "Survex file",
-      "mIME:": "text/plain"
-    },
-    {
-      "@id": "90490bfb-a7ee-4e50-bb25-7db1d6ff3163",
-      "@type": "Place",
-      "description": "Located in the Snowy Mountains Region of NSW, nearest town Tumut 2720",
-      "geo": {
-        "@id": "f5968c35-9cb0-4bf9-9ef6-7ccede1ea8e6"
-      },
-      "name": "Glop Pot"
-    },
-    {
       "@id": "Keir Vaughan-Taylor",
       "@type": "Person",
       "email": "keir@example.com",
@@ -196,6 +179,12 @@
       "fileFormat": "http://www.nationalarchives.gov.uk/PRONOM/x-fmt/111"
     },
     {
+      "@id": "b8543d48-b8ff-467f-9c76-791c692955ed",
+      "@type": "GeoCoordinates",
+      "latitude": "-35.623592",
+      "longitude": "148.683836"
+    },
+    {
       "@id": "cp7glop.ai",
       "@type": "File",
       "contentSize": "383766",
@@ -294,10 +283,21 @@
       }
     },
     {
-      "@id": "f5968c35-9cb0-4bf9-9ef6-7ccede1ea8e6",
-      "@type": "GeoCoordinates",
-      "latitude": "-35.623592",
-      "longitude": "148.683836"
+      "@id": "f1a1f643-d04b-4d0b-9b1f-d552fdd640f9",
+      "@type": "Format",
+      "eXTENSION:": ".svx",
+      "description": "Survex is a multi-platform open-source cave surveying package.",
+      "name": "Survex file",
+      "mIME:": "text/plain"
+    },
+    {
+      "@id": "fcfa07e8-e47d-4d53-8230-ed5c33b430b4",
+      "@type": "Place",
+      "description": "Located in the Snowy Mountains Region of NSW, nearest town Tumut 2720",
+      "geo": {
+        "@id": "b8543d48-b8ff-467f-9c76-791c692955ed"
+      },
+      "name": "Glop Pot"
     },
     {
       "@id": "http://dx.doi.org/10.1016/something",
@@ -306,7 +306,7 @@
         "@id": "http://orcid.org/0000-0003-4953-0830"
       },
       "contentLocation": {
-        "@id": "90490bfb-a7ee-4e50-bb25-7db1d6ff3163"
+        "@id": "fcfa07e8-e47d-4d53-8230-ed5c33b430b4"
       },
       "path": "./",
       "creator": [

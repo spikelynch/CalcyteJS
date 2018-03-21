@@ -61,7 +61,7 @@ describe("Create a CATALOG", function(){
   var c = new Collection();
   c.read(test_path);
   sheet_json = XLSX.utils.sheet_to_json(c.workbook.Sheets["Files"]);
-  console.log(sheet_json);
+  //console.log(sheet_json);
   // 1.pdf deleted but still in spreadsheet
   assert.equal(sheet_json[0]["FILE:Filename"], "1.pdf");
   assert.equal(sheet_json[0]["*MISSING-FILE*"], "1");
@@ -91,7 +91,7 @@ describe("Create MANY CATALOGS", function(){
   console.log(test_path);
   var c = new Collection();
   c.read(test_path);
-  console.log(c.existing_catalogs);
+  //console.log(c.existing_catalogs);
   console.log(shell.test('-e', path.join(test_path,"a","CATALOG_a.xlsx")))
   assert(shell.test('-e', path.join(test_path,"a","CATALOG_a.xlsx")));
   assert(shell.test('-e', path.join(test_path,"a","a", "CATALOG_a_1.xlsx")));
