@@ -11,12 +11,15 @@ This is pre-alpha code. It does run but several features are missing.
 Calcyte is (will be) a toolkit for managing metadata for collections of content
 via automatically generated spreadsheets and for creating static HTML repositories.
 
-Calcyte targets the [Draft DataCrate Packaging format v0.2](https://github.com/UTS-eResearch/datacrate/blob/new_draft/0.2/spec/0.2/data_crate_specification_v0.2.md).  
+Calcyte targets the [Draft DataCrate Packaging format v0.2](https://github.com/UTS-eResearch/datacrate/blob/new_draft/0.2/spec/0.2/data_crate_specification_v0.2.md).
 At this stage Calcyte does not Bag content, it jsut creates *Working DataCrates*.
 
 ## Installation (untested)
 
 -  Install [node.js](https://nodejs.org/en/)
+
+-  Install the python package [BagIt](https://github.com/LibraryOfCongress/bagit-python)
+   ```pip install bagit```
 
 -  Install Siegfreid using the [instructions](https://github.com/richardlehane/siegfried/wiki/Getting-started).
 
@@ -32,14 +35,22 @@ At this stage Calcyte does not Bag content, it jsut creates *Working DataCrates*
 Usage:
 
 ```
-> calcyfy --help
+> ./calcyfy
+Please specify a bag name
+Please specify an origin directory name
 
   Usage: calcyfy [options] <directories...>
+
+  To run calcyfy on a group of directories pass it a list of directories
 
 
   Options:
 
-    -h, --help  output usage information
+    -V, --version        output the version number
+    -g, --generate-html  Generate HTML from a "CATALOG.json" in a directory
+    -b  --bag [bag]      Create Bagit Bag(s)
+    -z  --zip            Create a zipped version of the bag (only works with -g at the moment)
+    -h, --help           output usage information
 ```
 
 
@@ -48,13 +59,13 @@ To run Calcyte on a group of directories pass it a list of directories
 One directory:
 
 ```
-calcyte test_data/sample
+calcyfy test_data/sample
 ```
 
 All the sample directories:
 
 ```
-calcyte test_data/*
+calcyfy test_data/*
 
 ```
 

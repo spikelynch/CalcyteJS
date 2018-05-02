@@ -15,6 +15,7 @@ const builder = require('xmlbuilder');
 const Index = require('./index_html.js');
 const Datacite = require('./datacite.js')
 
+
 module.exports = function(){
   this.collection_metadata = new Item();
   this.children = [];
@@ -25,6 +26,8 @@ module.exports = function(){
   this.json_ld = {};
   this.field_names_by_type = {};
   this.existing_catalogs = [];
+  this.root_node = {};
+
 
 
   function get_collection_metadata(workbook, collection) {
@@ -85,6 +88,12 @@ module.exports = function(){
     items : this.items,
     json_ld : this.json_ld,
     existing_catalogs : this.existing_catalogs,
+    bagged : this.bagged,
+    root_node: this.root_node,
+    json_by_path: this.json_by_path,
+    json_by_id: this.json_by_id,
+    json_by_type: this.json_by_type,
+
 
     get_unique_catalog_name: function get_unique_catalog_name(dir, existing_catalogs= []){
        var index = 0;
@@ -99,20 +108,82 @@ module.exports = function(){
        return potential_catalog_filename;
      },
 
+     index_graph : function index_graph() {
 
+       this.json_by_id = {};
+       this.json_by_path = {};
+       this.json_by_type = {};
+       this.graph =  this.json_ld["@graph"];
+       for (let i = 0; i < this.graph.length ; i++) {
+         var item = this. graph[i];
+         if (item['@id']){
+           this.json_by_id[item['@id']] = item;
+         }
+         if (item['path']){
+           this.json_by_path[item['path']] = item;
+         }
+         if (item['@type']) {
+           if (!this.json_by_type[item['@type']]) {
+             this.json_by_type[item['@type']] = [];
+           }
+           this.json_by_type[item['@type']].push(item);
+         }
 
+       }
+       this.root_node = this.json_by_path["./"] ? this.json_by_path["./"] :  this.json_by_path["data/"];
+
+     },
+
+    generate_bag_info : function generate_bag_info(){
+      this.index_graph();
+      this.bag_meta = {"BagIt-Profile-Identifier":
+         "https://raw.githubusercontent.com/UTS-eResearch/datacrate/master/spec/0.2/profile-datacrate-v0.2.json",
+           "DataCrate-Specification-Identifier":
+         "https://github.com/UTS-eResearch/datacrate/blob/master/spec/0.2/data_crate_specification_v0.2.md"}
+
+      if (this.root_node["contact"] && this.root_node["contact"]['@id']) {
+          contact = this.json_by_id[this.root_node["contact"]['@id']]
+          map = {"email": "Contact-Email","phone": "Contact-Telephone", "name": "Contact-Name"}
+          for (var [k, v] of Object.entries(map)) {
+            if (contact[k]) {
+              this.bag_meta[v] = String(contact[k]);
+            }
+          }
+
+      }
+      if(this.root_node["description"]) {
+        this.bag_meta["Description"] = this.root_node["description"];
+      }
+
+       // Return a hash of BagIt style metadata by looking for it in the JSON-LD structure
+
+     },
+
+    save_bag_info : function save_bag_info() {
+         var bag_info = "";
+         for (var [k, v] of Object.entries(this.bag_meta)) {
+           bag_info += k + ": " + v + "\n";
+
+         }
+         fs.writeFileSync(path.join(this.dir, "bag-info.txt"), bag_info);
+    },
 
     to_html : function to_html() {
+        console.log("Saving html");
         var index_maker = new Index();
         index_maker.make_index_html(this.json_ld);
         citer = new Datacite();
         text_citation = citer.make_citation(this.json_ld, path.join(this.dir, "index.html"));
+        console.log("Writing to");
         index_maker.write_html(path.join(__dirname, "defaults/catalog_template.html"), path.join(this.dir, "index.html"), text_citation);
     },
 
     to_json : function to_json(graph) {
         if (!this.collection_metadata) {
           this.collection_metadata = new Item();
+        }
+        if (this.parent) {
+          this.bagged = this.parent.bagged;
         }
         var collection_json = this.collection_metadata.to_json_ld_fragment();
         graph.push(collection_json);
@@ -156,7 +227,16 @@ module.exports = function(){
         });
 
     },
-
+    bag : function bag(bag_dir) {
+      // TODO Generate a list of all files
+      // FOR NOW: delete CATALOG.json and index.html
+      // Generate bag info later
+      shell.rm(path.join(this.dir, "CATALOG.json"));
+      shell.rm(path.join(this.dir, "index.html"));
+      shell.exec("bagit create --excludebaginfo " + bag_dir + " " + path.join(this.dir, "*"));
+      this.bagged = true;
+      this.dir = bag_dir;
+    },
     to_json_ld : function to_json_ld() {
     // Turn the entire collection into a JSON-LD document
 
@@ -189,7 +269,7 @@ module.exports = function(){
               if(err) {
                 return console.log(err, "Error writing in", collection.dir);
               }
-           log("The file was saved!" + path.join(collection.dir, "CATALOG.json"));
+           console.log("The file was saved!" + path.join(collection.dir, "CATALOG.json"));
           });
 
         },
@@ -204,6 +284,7 @@ module.exports = function(){
         this.id_lookup = parent.id_lookup;
         this.existing_catalogs = parent.existing_catalogs;
         this.root_dir = parent.root_dir;
+        this.bagged = parent.bagged;
         //console.log(this.existing_catalogs);
       }
       else {
@@ -211,6 +292,7 @@ module.exports = function(){
         this.id_lookup = {};
         this.existing_catalogs = [];
         this.root_dir = dir;
+        this.bagged = false;
       }
 
       this.children = [];

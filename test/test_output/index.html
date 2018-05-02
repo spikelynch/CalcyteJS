@@ -32,6 +32,8 @@
       integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
       crossorigin="anonymous"/>
 
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
 <meta charset='utf-8'/>
 
 </head>
@@ -39,7 +41,9 @@
 <div class="container">
 <div class="jumbotron">
 Cite this work: <h3>Peter Sefton (2017) Sample dataset for DataCrate v0.2. University of Technology Sydney. Datacrate. http://dx.doi.org/10.5281/zenodo.1009240</h3>
+<h4>  </h4>
 </div>
+
 <p>This catalog file describes a dataset.
 It uses the <a href='https://github.com/UTS-eResearch/datacrate/blob/master/spec/0.2/data_crate_specification_v0.1.md'>
 Draft DataCrate Packaging format v0.2</a>.
@@ -53,154 +57,299 @@ A machine-readable version of this page is available:
 
 <?xml version="1.0"?>
 <div>
+  <hr></hr>
   <table class="table" id="http://dx.doi.org/10.5281/zenodo.1009240">
+    <th>
+      <h4>Type</h4>
+    </th>
+    <td>
+      <h4></h4>
+    </td>
+    <tr></tr>
     <tr>
-      <th>Contact</th>
+      <th>contact</th>
       <td>
         <a href="#http://orcid.org/0000-0002-3545-944X">Peter Sefton</a>
       </td>
     </tr>
     <tr>
-      <th>ContentLocation</th>
+      <th>contentLocation</th>
       <td>
         <a href="#http://www.geonames.org/8152662/catalina-park.html">Catalina Park</a>
       </td>
     </tr>
     <tr>
-      <th>Path</th>
+      <th>path</th>
       <td>
-        <a href="./"/>
+        <a href="./">.</a>
       </td>
     </tr>
     <tr>
-      <th>Contributor</th>
+      <th>contributor</th>
       <td>
         <a href="#https://github.com/UTS-eResearch/datacrate">DataCrate</a>
       </td>
     </tr>
     <tr>
-      <th>Creator</th>
+      <th>creator</th>
       <td>
         <a href="#http://orcid.org/0000-0002-3545-944X">Peter Sefton</a>
       </td>
     </tr>
     <tr>
-      <th>DatePublished</th>
+      <th>datePublished</th>
       <td>2017-06-29</td>
     </tr>
     <tr>
-      <th>Description</th>
+      <th>description</th>
       <td>This is a simple dataset for demonstration purposes it contains just one image and a directory full of useless text files.</td>
     </tr>
     <tr>
-      <th>Keywords</th>
-      <td>Dogs, Fences, The Gully</td>
-    </tr>
-    <tr>
-      <th>Name</th>
+      <th>hasPart</th>
       <td>
-        <a href="http://dx.doi.org/10.5281/zenodo.1009240">Sample dataset for DataCrate v0.2</a>
+        <a href="#lots_of_little_files">Too many files</a>
+        , 
+        <a href="#pics">Pictures</a>
       </td>
     </tr>
     <tr>
-      <th>Publisher</th>
+      <th>keywords</th>
+      <td>Dogs, Fences, The Gully</td>
+    </tr>
+    <tr>
+      <th>name</th>
+      <td>
+        <a href="http://dx.doi.org/10.5281/zenodo.1009240" class="fa fa-external-link">Sample dataset for DataCrate v0.2</a>
+      </td>
+    </tr>
+    <tr>
+      <th>publisher</th>
       <td>
         <a href="#http://uts.edu.au">University of Technology Sydney</a>
       </td>
     </tr>
     <tr>
-      <th>TemporalCoverage</th>
+      <th>temporalCoverage</th>
       <td>2017</td>
     </tr>
   </table>
+  <hr></hr>
   <table class="table" id="lots_of_little_files">
+    <th>
+      <h4>Type</h4>
+    </th>
+    <td>
+      <h4></h4>
+    </td>
+    <tr></tr>
     <tr>
-      <th>Path</th>
+      <th>path</th>
       <td>
         <a href="lots_of_little_files">lots_of_little_files</a>
       </td>
     </tr>
     <tr>
-      <th>Description</th>
+      <th>description</th>
       <td>This directory contains many small files, that we’re not going to describe in detail.</td>
     </tr>
     <tr>
-      <th>Name</th>
+      <th>name</th>
       <td>Too many files</td>
     </tr>
   </table>
+  <hr></hr>
   <table class="table" id="pics">
+    <th>
+      <h4>Type</h4>
+    </th>
+    <td>
+      <h4></h4>
+    </td>
+    <tr></tr>
     <tr>
-      <th>Path</th>
+      <th>path</th>
       <td>
         <a href="pics">pics</a>
       </td>
     </tr>
     <tr>
-      <th>Description</th>
+      <th>description</th>
       <td>This directory contains the images for the research project</td>
     </tr>
     <tr>
-      <th>Name</th>
+      <th>hasPart</th>
+      <td>
+        <a href="#pics/19093074_10155469333581584_5707039334816454031_o.jpg">pics/19093074_10155469333581584_5707039334816454031_o.jpg</a>
+        , 
+        <a href="#pics/CATALOG_pics.xlsx">pics/CATALOG_pics.xlsx</a>
+      </td>
+    </tr>
+    <tr>
+      <th>name</th>
       <td>Pictures</td>
     </tr>
   </table>
   <h1>Files: </h1>
   <table class="table table-striped">
     <thead class="thead-inverse">
-      <tr/>
+      <tr></tr>
     </thead>
-    <tbody class="table-striped"/>
-    <tr id="pics/19093074_10155469333581584_5707039334816454031_o.jpg"/>
-    <tr id="pics/CATALOG_pics.xlsx"/>
+    <tbody class="table-striped"></tbody>
+    <tr id="pics/19093074_10155469333581584_5707039334816454031_o.jpg"></tr>
+    <tr id="pics/CATALOG_pics.xlsx"></tr>
   </table>
   <h1>Contextual info: GeoCoordinates</h1>
-  <table class="table table-striped">
-    <thead class="thead-inverse">
-      <tr/>
-    </thead>
-    <tbody class="table-striped"/>
-    <tr id="263e4cc5-37e6-4bee-a8cd-893e42bec48b"/>
+  <hr></hr>
+  <table class="table" id="263e4cc5-37e6-4bee-a8cd-893e42bec48b">
+    <th>
+      <h4>Type</h4>
+    </th>
+    <td>
+      <h4></h4>
+    </td>
+    <tr></tr>
+    <tr>
+      <th>latitude</th>
+      <td>-33.7152</td>
+    </tr>
+    <tr>
+      <th>longitude</th>
+      <td>150.30119</td>
+    </tr>
   </table>
   <h1>Contextual info: Organisation</h1>
-  <table class="table table-striped">
-    <thead class="thead-inverse">
-      <tr/>
-    </thead>
-    <tbody class="table-striped"/>
-    <tr id="http://uts.edu.au"/>
+  <hr></hr>
+  <table class="table" id="http://uts.edu.au">
+    <th>
+      <h4>Type</h4>
+    </th>
+    <td>
+      <h4></h4>
+    </td>
+    <tr></tr>
+    <tr>
+      <th>name</th>
+      <td>
+        <a href="http://uts.edu.au" class="fa fa-external-link">University of Technology Sydney</a>
+      </td>
+    </tr>
   </table>
   <h1>Contextual info: Person</h1>
-  <table class="table table-striped">
-    <thead class="thead-inverse">
-      <tr/>
-    </thead>
-    <tbody class="table-striped"/>
-    <tr id="http://orcid.org/0000-0002-3545-944X"/>
+  <hr></hr>
+  <table class="table" id="http://orcid.org/0000-0002-3545-944X">
+    <th>
+      <h4>Type</h4>
+    </th>
+    <td>
+      <h4></h4>
+    </td>
+    <tr></tr>
+    <tr>
+      <th>affiliation</th>
+      <td>
+        <a href="#http://uts.edu.au">University of Technology Sydney</a>
+      </td>
+    </tr>
+    <tr>
+      <th>email</th>
+      <td>pt@ptsefton.com</td>
+    </tr>
+    <tr>
+      <th>name</th>
+      <td>
+        <a href="http://orcid.org/0000-0002-3545-944X" class="fa fa-external-link">Peter Sefton</a>
+      </td>
+    </tr>
   </table>
   <h1>Contextual info: Place</h1>
-  <table class="table table-striped">
-    <thead class="thead-inverse">
-      <tr/>
-    </thead>
-    <tbody class="table-striped"/>
-    <tr id="http://www.geonames.org/8152662/catalina-park.html"/>
+  <hr></hr>
+  <table class="table" id="http://www.geonames.org/8152662/catalina-park.html">
+    <th>
+      <h4>Type</h4>
+    </th>
+    <td>
+      <h4></h4>
+    </td>
+    <tr></tr>
+    <tr>
+      <th>description</th>
+      <td>Catalina Park is a disused motor racing venue, located at Katoomba, in the Blue Mountains, New South Wales, Australia, and is recognised as an Aboriginal Place due to the long association of the local Gundungarra and Darug clans to the area.</td>
+    </tr>
+    <tr>
+      <th>geo</th>
+      <td>
+        <hr></hr>
+        <table class="table" id="263e4cc5-37e6-4bee-a8cd-893e42bec48b">
+          <th>
+            <h4>Type</h4>
+          </th>
+          <td>
+            <h4></h4>
+          </td>
+          <tr></tr>
+          <tr>
+            <th>latitude</th>
+            <td>-33.7152</td>
+          </tr>
+          <tr>
+            <th>longitude</th>
+            <td>150.30119</td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+    <tr>
+      <th>name</th>
+      <td>
+        <a href="http://www.geonames.org/8152662/catalina-park.html" class="fa fa-external-link">Catalina Park</a>
+      </td>
+    </tr>
   </table>
   <h1>Contextual info: Project</h1>
-  <table class="table table-striped">
-    <thead class="thead-inverse">
-      <tr/>
-    </thead>
-    <tbody class="table-striped"/>
-    <tr id="https://github.com/UTS-eResearch/datacrate"/>
+  <hr></hr>
+  <table class="table" id="https://github.com/UTS-eResearch/datacrate">
+    <th>
+      <h4>Type</h4>
+    </th>
+    <td>
+      <h4></h4>
+    </td>
+    <tr></tr>
+    <tr>
+      <th>description</th>
+      <td>The DataCrate project is to write the spec for DataCrate, of which this is an example.</td>
+    </tr>
+    <tr>
+      <th>funder</th>
+      <td>UTS</td>
+    </tr>
+    <tr>
+      <th>name</th>
+      <td>
+        <a href="https://github.com/UTS-eResearch/datacrate" class="fa fa-external-link">DataCrate</a>
+      </td>
+    </tr>
   </table>
   <h1>Contextual info: ScholarlyWork</h1>
-  <table class="table table-striped">
-    <thead class="thead-inverse">
-      <tr/>
-    </thead>
-    <tbody class="table-striped"/>
-    <tr id="http://dx.doi.org/10.1000/123456"/>
+  <hr></hr>
+  <table class="table" id="http://dx.doi.org/10.1000/123456">
+    <th>
+      <h4>Type</h4>
+    </th>
+    <td>
+      <h4></h4>
+    </td>
+    <tr></tr>
+    <tr>
+      <th>dC:CREATOR</th>
+      <td>Peter Sefton</td>
+    </tr>
+    <tr>
+      <th>name</th>
+      <td>
+        <a href="http://dx.doi.org/10.1000/123456" class="fa fa-external-link">This is an example publication with a dodgy DOI</a>
+      </td>
+    </tr>
   </table>
 </div>
 

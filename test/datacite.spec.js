@@ -3,7 +3,6 @@ const builder = require('xmlbuilder');
 const Datacite = require('../datacite.js')
 const assert = require("assert");
 const default_test_dir = "test_output";
-
 const text_citation_1 = "Peter Sefton (2017) Sample dataset for DataCrate v0.2. University of Technology Sydney. Datacrate. http://dx.doi.org/10.5281/zenodo.1009240";
 
 function set_up_a_dir(test_dir = default_test_dir ) {

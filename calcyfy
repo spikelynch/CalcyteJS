@@ -2,6 +2,7 @@
 const Collection = require('./collection.js');
 const Index = require('./index_html.js');
 const Datacite = require('./datacite.js');
+const Bag = require('./bag.js');
 const args = require('minimist')(process.argv.slice(2));
 const shell = require('shelljs');
 const program = require('commander');
@@ -15,35 +16,83 @@ program
   .action(function (directories) {
     dirs = directories;
   })
-  .option('-g, --generate-html', 'Generate HTML from a "CATALOG.json" in a directory');
+  .option('-g, --generate-html', 'Generate HTML from a "CATALOG.json" in a directory')
+  .option('-b  --bag [bag-dir]', 'Create Bagit Bag(s) under [bag-dir])' )
+  .option('-z  --zip', 'Create a zipped version of the bag' )
+
+
 
 program.parse(process.argv);
 if (!program.rawArgs.length || !dirs) program.help();
 
 if (program.generateHtml) {
-  console.log('generate html');
+  console.log('Generating html from exsiting CATALOG.json file')
   dirs.forEach(function (dir) {
     if (shell.test('-d', dir)) {
       if(!path.isAbsolute(dir)) {
-        dir = path.join(process.cwd(), dir);
+        dir = path.join(process.cwd(), dir)
+
       }
-      var catalog = path.join(dir, 'CATALOG.json');
-      var index_maker = new Index();
-      index_maker.make_index_html(catalog);
-      var citer = new Datacite();
-      var text_citation = citer.make_citation(catalog, path.join(dir, 'datacite.xml'));
-      index_maker.write_html('defaults/catalog_template.html', path.join(dir, 'index.html'), text_citation);
+        var catalog = path.join(dir, 'CATALOG.json')
     }
+    else if (shell.test('-f', dir)) {
+      if(!path.isAbsolute(dir)) {
+        dir = path.join(process.cwd(), dir)
+      }
+      var catalog = dir
+      dir = path.dirname(catalog)
+    }
+
+    if (program.bag) { //Bag the HTML
+        var bagger = new Bag();
+        var dest = path.join(program.bag,path.basename(dir))
+        shell.rm("-rf", dest)
+        dir = bagger.bag(dir, program.bag)
+        if(!path.isAbsolute(dir)) {
+          dir = path.join(process.cwd(), dir);
+        }
+        catalog = path.join(dir,"CATALOG.json")
+
+    }
+    var index_maker = new Index();
+    index_maker.make_index_html(catalog);
+    var citer = new Datacite();
+    shell.mkdir(path.join(dir, 'metadata'))
+    var text_citation = citer.make_citation(catalog, path.join(dir, 'metadata','datacite.xml'));
+    // TODO Make template relative to script not current dir
+    index_maker.write_html(path.join(__dirname,'defaults/catalog_template.html'), path.join(dir, 'index.html'), text_citation);
+    if (program.bag) {
+      bagger.update()
+      if (program.zip) {
+        shell.cd(bagger.target_dir)
+        var zipname = path.join("../", path.basename(bagger.target_dir) + ".zip")
+        shell.cd(bagger.target_dir)
+        shell.exec("zip -r " + zipname + " " + ".*")
+        index_maker.write_html(path.join(__dirname,'defaults/catalog_template.html'), path.join(dir, 'index.html'), text_citation, zipname);
+      }
+    }
+
+
   })
 } else {
-  console.log(dirs);
+  //console.log(dirs);
   dirs.forEach(function (dir) {
     if (shell.test('-d', dir)) {
       var c = new Collection();
       c.read(dir);
+      if (program.bag) {
+         var source_dir = dir.split("\\").pop(0).split("/").pop(0); //Get deepest dir
+         c.bag(path.join(program.bag, source_dir));
+      }
+      // TODO - Change paths
+      // TODO
       c.to_json_ld().then(
         function () {
           c.to_html();
+            if (program.bag) {
+          c.generate_bag_info();
+          c.save_bag_info();
+        }
         },
         function (err) {
           console.log(err)

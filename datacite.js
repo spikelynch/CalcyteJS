@@ -1,6 +1,13 @@
 const builder = require('xmlbuilder');
 var fs = require('fs');
 
+const arrayify = function arrayify(something, callback) {
+  if (!Array.isArray(something)){
+      something = [something]
+    }
+  return callback(something)
+}
+
 module.exports = function(){
   return(
   {
@@ -34,7 +41,13 @@ module.exports = function(){
         this.json_by_id[item['@id']] = item;
       }
       if (item['path']){
-        this.json_by_url[item['path']] = item;
+        var p = item['path']
+        if (!Array.isArray(p)){
+            p = [p]
+          }
+        for (let path of p) {
+          this.json_by_url[p] = item;
+        }
       }
       if (item['@type']) {
         if (!this.json_by_type[item['@type']]) {
@@ -45,7 +58,8 @@ module.exports = function(){
 
     }
   //console.log("THIS JSON BY URL", this.json_by_url)
-  var root = this.json_by_url["./"];
+    var root = this.json_by_url["./"] ? this.json_by_url["./"] : this.json_by_url["data/"]  ;
+    //console.log(this.json_by_url)
     var can_cite = true;
     var report = "";
     const ns = "http://datacite.org/schema/kernel-4"
@@ -81,8 +95,8 @@ module.exports = function(){
                 creator_el = creators_el.ele("creator");
                 creator_names = creator["familyName"] + ", " + creator["givenName"];
                 creator_el.ele("creatorName", creator_names) ;
-                creator_el.ele('givenName', creator["givenName"]);
-                creator_el.ele('familyName', creator["familyName"]);
+                creator_el.ele('givenName').txt(creator["givenName"]);
+                creator_el.ele('familyName').txt(["familyName"]);
                 found_creator = true;
                 creators_strings.push(creator_names);
               } else if (creator["name"]) {
@@ -104,11 +118,10 @@ module.exports = function(){
 
       if (creators_strings.length === 0) {
         can_cite = false;
-        report += "Data citations requires *  At least one [schema:creator] with a [schema:givenName] and [schema:familyName]."
+        report += "Data citations requires *  At least one [schema:creator] with a [schema:givenName] and [schema:familyName]. "
       }
     if (root["@id"]){
       var identifier = root["@id"];
-      console.log("ID", identifier)
       if (identifier.match(/http:\/\/(dx\.)?doi.org\/10\./)) {
           //<identifier identifierType="DOI">10.5072/example-full</identifier>
           id_el = xml.ele("identifier", identifier.replace("http://dx.doi.org/",""))
@@ -116,12 +129,12 @@ module.exports = function(){
         }
       else {
           can_cite = false;
-          report += "Collection needs to have a DOI as an ID";
+          report += "Collection needs to have a DOI as an ID. ";
         }
       }
       else
       {
-            report += "There is no Identifier";
+            report += "There is no Identifier. ";
             can_cite = false;
       }
 
@@ -140,7 +153,7 @@ module.exports = function(){
       }
       else {
           can_cite = false;
-          report += "Data Citation requires at least one [schema:name] (Title) (which maps to a DataCite title).";
+          report += "Data Citation requires at least one [schema:name] (Title) (which maps to a DataCite title). ";
         }
 
 
@@ -148,7 +161,11 @@ module.exports = function(){
             /*
             <publisher>DataCite</publisher>
            */
-            var publisher = root["publisher"]
+           var publisher = root["publisher"]
+           arrayify(publisher, function(pub){
+                  publisher = pub[0]
+
+            })
             if (publisher["@id"] && this.json_by_id[publisher["@id"]] && this.json_by_id[publisher["@id"]].name){
                 publisher = this.json_by_id[publisher["@id"]].name
             }
@@ -156,16 +173,26 @@ module.exports = function(){
           }
         else {
             can_cite = false;
-            report += "At least one [schema:publisher] property which SHOULD be an organization but may be a String";
+            report += "At least one schema:publisher property which SHOULD be an organization but may be a String. ";
           }
-        if (root["datePublished"] && root["datePublished"].match(/^\d\d\d\d/)) {
-            //<publicationYear>2014</publicationYear>
-            published = root["datePublished"].slice(0,4);
-            var date_published_el = xml.ele("publicationYear", published);
-          }
-        else {
+
+
+        var published
+        if (root["datePublished"]) {
+          var date = root["datePublished"]
+          arrayify(date, function(dates) {
+            if (dates[0].match(/^\d\d\d\d/)) {
+                published = root["datePublished"].slice(0,4)
+                var date_published_el = xml.ele("publicationYear").txt(published)
+              }
+
+            })
+
+        }
+
+        if  (!published){
             can_cite = false;
-            report += "A [schema:datePublished] property in [ISO 8601 Date Format]";
+            report += "A schema:datePublished. "
         }
         xml.ele("resourceType","DataCrate v0.1").att("resourceTypeGeneral", "Dataset");
 
@@ -184,14 +211,16 @@ module.exports = function(){
           this.citation += identifier;
           //console.log("REPORT" + report);
           //console.log("CITATION",  this.citation);
-          //console.log(xml.end({ pretty: true }));
+          //console.log();
 
           }   else {
-                console.log("CAN'T CITE", report);
+                console.log("Can't cite this dataset:  ", report);
                 this.citation = report;
 
               }
-
+        if (out_path) {
+          fs.writeFileSync(out_path, xml.end({ pretty: true }));
+        }
         return this.citation;
 
 

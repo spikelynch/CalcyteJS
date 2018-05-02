@@ -57,10 +57,10 @@ module.exports = function(){
 
   "to_json_ld_fragment" : function to_json_ld_fragment() {
       //console.log("Keys at start of output", Object.keys(this.properties));
-
       var frag = {"@id" : String(this.id)};
       //console.log("Setting id", this.id, this.name, this.nested_items);
       //console.log(" NAMELOOKUPS",  this.collection.name_lookup);
+
       for (let [key, i] of Object.entries(this.nested_items)) {
         frag[key] = i.to_json_ld_fragment();
       }
@@ -75,7 +75,6 @@ module.exports = function(){
               //console.log("link_id", link_id, "relational", f.is_relational)
               if (f.is_file) {
                 this.is_file = true;
-
                 //types.push("schema:MediaObject");
 
               } else if (f.is_relational && link_id) {
@@ -93,6 +92,9 @@ module.exports = function(){
       }
       }
       frag["@type"] = this.types;
+      if (this.collection.bagged &&  frag.path) {
+        frag.path = path.join("data", frag.path);
+      }
       this.json_ld_fragment = frag;
       //console.log(frag);
       return frag;
@@ -120,7 +122,6 @@ module.exports = function(){
         pr.parse("path", this.id);
         this.properties[pr.name] = pr;
         this.is_file = value;
-
       }
       else if (property.is_id) {
         //console.log("Got an ID", value);

@@ -6,15 +6,21 @@ const entities = new Entities();
 module.exports = function(){
     this.nested_item_json = [];
     function get_RDF_for_column(name) {
-      return context[name] ?  context[name] : undefined
+      if (context[name]) {
+        return context[name]["@id"] ? context[name]["@id"] : context[name]
+      }
+      else {
+        return undefined
+      }
      }
 
     function get_fully_qualified_URI(property_name){
           /*
           Look up the data dictionary to get an RDF name for column_name.
           */
+        property_name =  property_name["@id"] ? property_name["@id"] : property_name
         if (context[property_name]) {
-            property_name = context[property_name]
+            property_name = context[property_name]["@id"] ? context[property_name]["@id"] : context[property_name]
           }
         if (property_name &&  property_name.includes(":")) {
             split_name = property_name.split(":",2);
@@ -134,7 +140,7 @@ module.exports = function(){
             this.data = this.data.replace(/, +/g, ",").split(",");
             //console.log("SPLIT", this.type, this.name, this.data)
           } else if(!Array.isArray(this.data)) {
-            
+
             this.data = [this.data];
           }
 
