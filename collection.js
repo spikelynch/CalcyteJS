@@ -135,6 +135,7 @@ module.exports = function(){
      },
 
     generate_bag_info : function generate_bag_info(){
+      //TODO: Remove this and us bag.js which is more generic
       this.index_graph();
       this.bag_meta = {"BagIt-Profile-Identifier":
          "https://raw.githubusercontent.com/UTS-eResearch/datacrate/master/spec/0.2/profile-datacrate-v0.2.json",
@@ -160,6 +161,7 @@ module.exports = function(){
      },
 
     save_bag_info : function save_bag_info() {
+      //TODO: Remove this and use bag.js
          var bag_info = "";
          for (var [k, v] of Object.entries(this.bag_meta)) {
            bag_info += k + ": " + v + "\n";
@@ -168,13 +170,23 @@ module.exports = function(){
          fs.writeFileSync(path.join(this.dir, "bag-info.txt"), bag_info);
     },
 
+    update: function update_bag_tags(){
+      //TDOD get rid of this - use bag.js
+      shell.exec("bagit updatetagmanifests " +  this.dir)
+    },
+
     to_html : function to_html() {
         console.log("Saving html");
         var index_maker = new Index();
         index_maker.make_index_html(this.json_ld);
         citer = new Datacite();
-        text_citation = citer.make_citation(this.json_ld, path.join(this.dir, "index.html"));
-        console.log("Writing to");
+        var citation_path
+        if (this.bagged) {
+          citation_path = path.join(this.dir, 'metadata','datacite.xml')
+          shell.mkdir(path.join(this.dir, 'metadata'))
+        }
+        text_citation = citer.make_citation(this.json_ld, citation_path);
+        console.log("Writing to", path.join(this.dir, "index.html"))
         index_maker.write_html(path.join(__dirname, "defaults/catalog_template.html"), path.join(this.dir, "index.html"), text_citation);
     },
 
@@ -227,7 +239,7 @@ module.exports = function(){
         });
 
     },
-    bag : function bag(bag_dir) {
+      bag : function bag(bag_dir) {
       // TODO Generate a list of all files
       // FOR NOW: delete CATALOG.json and index.html
       // Generate bag info later

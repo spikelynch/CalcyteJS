@@ -2273,7 +2273,7 @@
   },
   "@graph": [
     {
-      "@id": "1f7e21d2-c471-44a1-b358-26903e7f65c2",
+      "@id": "2a466ee0-a7c0-42c6-8329-53ada05de42d",
       "@type": "GeoCoordinates",
       "latitude": "-33.7152",
       "longitude": "150.30119"
@@ -2281,19 +2281,10 @@
     {
       "@id": "EPL1",
       "@type": "Equipment",
+      "URL": "https://en.wikipedia.org/wiki/Olympus_PEN_E-PL1",
       "description": "Olympus camera with Panasonic 20mm lens",
       "identifier": "EPL1",
-      "name": "EPL1 Camera",
-      "uRL": "https://en.wikipedia.org/wiki/Olympus_PEN_E-PL1"
-    },
-    {
-      "@id": "bag-info.txt",
-      "@type": "File",
-      "contentSize": "455",
-      "path": "bag-info.txt",
-      "encodingFormat": "Plain Text File",
-      "fileFormat": "http://www.nationalarchives.gov.uk/PRONOM/x-fmt/111",
-      "filename": []
+      "name": "EPL1 Camera"
     },
     {
       "@id": "http://ands.org.au",
@@ -2315,6 +2306,7 @@
     {
       "@id": "http://dx.doi.org/10.5281/zenodo.1009240",
       "@type": "Dataset",
+      "isOutputOf": "DataCrate",
       "contact": {
         "@id": "http://orcid.org/0000-0002-3545-944X"
       },
@@ -2329,9 +2321,6 @@
       "description": "This is a simple dataset for demonstration purposes it contains just one image and a directory full of useless text files.",
       "hasPart": [
         {
-          "@id": "bag-info.txt"
-        },
-        {
           "@id": "lots_of_little_files"
         },
         {
@@ -2341,7 +2330,6 @@
       "identifier": "http://dx.doi.org/10.5281/zenodo.1009240",
       "keywords": "Dogs, Fences, The Gully",
       "name": "Sample dataset for DataCrate v0.2",
-      "outputOf": "DataCrate",
       "publisher": {
         "@id": "http://uts.edu.au"
       },
@@ -2372,8 +2360,8 @@
         "@id": "http://uts.edu.au"
       },
       "email": "pt@ptsefton.com",
-      "family Name": "Sefton",
-      "given Name": "Peter",
+      "family_Name": "Sefton",
+      "given_Name": "Peter",
       "identifier": "http://orcid.org/0000-0002-3545-944X",
       "name": "Peter Sefton"
     },
@@ -2387,19 +2375,19 @@
     {
       "@id": "http://www.geonames.org/8152662/catalina-park.html",
       "@type": "Place",
+      "URL": "https://en.wikipedia.org/wiki/Catalina_Park",
       "address": "Katoomba, NSW",
       "description": "Catalina Park is a disused motor racing venue, located at Katoomba, in the Blue Mountains, New South Wales, Australia, and is recognised as an Aboriginal Place due to the long association of the local Gundungarra and Darug clans to the area.",
       "geo": {
-        "@id": "1f7e21d2-c471-44a1-b358-26903e7f65c2"
+        "@id": "2a466ee0-a7c0-42c6-8329-53ada05de42d"
       },
       "identifier": "http://www.geonames.org/8152662/catalina-park.html",
-      "name": "Catalina Park",
-      "uRL": "https://en.wikipedia.org/wiki/Catalina_Park"
+      "name": "Catalina Park"
     },
     {
       "@id": "https://creativecommons.org/licenses/by-nc-sa/3.0/au/",
       "@type": "ScholarlyWork",
-      "description": "Attribution-NonCommercial-ShareAlike 3.0 Australia (CC BY-NC-SA 3.0 AU)\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\nThis is a human-readable summary of (and not a substitute for) the license. Disclaimer.\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\nYou are free to:\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\nShare — copy and redistribute the material in any medium or format\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\nAdapt — remix, transform, and build upon the material\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\nThe licensor cannot revoke these freedoms as long as you follow the license terms.\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\nUnder the following terms:\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\nAttribution — You must give appropriate credit, provide a link to the license, and indicate if changes were made. You may do so in any reasonable manner, but not in any way that suggests the licensor endorses you or your use.\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\nNon-Commercial — You may not use the material for commercial purposes.\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\nShareAlike — If you remix, transform, or build upon the material, you must distribute your contributions under the same license as the original.\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\nNo additional restrictions — You may not apply legal terms or technological measures that legally restrict others from doing anything the license permits.",
+      "description": "Attribution-NonCommercial-ShareAlike 3.0 Australia (CC BY-NC-SA 3.0 AU)\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\nThis is a human-readable summary of (and not a substitute for) the license. Disclaimer.\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\nYou are free to:\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\nShare — copy and redistribute the material in any medium or format\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\nAdapt — remix, transform, and build upon the material\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\nThe licensor cannot revoke these freedoms as long as you follow the license terms.\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\nUnder the following terms:\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\nAttribution — You must give appropriate credit, provide a link to the license, and indicate if changes were made. You may do so in any reasonable manner, but not in any way that suggests the licensor endorses you or your use.\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\nNon-Commercial — You may not use the material for commercial purposes.\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\nShareAlike — If you remix, transform, or build upon the material, you must distribute your contributions under the same license as the original.\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\nNo additional restrictions — You may not apply legal terms or technological measures that legally restrict others from doing anything the license permits.",
       "identifier": "https://creativecommons.org/licenses/by-nc-sa/3.0/au/",
       "name": "CC BY-NC-SA 3.0 AU"
     },

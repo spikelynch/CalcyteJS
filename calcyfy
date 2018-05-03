@@ -67,7 +67,7 @@ if (program.generateHtml) {
         shell.cd(bagger.target_dir)
         var zipname = path.join("../", path.basename(bagger.target_dir) + ".zip")
         shell.cd(bagger.target_dir)
-        shell.exec("zip -r " + zipname + " " + ".*")
+        shell.exec("zip -r " + zipname + " " + "*")
         index_maker.write_html(path.join(__dirname,'defaults/catalog_template.html'), path.join(dir, 'index.html'), text_citation, zipname);
       }
     }
@@ -76,23 +76,39 @@ if (program.generateHtml) {
   })
 } else {
   //console.log(dirs);
+
   dirs.forEach(function (dir) {
+    console.log("JHERE")
+
     if (shell.test('-d', dir)) {
       var c = new Collection();
       c.read(dir);
       if (program.bag) {
-         var source_dir = dir.split("\\").pop(0).split("/").pop(0); //Get deepest dir
-         c.bag(path.join(program.bag, source_dir));
+         //Get deepest dir
+         c.bag(path.join(program.bag, path.basename(dir)));
       }
       // TODO - Change paths
       // TODO
       c.to_json_ld().then(
         function () {
           c.to_html();
-            if (program.bag) {
-          c.generate_bag_info();
-          c.save_bag_info();
-        }
+          if (program.bag) {
+            c.generate_bag_info();
+            c.save_bag_info();
+            c.update();
+            if (program.zip) {
+              //TODO: This is REPEATING YOURSELF
+              console.log("GETTING IN THERE", c.dir)
+              shell.cd(c.dir)
+              var zipname = path.join("../", path.basename(c.dir) + ".zip")
+              var zip_cmd = "zip -r " + zipname + " *"
+              console.log("Zip command", zip_cmd)
+              shell.exec(zip_cmd)
+              var index_maker = new Index();
+              index_maker.make_index_html(path.join(c.dir, "CATALOG.json"));
+              index_maker.write_html(path.join(__dirname,'defaults/catalog_template.html'), path.join(c.dir, 'index.html'), text_citation, zipname);
+            }
+          }
         },
         function (err) {
           console.log(err)

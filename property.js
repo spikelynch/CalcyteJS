@@ -89,7 +89,9 @@ module.exports = function(){
         }
       //Assume what's left of header is a property, and hence starts with lowecase letter
       if (this.name.length > 0) {
-        this.name = this.name[0].toLowerCase() + this.name.substring(1);
+        if (!(/[A-Z]/.test(this.name[1]))) {
+          this.name = this.name[0].toLowerCase() + this.name.substring(1);
+      }
       }
       var nest;
 

@@ -25,11 +25,11 @@
       <nameIdentifier schemeURI="http://orcid.org" nameIdentifierScheme="ORCID">http://orcid.org/0000-0003-4953-9114</nameIdentifier>
     </creator>
   </creators>
-  <identifier identifierType="DOI">10.1016/something</identifier>
+  <identifier identifierType="DOI">10.1016/this_is_an_example_not_a_real_DOI</identifier>
   <titles>
     <title>Glop Pot data</title>
   </titles>
-  <publisher>University of Technology Sydney</publisher>
+  <publisher>Sydney University Speleological Society</publisher>
   <publicationYear>2017</publicationYear>
   <resourceType resourceTypeGeneral="Dataset">DataCrate v0.1</resourceType>
 </resource>

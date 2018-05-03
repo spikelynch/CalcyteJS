@@ -40,7 +40,7 @@
 <body>
 <div class="container">
 <div class="jumbotron">
-Cite this work: <h3>Lake, Mike; Vaughan-Taylor, Keir; Klocker, Andreas; Maynard, Phil (2017) Glop Pot data. University of Technology Sydney. Datacrate. http://dx.doi.org/10.1016/something</h3>
+Cite this work: <h3>Lake, Mike; Vaughan-Taylor, Keir; Klocker, Andreas; Maynard, Phil (2017) Glop Pot data. Sydney University Speleological Society. Datacrate. http://dx.doi.org/10.1016/this_is_an_example_not_a_real_DOI</h3>
 <h4>  </h4>
 </div>
 
@@ -48,8 +48,8 @@ Cite this work: <h3>Lake, Mike; Vaughan-Taylor, Keir; Klocker, Andreas; Maynard,
 It uses the <a href='https://github.com/UTS-eResearch/datacrate/blob/master/spec/0.2/data_crate_specification_v0.1.md'>
 Draft DataCrate Packaging format v0.2</a>.
 <p>This file was made with
-<a href='https://codeine.research.uts.edu.au/eresearch/calcytejs'>
-Calcyte</a> .
+<a href='https://code.research.uts.edu.au/eresearch/calcytejs'>
+Calcyte</a>.
  </p>
 A machine-readable version of this page is available:
 <a href='CATALOG.json'>CATALOG.json</a></p>
@@ -58,31 +58,25 @@ A machine-readable version of this page is available:
 <?xml version="1.0"?>
 <div>
   <hr></hr>
-  <table class="table" id="http://dx.doi.org/10.1016/something">
-    <th>
-      <h4>Type</h4>
-    </th>
-    <td>
-      <h4></h4>
-    </td>
+  <table class="table" id="http://dx.doi.org/10.1016/this_is_an_example_not_a_real_DOI">
     <tr></tr>
     <tr>
-      <th>contact</th>
+      <th>@type</th>
+      <td>Dataset</td>
+    </tr>
+    <tr>
+      <th>name</th>
       <td>
-        <a href="#http://orcid.org/0000-0003-4953-0830">Mike Lake</a>
+        <a href="http://dx.doi.org/10.1016/this_is_an_example_not_a_real_DOI" class="fa fa-external-link">Glop Pot data</a>
       </td>
     </tr>
     <tr>
-      <th>contentLocation</th>
-      <td>
-        <a href="#318332f7-2ae7-42db-8263-67be6e731437">Glop Pot</a>
-      </td>
+      <th>description</th>
+      <td>Sketchsheets and data from the Glop Pot cave survey</td>
     </tr>
     <tr>
-      <th>path</th>
-      <td>
-        <a href="./">.</a>
-      </td>
+      <th>datePublished</th>
+      <td>2017</td>
     </tr>
     <tr>
       <th>creator</th>
@@ -97,12 +91,22 @@ A machine-readable version of this page is available:
       </td>
     </tr>
     <tr>
-      <th>datePublished</th>
-      <td>2017</td>
+      <th>path</th>
+      <td>
+        <a href="./">.</a>
+      </td>
     </tr>
     <tr>
-      <th>description</th>
-      <td>Sketchsheets and data from the Glop Pot cave survey</td>
+      <th>contact</th>
+      <td>
+        <a href="#http://orcid.org/0000-0003-4953-0830">Mike Lake</a>
+      </td>
+    </tr>
+    <tr>
+      <th>contentLocation</th>
+      <td>
+        <a href="#d235be03-c79e-4f17-b0c1-87280c1a8334">Glop Pot</a>
+      </td>
     </tr>
     <tr>
       <th>hasPart</th>
@@ -115,42 +119,69 @@ A machine-readable version of this page is available:
         , 
         <a href="#datasheets">CP7 Glop Pot, Cooleman Plains, Glop Pot data sheets </a>
         , 
-        <a href="#sketchsheets">sketchsheets</a>
+        <a href="#sketchsheets">Sketch Sheets</a>
       </td>
-    </tr>
-    <tr>
-      <th>name</th>
-      <td>
-        <a href="http://dx.doi.org/10.1016/something" class="fa fa-external-link">Glop Pot data</a>
-      </td>
-    </tr>
-    <tr>
-      <th>organisation</th>
-      <td>Sydney University Speleological Society</td>
     </tr>
     <tr>
       <th>publisher</th>
-      <td>University of Technology Sydney</td>
+      <td>
+        <a href="#https://suss.caves.org.au/">Sydney University Speleological Society</a>
+      </td>
     </tr>
   </table>
   <h1>Files: </h1>
   <table class="table table-striped">
     <thead class="thead-inverse">
-      <tr></tr>
+      <tr>
+        <th>description</th>
+        <th>creator</th>
+        <th>path</th>
+        <th>encodingFormat</th>
+        <th>contentSize</th>
+        <th>license</th>
+      </tr>
     </thead>
     <tbody class="table-striped"></tbody>
-    <tr id="cp7glop.svx"></tr>
-    <tr id="cp7glop.ai"></tr>
+    <tr id="cp7glop.svx">
+      <td>Survex data file for Glop Pot</td>
+      <td>
+        <a href="#http://orcid.org/0000-0003-4953-9114">Phil Maynard</a>
+      </td>
+      <td>
+        <a href="cp7glop.svx">cp7glop.svx</a>
+      </td>
+      <td>
+        <a href="http://www.nationalarchives.gov.uk/PRONOM/x-fmt/111">Plain Text File</a>
+      </td>
+      <td>2058</td>
+      <td>
+        <a href="#https://creativecommons.org/licenses/by/3.0/au/">CC-BY</a>
+      </td>
+    </tr>
+    <tr id="cp7glop.ai">
+      <td>Illustrator file for Glop Pot</td>
+      <td>
+        <a href="#http://orcid.org/0000-0003-4953-9114">Phil Maynard</a>
+      </td>
+      <td>
+        <a href="cp7glop.ai">cp7glop.ai</a>
+      </td>
+      <td>
+        <a href="http://www.nationalarchives.gov.uk/PRONOM/fmt/19">Acrobat PDF 1.5 - Portable Document Format</a>
+      </td>
+      <td>383766</td>
+      <td>
+        <a href="#https://creativecommons.org/licenses/by/3.0/au/">CC-BY</a>
+      </td>
+    </tr>
   </table>
   <hr></hr>
   <table class="table" id="asf">
-    <th>
-      <h4>Type</h4>
-    </th>
-    <td>
-      <h4></h4>
-    </td>
     <tr></tr>
+    <tr>
+      <th>@type</th>
+      <td>Dataset</td>
+    </tr>
     <tr>
       <th>path</th>
       <td>
@@ -183,27 +214,106 @@ A machine-readable version of this page is available:
   <h1>Files: </h1>
   <table class="table table-striped">
     <thead class="thead-inverse">
-      <tr></tr>
+      <tr>
+        <th>path</th>
+        <th>encodingFormat</th>
+        <th>contentSize</th>
+        <th>*MISSING-FILE</th>
+      </tr>
     </thead>
     <tbody class="table-striped"></tbody>
-    <tr id="asf/README.txt"></tr>
-    <tr id="asf/asf3.svx"></tr>
-    <tr id="asf/asf4.svx"></tr>
-    <tr id="asf/asf5.svx"></tr>
-    <tr id="asf/asf6.svx"></tr>
-    <tr id="asf/asf7.svx"></tr>
-    <tr id="asf/asf8.svx"></tr>
-    <tr id="asf/CATALOG_asf.xlsx"></tr>
+    <tr id="asf/README.txt">
+      <td>
+        <a href="asf/README.txt">README.txt</a>
+      </td>
+      <td>
+        <a href="http://www.nationalarchives.gov.uk/PRONOM/x-fmt/111">Plain Text File</a>
+      </td>
+      <td>401</td>
+      <td></td>
+    </tr>
+    <tr id="asf/asf3.svx">
+      <td>
+        <a href="asf/asf3.svx">asf3.svx</a>
+      </td>
+      <td>
+        <a href="http://www.nationalarchives.gov.uk/PRONOM/x-fmt/111">Plain Text File</a>
+      </td>
+      <td>406</td>
+      <td></td>
+    </tr>
+    <tr id="asf/asf4.svx">
+      <td>
+        <a href="asf/asf4.svx">asf4.svx</a>
+      </td>
+      <td>
+        <a href="http://www.nationalarchives.gov.uk/PRONOM/x-fmt/111">Plain Text File</a>
+      </td>
+      <td>386</td>
+      <td></td>
+    </tr>
+    <tr id="asf/asf5.svx">
+      <td>
+        <a href="asf/asf5.svx">asf5.svx</a>
+      </td>
+      <td>
+        <a href="http://www.nationalarchives.gov.uk/PRONOM/x-fmt/111">Plain Text File</a>
+      </td>
+      <td>390</td>
+      <td></td>
+    </tr>
+    <tr id="asf/asf6.svx">
+      <td>
+        <a href="asf/asf6.svx">asf6.svx</a>
+      </td>
+      <td>
+        <a href="http://www.nationalarchives.gov.uk/PRONOM/x-fmt/111">Plain Text File</a>
+      </td>
+      <td>400</td>
+      <td></td>
+    </tr>
+    <tr id="asf/asf7.svx">
+      <td>
+        <a href="asf/asf7.svx">asf7.svx</a>
+      </td>
+      <td>
+        <a href="http://www.nationalarchives.gov.uk/PRONOM/x-fmt/111">Plain Text File</a>
+      </td>
+      <td>402</td>
+      <td></td>
+    </tr>
+    <tr id="asf/asf8.svx">
+      <td>
+        <a href="asf/asf8.svx">asf8.svx</a>
+      </td>
+      <td>
+        <a href="http://www.nationalarchives.gov.uk/PRONOM/x-fmt/111">Plain Text File</a>
+      </td>
+      <td>418</td>
+      <td></td>
+    </tr>
+    <tr id="asf/CATALOG_asf.xlsx">
+      <td>
+        <a href="asf/CATALOG_asf.xlsx">CATALOG_asf.xlsx</a>
+      </td>
+      <td>
+        <a href="http://www.nationalarchives.gov.uk/PRONOM/fmt/595">Microsoft Excel Non-XML Binary Workbook</a>
+      </td>
+      <td>16871</td>
+      <td>1</td>
+    </tr>
   </table>
   <hr></hr>
   <table class="table" id="datasheets">
-    <th>
-      <h4>Type</h4>
-    </th>
-    <td>
-      <h4></h4>
-    </td>
     <tr></tr>
+    <tr>
+      <th>@type</th>
+      <td>Dataset</td>
+    </tr>
+    <tr>
+      <th>name</th>
+      <td>CP7 Glop Pot, Cooleman Plains, Glop Pot data sheets </td>
+    </tr>
     <tr>
       <th>path</th>
       <td>
@@ -216,13 +326,7 @@ A machine-readable version of this page is available:
         <a href="#datasheets/CP7Glopdata01.jpg">datasheets/CP7Glopdata01.jpg</a>
         , 
         <a href="#datasheets/CP7Glopdata02.jpg">datasheets/CP7Glopdata02.jpg</a>
-        , 
-        <a href="#datasheets/CATALOG_datasheets.xlsx">datasheets/CATALOG_datasheets.xlsx</a>
       </td>
-    </tr>
-    <tr>
-      <th>name</th>
-      <td>CP7 Glop Pot, Cooleman Plains, Glop Pot data sheets </td>
     </tr>
     <tr>
       <th>organization</th>
@@ -232,31 +336,75 @@ A machine-readable version of this page is available:
   <h1>Files: </h1>
   <table class="table table-striped">
     <thead class="thead-inverse">
-      <tr></tr>
+      <tr>
+        <th>description</th>
+        <th>creator</th>
+        <th>path</th>
+        <th>encodingFormat</th>
+        <th>contentSize</th>
+        <th>license</th>
+      </tr>
     </thead>
     <tbody class="table-striped"></tbody>
-    <tr id="datasheets/CP7Glopdata01.jpg"></tr>
-    <tr id="datasheets/CP7Glopdata02.jpg"></tr>
-    <tr id="datasheets/CATALOG_datasheets.xlsx"></tr>
+    <tr id="datasheets/CP7Glopdata01.jpg">
+      <td>Sump 2 downstream to sump 1</td>
+      <td>
+        <a href="#Keir Vaughan-Taylor">Keir Vaughan-Taylor</a>
+        , 
+        <a href="#http://orcid.org/0000-0003-4953-9114">Phil Maynard</a>
+        , 
+        <a href="#http://orcid.org/0000-0002-2038-7922">Andreas Klocker</a>
+      </td>
+      <td>
+        <a href="datasheets/CP7Glopdata01.jpg">CP7Glopdata01.jpg</a>
+      </td>
+      <td>
+        <a href="http://www.nationalarchives.gov.uk/PRONOM/fmt/43">JPEG File Interchange Format</a>
+      </td>
+      <td>135193</td>
+      <td>
+        <a href="#https://creativecommons.org/licenses/by/3.0/au/">CC-BY</a>
+      </td>
+    </tr>
+    <tr id="datasheets/CP7Glopdata02.jpg">
+      <td>Sump 1 to ladder, Tag to ladder</td>
+      <td>
+        <a href="#http://orcid.org/0000-0003-4953-9114">Phil Maynard</a>
+        , 
+        <a href="#http://orcid.org/0000-0002-2038-7922">Andreas Klocker</a>
+      </td>
+      <td>
+        <a href="datasheets/CP7Glopdata02.jpg">CP7Glopdata02.jpg</a>
+      </td>
+      <td>
+        <a href="http://www.nationalarchives.gov.uk/PRONOM/fmt/43">JPEG File Interchange Format</a>
+      </td>
+      <td>199121</td>
+      <td>
+        <a href="#https://creativecommons.org/licenses/by/3.0/au/">CC-BY</a>
+      </td>
+    </tr>
   </table>
   <hr></hr>
   <table class="table" id="sketchsheets">
-    <th>
-      <h4>Type</h4>
-    </th>
-    <td>
-      <h4></h4>
-    </td>
     <tr></tr>
+    <tr>
+      <th>@type</th>
+      <td>Dataset</td>
+    </tr>
+    <tr>
+      <th>name</th>
+      <td>Sketch Sheets</td>
+    </tr>
+    <tr>
+      <th>description</th>
+      <td>Metadata file for Glop Pot sketch sheets</td>
+    </tr>
     <tr>
       <th>path</th>
       <td>
         <a href="sketchsheets">sketchsheets</a>
       </td>
-    </tr>
-    <tr>
-      <th>description</th>
-      <td>Metadata file for Glop Pot sketch sheets</td>
     </tr>
     <tr>
       <th>hasPart</th>
@@ -268,62 +416,118 @@ A machine-readable version of this page is available:
         <a href="#sketchsheets/CP7Glopsketch03.jpg">sketchsheets/CP7Glopsketch03.jpg</a>
       </td>
     </tr>
-    <tr>
-      <th>title</th>
-      <td>Sketch Sheets</td>
-    </tr>
   </table>
   <h1>Files: </h1>
   <table class="table table-striped">
     <thead class="thead-inverse">
-      <tr></tr>
+      <tr>
+        <th>description</th>
+        <th>creator</th>
+        <th>path</th>
+        <th>encodingFormat</th>
+        <th>contentSize</th>
+        <th>license</th>
+      </tr>
     </thead>
     <tbody class="table-striped"></tbody>
-    <tr id="sketchsheets/CP7Glopsketch01.jpg"></tr>
-    <tr id="sketchsheets/CP7Glopsketch02.jpg"></tr>
-    <tr id="sketchsheets/CP7Glopsketch03.jpg"></tr>
+    <tr id="sketchsheets/CP7Glopsketch01.jpg">
+      <td>Downstream from sump 2 to sump 1</td>
+      <td>
+        <a href="#http://orcid.org/0000-0003-4953-9114">Phil Maynard</a>
+        , 
+        <a href="#http://orcid.org/0000-0002-2038-7922">Andreas Klocker</a>
+      </td>
+      <td>
+        <a href="sketchsheets/CP7Glopsketch01.jpg">CP7Glopsketch01.jpg</a>
+      </td>
+      <td>
+        <a href="http://www.nationalarchives.gov.uk/PRONOM/fmt/43">JPEG File Interchange Format</a>
+      </td>
+      <td>179640</td>
+      <td>
+        <a href="#https://creativecommons.org/licenses/by/3.0/au/">CC-BY</a>
+      </td>
+    </tr>
+    <tr id="sketchsheets/CP7Glopsketch02.jpg">
+      <td>Downstream from sump 1 to ladder</td>
+      <td>
+        <a href="#http://orcid.org/0000-0003-4953-9114">Phil Maynard</a>
+        , 
+        <a href="#http://orcid.org/0000-0002-2038-7922">Andreas Klocker</a>
+      </td>
+      <td>
+        <a href="sketchsheets/CP7Glopsketch02.jpg">CP7Glopsketch02.jpg</a>
+      </td>
+      <td>
+        <a href="http://www.nationalarchives.gov.uk/PRONOM/fmt/43">JPEG File Interchange Format</a>
+      </td>
+      <td>105936</td>
+      <td>
+        <a href="#https://creativecommons.org/licenses/by/3.0/au/">CC-BY</a>
+      </td>
+    </tr>
+    <tr id="sketchsheets/CP7Glopsketch03.jpg">
+      <td>In from tag to ladder</td>
+      <td>
+        <a href="#http://orcid.org/0000-0003-4953-9114">Phil Maynard</a>
+        , 
+        <a href="#http://orcid.org/0000-0002-2038-7922">Andreas Klocker</a>
+      </td>
+      <td>
+        <a href="sketchsheets/CP7Glopsketch03.jpg">CP7Glopsketch03.jpg</a>
+      </td>
+      <td>
+        <a href="http://www.nationalarchives.gov.uk/PRONOM/fmt/43">JPEG File Interchange Format</a>
+      </td>
+      <td>97729</td>
+      <td>
+        <a href="#https://creativecommons.org/licenses/by/3.0/au/">CC-BY</a>
+      </td>
+    </tr>
   </table>
-  <h1>Contextual info: Format</h1>
+  <h1>
+    Contextual info: 
+    <span>Format</span>
+  </h1>
   <hr></hr>
-  <table class="table" id="63a88242-1a75-4b4e-a6ab-75db08c5702f">
-    <th>
-      <h4>Type</h4>
-    </th>
-    <td>
-      <h4></h4>
-    </td>
+  <table class="table" id="97f299a0-454e-425f-9e57-4d69bc2203f8">
     <tr></tr>
     <tr>
-      <th>eXTENSION:</th>
-      <td>.svx</td>
-    </tr>
-    <tr>
-      <th>description</th>
-      <td>Survex is a multi-platform open-source cave surveying package.</td>
+      <th>@type</th>
+      <td>Format</td>
     </tr>
     <tr>
       <th>name</th>
       <td>Survex file</td>
     </tr>
     <tr>
-      <th>uRL</th>
+      <th>description</th>
+      <td>Survex is a multi-platform open-source cave surveying package.</td>
+    </tr>
+    <tr>
+      <th>URL</th>
       <td>https://survex.com/docs/manual/datafile.htm</td>
     </tr>
     <tr>
-      <th>mIME:</th>
+      <th>extension</th>
+      <td>.svx</td>
+    </tr>
+    <tr>
+      <th>mime</th>
       <td>text/plain</td>
     </tr>
   </table>
-  <h1>Contextual info: GeoCoordinates</h1>
+  <h1>
+    Contextual info: 
+    <span>GeoCoordinates</span>
+  </h1>
   <hr></hr>
-  <table class="table" id="57894db3-0f29-45c5-a592-bdbb9c19ae94">
-    <th>
-      <h4>Type</h4>
-    </th>
-    <td>
-      <h4></h4>
-    </td>
+  <table class="table" id="ae317a3c-ebaa-4919-a97c-9495433a1380">
     <tr></tr>
+    <tr>
+      <th>@type</th>
+      <td>GeoCoordinates</td>
+    </tr>
     <tr>
       <th>latitude</th>
       <td>-35.623592</td>
@@ -333,35 +537,39 @@ A machine-readable version of this page is available:
       <td>148.683836</td>
     </tr>
   </table>
-  <h1>Contextual info: Organization</h1>
+  <h1>
+    Contextual info: 
+    <span>Organization</span>
+  </h1>
   <hr></hr>
-  <table class="table" id="SUSS">
-    <th>
-      <h4>Type</h4>
-    </th>
-    <td>
-      <h4></h4>
-    </td>
+  <table class="table" id="https://suss.caves.org.au/">
     <tr></tr>
+    <tr>
+      <th>@type</th>
+      <td>Organization</td>
+    </tr>
     <tr>
       <th>name</th>
-      <td>Sydney University Speleological Society </td>
-    </tr>
-    <tr>
-      <th>uRL</th>
-      <td>https://suss.caves.org.au/</td>
+      <td>
+        <a href="https://suss.caves.org.au/" class="fa fa-external-link">Sydney University Speleological Society</a>
+      </td>
     </tr>
   </table>
-  <h1>Contextual info: Person</h1>
+  <h1>
+    Contextual info: 
+    <span>Person</span>
+  </h1>
   <hr></hr>
   <table class="table" id="Keir Vaughan-Taylor">
-    <th>
-      <h4>Type</h4>
-    </th>
-    <td>
-      <h4></h4>
-    </td>
     <tr></tr>
+    <tr>
+      <th>@type</th>
+      <td>Person</td>
+    </tr>
+    <tr>
+      <th>name</th>
+      <td>Keir Vaughan-Taylor</td>
+    </tr>
     <tr>
       <th>email</th>
       <td>keir@example.com</td>
@@ -374,20 +582,20 @@ A machine-readable version of this page is available:
       <th>givenName</th>
       <td>Keir</td>
     </tr>
-    <tr>
-      <th>name</th>
-      <td>Keir Vaughan-Taylor</td>
-    </tr>
   </table>
   <hr></hr>
   <table class="table" id="http://orcid.org/0000-0002-2038-7922">
-    <th>
-      <h4>Type</h4>
-    </th>
-    <td>
-      <h4></h4>
-    </td>
     <tr></tr>
+    <tr>
+      <th>@type</th>
+      <td>Person</td>
+    </tr>
+    <tr>
+      <th>name</th>
+      <td>
+        <a href="http://orcid.org/0000-0002-2038-7922" class="fa fa-external-link">Andreas Klocker</a>
+      </td>
+    </tr>
     <tr>
       <th>email</th>
       <td>andreas@example.com</td>
@@ -400,22 +608,20 @@ A machine-readable version of this page is available:
       <th>givenName</th>
       <td>Andreas</td>
     </tr>
-    <tr>
-      <th>name</th>
-      <td>
-        <a href="http://orcid.org/0000-0002-2038-7922" class="fa fa-external-link">Andreas Klocker</a>
-      </td>
-    </tr>
   </table>
   <hr></hr>
   <table class="table" id="http://orcid.org/0000-0003-4953-0830">
-    <th>
-      <h4>Type</h4>
-    </th>
-    <td>
-      <h4></h4>
-    </td>
     <tr></tr>
+    <tr>
+      <th>@type</th>
+      <td>Person</td>
+    </tr>
+    <tr>
+      <th>name</th>
+      <td>
+        <a href="http://orcid.org/0000-0003-4953-0830" class="fa fa-external-link">Mike Lake</a>
+      </td>
+    </tr>
     <tr>
       <th>email</th>
       <td>mike.lake@uts.edu.au</td>
@@ -428,22 +634,20 @@ A machine-readable version of this page is available:
       <th>givenName</th>
       <td>Mike</td>
     </tr>
-    <tr>
-      <th>name</th>
-      <td>
-        <a href="http://orcid.org/0000-0003-4953-0830" class="fa fa-external-link">Mike Lake</a>
-      </td>
-    </tr>
   </table>
   <hr></hr>
   <table class="table" id="http://orcid.org/0000-0003-4953-9114">
-    <th>
-      <h4>Type</h4>
-    </th>
-    <td>
-      <h4></h4>
-    </td>
     <tr></tr>
+    <tr>
+      <th>@type</th>
+      <td>Person</td>
+    </tr>
+    <tr>
+      <th>name</th>
+      <td>
+        <a href="http://orcid.org/0000-0003-4953-9114" class="fa fa-external-link">Phil Maynard</a>
+      </td>
+    </tr>
     <tr>
       <th>email</th>
       <td>phil@example.com</td>
@@ -456,43 +660,40 @@ A machine-readable version of this page is available:
       <th>givenName</th>
       <td>Phil</td>
     </tr>
-    <tr>
-      <th>name</th>
-      <td>
-        <a href="http://orcid.org/0000-0003-4953-9114" class="fa fa-external-link">Phil Maynard</a>
-      </td>
-    </tr>
   </table>
-  <h1>Contextual info: Place</h1>
+  <h1>
+    Contextual info: 
+    <span>Place</span>
+  </h1>
   <hr></hr>
-  <table class="table" id="318332f7-2ae7-42db-8263-67be6e731437">
-    <th>
-      <h4>Type</h4>
-    </th>
-    <td>
-      <h4></h4>
-    </td>
+  <table class="table" id="d235be03-c79e-4f17-b0c1-87280c1a8334">
     <tr></tr>
     <tr>
-      <th>address</th>
-      <td>Cooleman Plains</td>
+      <th>@type</th>
+      <td>Place</td>
+    </tr>
+    <tr>
+      <th>name</th>
+      <td>Glop Pot</td>
     </tr>
     <tr>
       <th>description</th>
       <td>Located in the Snowy Mountains Region of NSW, nearest town Tumut 2720</td>
     </tr>
     <tr>
+      <th>address</th>
+      <td>Cooleman Plains</td>
+    </tr>
+    <tr>
       <th>geo</th>
       <td>
         <hr></hr>
-        <table class="table" id="57894db3-0f29-45c5-a592-bdbb9c19ae94">
-          <th>
-            <h4>Type</h4>
-          </th>
-          <td>
-            <h4></h4>
-          </td>
+        <table class="table" id="ae317a3c-ebaa-4919-a97c-9495433a1380">
           <tr></tr>
+          <tr>
+            <th>@type</th>
+            <td>GeoCoordinates</td>
+          </tr>
           <tr>
             <th>latitude</th>
             <td>-35.623592</td>
@@ -503,10 +704,6 @@ A machine-readable version of this page is available:
           </tr>
         </table>
       </td>
-    </tr>
-    <tr>
-      <th>name</th>
-      <td>Glop Pot</td>
     </tr>
   </table>
 </div>

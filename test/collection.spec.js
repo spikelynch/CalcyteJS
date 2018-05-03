@@ -159,7 +159,7 @@ describe("Glop Plot data", function(){
     return c.to_json_ld().then(
       function() {
         c.to_html();
-        assert.equal(c.json_by_id["http://dx.doi.org/10.1016/something"]["hasPart"].length, 5);
+        assert.equal(c.json_by_id["http://dx.doi.org/10.1016/this_is_an_example_not_a_real_DOI"]["hasPart"].length, 5);
         assert.equal(c.json_by_url["sketchsheets"]["hasPart"].length, 3);
         //console.log("IDS", c.json_by_url["sketchsheets"]["hasPart"]);
         var a_file = c.json_by_id["sketchsheets/CP7Glopsketch01.jpg"];
@@ -275,7 +275,7 @@ describe("Datacite", function(){
       function () {
       citer = new Datacite();
       text_citation = citer.make_citation("./test_data/Glop_Pot/CATALOG.json", "./test_data/Glop_pot/datacite.xml")
-      assert.equal(text_citation, "Lake, Mike; Vaughan-Taylor, Keir; Klocker, Andreas; Maynard, Phil (2017) Glop Pot data. University of Technology Sydney. Datacrate. http://dx.doi.org/10.1016/something");
+      assert.equal(text_citation, "Lake, Mike; Vaughan-Taylor, Keir; Klocker, Andreas; Maynard, Phil (2017) Glop Pot data. Sydney University Speleological Society. Datacrate. http://dx.doi.org/10.1016/this_is_an_example_not_a_real_DOI");
 
     },
     function(err) {

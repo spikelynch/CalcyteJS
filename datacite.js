@@ -218,6 +218,7 @@ module.exports = function(){
                 this.citation = report;
 
               }
+        console.log("OUTPATH", out_path)
         if (out_path) {
           fs.writeFileSync(out_path, xml.end({ pretty: true }));
         }

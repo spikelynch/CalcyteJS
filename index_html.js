@@ -5,6 +5,7 @@ context = require('./defaults/context.json');
 const path = require('path');
 const shell = require("shelljs");
 const jsonld = require("jsonld");
+const display_keys = ["@type", "name", "@id", "description", "datePublished", "creator", "path", "encodingFormat", "contentSize"]
 
 // TODO - Put this in a utility function
 const arrayify = function arrayify(something, callback) {
@@ -26,6 +27,7 @@ module.exports = function(){
     var template = ejs.compile(temp);
     this.html = template({html: this.html_el.end({ pretty: true, allowEmpty: true}), citation: citation_text, zip_link: zip_link});
     if (out_path) {
+      console.log("WRITIng", out_path)
       fs.writeFileSync(out_path, this.html);
     }
 
@@ -33,8 +35,21 @@ module.exports = function(){
   sort_keys : function(keys) {
     // Sort a set or array of keys to be in the same order as those in context.json
     // Returns set
-    keys = new Set(keys);
-    return new Set(Object.keys(context).filter(function (k){return keys.has(k)}))
+    var keys_in_order = new Set()
+    keys = new Set(keys)
+    for (let key of display_keys){
+      if (keys.has(key)) {
+        keys_in_order.add(key)
+      }
+    }
+    for (let key of keys){
+      if (!keys_in_order.has(key)) {
+        keys_in_order.add(key)
+      }
+    }
+
+
+    return keys_in_order;
   },
 
   items_to_html : function items_to_html(node, html, toc) {
@@ -50,11 +65,13 @@ module.exports = function(){
       key_set.delete('@id');
       key_set.delete('identifier');
       key_set.delete('fileFormat');
+      key_set.delete('filename');
       var thead_l = table_el.ele("thead").att("class","thead-inverse");
       var header_row_el = thead_l.ele("tr");
       for (let k of key_set) {
-        header_row_el.ele("th", k[0].toUpperCase() + k.substring(1));
-      }
+        el = header_row_el.ele("th")
+        this.format_header(k, el)
+       }
       body_el = table_el.ele("tbody").att("class","table-striped");
       for (let [_, property] of Object.entries(node)) {
         var row_el = table_el.ele("tr").att("id", property['@id']);
@@ -79,7 +96,10 @@ module.exports = function(){
       //console.log("PART", part)
       if (part === undefined) {
 
-      } else if (k === 'name' && f["@id"].match(/^https?:\/\//i)) {
+      } else if (k == "@type") {
+        this.format_header(part, td_ele)
+      }
+      else if (k === 'name' && f["@id"].match(/^https?:\/\//i)) {
         td_ele.ele("a", part).att('href', f["@id"]).att('class', 'fa fa-external-link');
       } else if (k === 'path') {
         td_ele.ele("a", part.replace(/\/$/,"").split('/').pop()).att('href', part) ;
@@ -108,6 +128,27 @@ module.exports = function(){
     }
   },
 
+  format_header : function format_header(key, el){
+    if (context[key]){
+      // TODO deal with more complex case by using JSON-LD library
+      el = el.ele("a").att("class", "fa fa-external-link")
+      //var myDoc = {"@graph": [{key: "something"}]}
+      //From the jsonld docs - doesn't work in this context...
+      //const expanded = await jsonld.expand(doc, context);
+      //console.log("EXPANDED", expanded)
+      var term = context[key]
+      arrayify(term, function(term){
+
+        term = term[0]
+        var expand1 = term["@id"] ? term["@id"] : term
+        el.att("href", context[expand1.split(":")[0]]+expand1.split(":")[1])
+
+      })
+
+    }
+    el.txt(key)
+  },
+
   dataset_to_html : function dataset_to_html(node, html, toc, out_path) {
     header = html.ele("hr")
 
@@ -117,39 +158,19 @@ module.exports = function(){
      }
 
     var keys = new Set(Object.keys(node));
-    table_el.ele("th").ele("h4","Type")
-    if (node["@type"])
-     {table_el.ele("td").ele("h4",)}
 
     keys.delete("@id");
     keys.delete("identifier");
-    keys.delete("@type");
+    //keys.delete("@type");
     var row_el = table_el.ele("tr")
 
     //keys.delete("hasPart");
-    key = this.sort_keys(keys);
-    for (let key of keys) {
+    key_set = this.sort_keys(keys);
+    for (let key of key_set) {
       var value = node[key];
       var row_el = table_el.ele("tr")
       el = row_el.ele("th")
-      if (context[key]){
-        // TODO deal with more complex case by using JSON-LD library
-        el = el.ele("a").att("class", "fa fa-external-link")
-        //var myDoc = {"@graph": [{key: "something"}]}
-        //From the jsonld docs - doesn't work in this context...
-        //const expanded = await jsonld.expand(doc, context);
-        //console.log("EXPANDED", expanded)
-        var term = context[key]
-        arrayify(term, function(term){
-
-          term = term[0]
-          var expand1 = term["@id"] ? term["@id"] : term
-          el.att("href", context[expand1.split(":")[0]]+expand1.split(":")[1])
-
-        })
-
-      }
-      el.txt(key) //[0].toUpperCase() + key.substring(1))
+      this.format_header(key, el)//[0].toUpperCase() + key.substring(1))
       this.format_cell(node, key, row_el.ele("td"))
     }
 
@@ -259,7 +280,9 @@ module.exports = function(){
     delete this.json_by_type["RepositoryCollection"];
     delete this.json_by_type["RepositoryObject"];
     for (let type of Object.keys(this.json_by_type).sort()) {
-      body_el.ele("h1", "Contextual info: " + type);
+      h1 = body_el.ele("h1", "Contextual info: ");
+      el = h1.ele("span")
+      this.format_header(type, el)
       //this.items_to_html(this.json_by_type[type], body_el);
       for (let i of this.json_by_type[type]) {
         this.dataset_to_html(i, body_el);

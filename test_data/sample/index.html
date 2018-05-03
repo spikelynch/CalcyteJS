@@ -48,8 +48,8 @@ Cite this work: <h3>Peter Sefton (2017) Sample dataset for DataCrate v0.2. Unive
 It uses the <a href='https://github.com/UTS-eResearch/datacrate/blob/master/spec/0.2/data_crate_specification_v0.1.md'>
 Draft DataCrate Packaging format v0.2</a>.
 <p>This file was made with
-<a href='https://codeine.research.uts.edu.au/eresearch/calcytejs'>
-Calcyte</a> .
+<a href='https://code.research.uts.edu.au/eresearch/calcytejs'>
+Calcyte</a>.
  </p>
 A machine-readable version of this page is available:
 <a href='CATALOG.json'>CATALOG.json</a></p>
@@ -59,13 +59,41 @@ A machine-readable version of this page is available:
 <div>
   <hr></hr>
   <table class="table" id="http://dx.doi.org/10.5281/zenodo.1009240">
-    <th>
-      <h4>Type</h4>
-    </th>
-    <td>
-      <h4></h4>
-    </td>
     <tr></tr>
+    <tr>
+      <th>@type</th>
+      <td>Dataset</td>
+    </tr>
+    <tr>
+      <th>name</th>
+      <td>
+        <a href="http://dx.doi.org/10.5281/zenodo.1009240" class="fa fa-external-link">Sample dataset for DataCrate v0.2</a>
+      </td>
+    </tr>
+    <tr>
+      <th>description</th>
+      <td>This is a simple dataset for demonstration purposes it contains just one image and a directory full of useless text files.</td>
+    </tr>
+    <tr>
+      <th>datePublished</th>
+      <td>2017-06-29</td>
+    </tr>
+    <tr>
+      <th>creator</th>
+      <td>
+        <a href="#http://orcid.org/0000-0002-3545-944X">Peter Sefton</a>
+      </td>
+    </tr>
+    <tr>
+      <th>path</th>
+      <td>
+        <a href="./">.</a>
+      </td>
+    </tr>
+    <tr>
+      <th>isOutputOf</th>
+      <td>DataCrate</td>
+    </tr>
     <tr>
       <th>contact</th>
       <td>
@@ -79,30 +107,8 @@ A machine-readable version of this page is available:
       </td>
     </tr>
     <tr>
-      <th>path</th>
-      <td>
-        <a href="./">.</a>
-      </td>
-    </tr>
-    <tr>
-      <th>creator</th>
-      <td>
-        <a href="#http://orcid.org/0000-0002-3545-944X">Peter Sefton</a>
-      </td>
-    </tr>
-    <tr>
-      <th>datePublished</th>
-      <td>2017-06-29</td>
-    </tr>
-    <tr>
-      <th>description</th>
-      <td>This is a simple dataset for demonstration purposes it contains just one image and a directory full of useless text files.</td>
-    </tr>
-    <tr>
       <th>hasPart</th>
       <td>
-        <a href="#bag-info.txt">bag-info.txt</a>
-        , 
         <a href="#lots_of_little_files">lots_of_little_files</a>
         , 
         <a href="#pics">pics</a>
@@ -111,16 +117,6 @@ A machine-readable version of this page is available:
     <tr>
       <th>keywords</th>
       <td>Dogs, Fences, The Gully</td>
-    </tr>
-    <tr>
-      <th>name</th>
-      <td>
-        <a href="http://dx.doi.org/10.5281/zenodo.1009240" class="fa fa-external-link">Sample dataset for DataCrate v0.2</a>
-      </td>
-    </tr>
-    <tr>
-      <th>outputOf</th>
-      <td>DataCrate</td>
     </tr>
     <tr>
       <th>publisher</th>
@@ -139,32 +135,22 @@ A machine-readable version of this page is available:
       <td>2017</td>
     </tr>
   </table>
-  <h1>Files: </h1>
-  <table class="table table-striped">
-    <thead class="thead-inverse">
-      <tr></tr>
-    </thead>
-    <tbody class="table-striped"></tbody>
-    <tr id="bag-info.txt"></tr>
-  </table>
   <hr></hr>
   <table class="table" id="lots_of_little_files">
-    <th>
-      <h4>Type</h4>
-    </th>
-    <td>
-      <h4></h4>
-    </td>
     <tr></tr>
+    <tr>
+      <th>@type</th>
+      <td>Dataset</td>
+    </tr>
+    <tr>
+      <th>description</th>
+      <td>This directory contains many small files, that we’re not going to describe in detail.</td>
+    </tr>
     <tr>
       <th>path</th>
       <td>
         <a href="lots_of_little_files">lots_of_little_files</a>
       </td>
-    </tr>
-    <tr>
-      <th>description</th>
-      <td>This directory contains many small files, that we’re not going to describe in detail.</td>
     </tr>
     <tr>
       <th>title</th>
@@ -173,22 +159,20 @@ A machine-readable version of this page is available:
   </table>
   <hr></hr>
   <table class="table" id="pics">
-    <th>
-      <h4>Type</h4>
-    </th>
-    <td>
-      <h4></h4>
-    </td>
     <tr></tr>
+    <tr>
+      <th>@type</th>
+      <td>Dataset</td>
+    </tr>
+    <tr>
+      <th>description</th>
+      <td>This directory contains the images for the research project</td>
+    </tr>
     <tr>
       <th>path</th>
       <td>
         <a href="pics">pics</a>
       </td>
-    </tr>
-    <tr>
-      <th>description</th>
-      <td>This directory contains the images for the research project</td>
     </tr>
     <tr>
       <th>hasPart</th>
@@ -204,44 +188,74 @@ A machine-readable version of this page is available:
   <h1>Files: </h1>
   <table class="table table-striped">
     <thead class="thead-inverse">
-      <tr></tr>
+      <tr>
+        <th>description</th>
+        <th>creator</th>
+        <th>path</th>
+        <th>encodingFormat</th>
+        <th>contentSize</th>
+        <th>contentLocation</th>
+        <th>license</th>
+        <th>relation:Contributor</th>
+      </tr>
     </thead>
     <tbody class="table-striped"></tbody>
-    <tr id="pics/19093074_10155469333581584_5707039334816454031_o.jpg"></tr>
+    <tr id="pics/19093074_10155469333581584_5707039334816454031_o.jpg">
+      <td>This is a photo of a dog, and a fence.</td>
+      <td>
+        <a href="#http://orcid.org/0000-0002-3545-944X">Peter Sefton</a>
+      </td>
+      <td>
+        <a href="pics/19093074_10155469333581584_5707039334816454031_o.jpg">19093074_10155469333581584_5707039334816454031_o.jpg</a>
+      </td>
+      <td>
+        <a href="http://www.nationalarchives.gov.uk/PRONOM/fmt/44">JPEG File Interchange Format</a>
+      </td>
+      <td>132765</td>
+      <td>
+        <a href="#http://www.geonames.org/8152662/catalina-park.html">Catalina Park</a>
+      </td>
+      <td>
+        <a href="#https://creativecommons.org/licenses/by-nc-sa/3.0/au/">CC BY-NC-SA 3.0 AU</a>
+      </td>
+      <td>EPL1</td>
+    </tr>
   </table>
-  <h1>Contextual info: Equipment</h1>
+  <h1>
+    Contextual info: 
+    <span>Equipment</span>
+  </h1>
   <hr></hr>
   <table class="table" id="EPL1">
-    <th>
-      <h4>Type</h4>
-    </th>
-    <td>
-      <h4></h4>
-    </td>
     <tr></tr>
     <tr>
-      <th>description</th>
-      <td>Olympus camera with Panasonic 20mm lens</td>
+      <th>@type</th>
+      <td>Equipment</td>
     </tr>
     <tr>
       <th>name</th>
       <td>EPL1 Camera</td>
     </tr>
     <tr>
-      <th>uRL</th>
+      <th>description</th>
+      <td>Olympus camera with Panasonic 20mm lens</td>
+    </tr>
+    <tr>
+      <th>URL</th>
       <td>https://en.wikipedia.org/wiki/Olympus_PEN_E-PL1</td>
     </tr>
   </table>
-  <h1>Contextual info: GeoCoordinates</h1>
+  <h1>
+    Contextual info: 
+    <span>GeoCoordinates</span>
+  </h1>
   <hr></hr>
-  <table class="table" id="1f7e21d2-c471-44a1-b358-26903e7f65c2">
-    <th>
-      <h4>Type</h4>
-    </th>
-    <td>
-      <h4></h4>
-    </td>
+  <table class="table" id="2a466ee0-a7c0-42c6-8329-53ada05de42d">
     <tr></tr>
+    <tr>
+      <th>@type</th>
+      <td>GeoCoordinates</td>
+    </tr>
     <tr>
       <th>latitude</th>
       <td>-33.7152</td>
@@ -251,19 +265,16 @@ A machine-readable version of this page is available:
       <td>150.30119</td>
     </tr>
   </table>
-  <h1>Contextual info: Organization</h1>
+  <h1>
+    Contextual info: 
+    <span>Organization</span>
+  </h1>
   <hr></hr>
   <table class="table" id="http://ands.org.au">
-    <th>
-      <h4>Type</h4>
-    </th>
-    <td>
-      <h4></h4>
-    </td>
     <tr></tr>
     <tr>
-      <th>description</th>
-      <td>The core purpose iof the Australian National Data Service (ANDS) is to make Australia’s research data assets more valuable for researchers, research institutions and the nation.</td>
+      <th>@type</th>
+      <td>Organization</td>
     </tr>
     <tr>
       <th>name</th>
@@ -271,19 +282,17 @@ A machine-readable version of this page is available:
         <a href="http://ands.org.au" class="fa fa-external-link">Australian National Data Service</a>
       </td>
     </tr>
+    <tr>
+      <th>description</th>
+      <td>The core purpose iof the Australian National Data Service (ANDS) is to make Australia’s research data assets more valuable for researchers, research institutions and the nation.</td>
+    </tr>
   </table>
   <hr></hr>
   <table class="table" id="http://uts.edu.au">
-    <th>
-      <h4>Type</h4>
-    </th>
-    <td>
-      <h4></h4>
-    </td>
     <tr></tr>
     <tr>
-      <th>address</th>
-      <td>Broadway, 2007, NSW Australia</td>
+      <th>@type</th>
+      <td>Organization</td>
     </tr>
     <tr>
       <th>name</th>
@@ -291,17 +300,28 @@ A machine-readable version of this page is available:
         <a href="http://uts.edu.au" class="fa fa-external-link">University of Technology Sydney</a>
       </td>
     </tr>
+    <tr>
+      <th>address</th>
+      <td>Broadway, 2007, NSW Australia</td>
+    </tr>
   </table>
-  <h1>Contextual info: Person</h1>
+  <h1>
+    Contextual info: 
+    <span>Person</span>
+  </h1>
   <hr></hr>
   <table class="table" id="http://orcid.org/0000-0002-3545-944X">
-    <th>
-      <h4>Type</h4>
-    </th>
-    <td>
-      <h4></h4>
-    </td>
     <tr></tr>
+    <tr>
+      <th>@type</th>
+      <td>Person</td>
+    </tr>
+    <tr>
+      <th>name</th>
+      <td>
+        <a href="http://orcid.org/0000-0002-3545-944X" class="fa fa-external-link">Peter Sefton</a>
+      </td>
+    </tr>
     <tr>
       <th>affiliation</th>
       <td>
@@ -313,50 +333,53 @@ A machine-readable version of this page is available:
       <td>pt@ptsefton.com</td>
     </tr>
     <tr>
-      <th>family Name</th>
+      <th>family_Name</th>
       <td>Sefton</td>
     </tr>
     <tr>
-      <th>given Name</th>
+      <th>given_Name</th>
       <td>Peter</td>
+    </tr>
+  </table>
+  <h1>
+    Contextual info: 
+    <span>Place</span>
+  </h1>
+  <hr></hr>
+  <table class="table" id="http://www.geonames.org/8152662/catalina-park.html">
+    <tr></tr>
+    <tr>
+      <th>@type</th>
+      <td>Place</td>
     </tr>
     <tr>
       <th>name</th>
       <td>
-        <a href="http://orcid.org/0000-0002-3545-944X" class="fa fa-external-link">Peter Sefton</a>
+        <a href="http://www.geonames.org/8152662/catalina-park.html" class="fa fa-external-link">Catalina Park</a>
       </td>
-    </tr>
-  </table>
-  <h1>Contextual info: Place</h1>
-  <hr></hr>
-  <table class="table" id="http://www.geonames.org/8152662/catalina-park.html">
-    <th>
-      <h4>Type</h4>
-    </th>
-    <td>
-      <h4></h4>
-    </td>
-    <tr></tr>
-    <tr>
-      <th>address</th>
-      <td>Katoomba, NSW</td>
     </tr>
     <tr>
       <th>description</th>
       <td>Catalina Park is a disused motor racing venue, located at Katoomba, in the Blue Mountains, New South Wales, Australia, and is recognised as an Aboriginal Place due to the long association of the local Gundungarra and Darug clans to the area.</td>
     </tr>
     <tr>
+      <th>URL</th>
+      <td>https://en.wikipedia.org/wiki/Catalina_Park</td>
+    </tr>
+    <tr>
+      <th>address</th>
+      <td>Katoomba, NSW</td>
+    </tr>
+    <tr>
       <th>geo</th>
       <td>
         <hr></hr>
-        <table class="table" id="1f7e21d2-c471-44a1-b358-26903e7f65c2">
-          <th>
-            <h4>Type</h4>
-          </th>
-          <td>
-            <h4></h4>
-          </td>
+        <table class="table" id="2a466ee0-a7c0-42c6-8329-53ada05de42d">
           <tr></tr>
+          <tr>
+            <th>@type</th>
+            <td>GeoCoordinates</td>
+          </tr>
           <tr>
             <th>latitude</th>
             <td>-33.7152</td>
@@ -368,27 +391,24 @@ A machine-readable version of this page is available:
         </table>
       </td>
     </tr>
+  </table>
+  <h1>
+    Contextual info: 
+    <span>Project</span>
+  </h1>
+  <hr></hr>
+  <table class="table" id="http://eresearch.uts.edu.au/projects/provisioner">
+    <tr></tr>
+    <tr>
+      <th>@type</th>
+      <td>Project</td>
+    </tr>
     <tr>
       <th>name</th>
       <td>
-        <a href="http://www.geonames.org/8152662/catalina-park.html" class="fa fa-external-link">Catalina Park</a>
+        <a href="http://eresearch.uts.edu.au/projects/provisioner" class="fa fa-external-link">Provisioner</a>
       </td>
     </tr>
-    <tr>
-      <th>uRL</th>
-      <td>https://en.wikipedia.org/wiki/Catalina_Park</td>
-    </tr>
-  </table>
-  <h1>Contextual info: Project</h1>
-  <hr></hr>
-  <table class="table" id="http://eresearch.uts.edu.au/projects/provisioner">
-    <th>
-      <h4>Type</h4>
-    </th>
-    <td>
-      <h4></h4>
-    </td>
-    <tr></tr>
     <tr>
       <th>description</th>
       <td>The University of Technology Sydney Provisioner project is </td>
@@ -401,22 +421,20 @@ A machine-readable version of this page is available:
         <a href="#http://ands.org.au">Australian National Data Service</a>
       </td>
     </tr>
-    <tr>
-      <th>name</th>
-      <td>
-        <a href="http://eresearch.uts.edu.au/projects/provisioner" class="fa fa-external-link">Provisioner</a>
-      </td>
-    </tr>
   </table>
   <hr></hr>
   <table class="table" id="https://github.com/UTS-eResearch/projects/datacrate">
-    <th>
-      <h4>Type</h4>
-    </th>
-    <td>
-      <h4></h4>
-    </td>
     <tr></tr>
+    <tr>
+      <th>@type</th>
+      <td>Project</td>
+    </tr>
+    <tr>
+      <th>name</th>
+      <td>
+        <a href="https://github.com/UTS-eResearch/projects/datacrate" class="fa fa-external-link">DataCrate Project</a>
+      </td>
+    </tr>
     <tr>
       <th>description</th>
       <td>The DataCrate project is to write the spec for DataCrate, of which this is an example. The DataCrate project is part of the University of Technology Sydney's Provisioner project.</td>
@@ -427,32 +445,17 @@ A machine-readable version of this page is available:
         <a href="#http://uts.edu.au">University of Technology Sydney</a>
       </td>
     </tr>
-    <tr>
-      <th>name</th>
-      <td>
-        <a href="https://github.com/UTS-eResearch/projects/datacrate" class="fa fa-external-link">DataCrate Project</a>
-      </td>
-    </tr>
   </table>
-  <h1>Contextual info: ScholarlyArticle</h1>
+  <h1>
+    Contextual info: 
+    <span>ScholarlyArticle</span>
+  </h1>
   <hr></hr>
   <table class="table" id="http://dx.doi.org/10.1000/123456">
-    <th>
-      <h4>Type</h4>
-    </th>
-    <td>
-      <h4></h4>
-    </td>
     <tr></tr>
     <tr>
-      <th>creator</th>
-      <td>
-        <a href="#http://orcid.org/0000-0002-3545-944X">Peter Sefton</a>
-      </td>
-    </tr>
-    <tr>
-      <th>datePublished</th>
-      <td>2018</td>
+      <th>@type</th>
+      <td>ScholarlyArticle</td>
     </tr>
     <tr>
       <th>name</th>
@@ -460,17 +463,34 @@ A machine-readable version of this page is available:
         <a href="http://dx.doi.org/10.1000/123456" class="fa fa-external-link">This is an example publication with a dodgy DOI</a>
       </td>
     </tr>
+    <tr>
+      <th>datePublished</th>
+      <td>2018</td>
+    </tr>
+    <tr>
+      <th>creator</th>
+      <td>
+        <a href="#http://orcid.org/0000-0002-3545-944X">Peter Sefton</a>
+      </td>
+    </tr>
   </table>
-  <h1>Contextual info: ScholarlyWork</h1>
+  <h1>
+    Contextual info: 
+    <span>ScholarlyWork</span>
+  </h1>
   <hr></hr>
   <table class="table" id="https://creativecommons.org/licenses/by-nc-sa/3.0/au/">
-    <th>
-      <h4>Type</h4>
-    </th>
-    <td>
-      <h4></h4>
-    </td>
     <tr></tr>
+    <tr>
+      <th>@type</th>
+      <td>ScholarlyWork</td>
+    </tr>
+    <tr>
+      <th>name</th>
+      <td>
+        <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/au/" class="fa fa-external-link">CC BY-NC-SA 3.0 AU</a>
+      </td>
+    </tr>
     <tr>
       <th>description</th>
       <td>Attribution-NonCommercial-ShareAlike 3.0 Australia (CC BY-NC-SA 3.0 AU)&#xD;
@@ -489,7 +509,55 @@ A machine-readable version of this page is available:
 &#xD;
 &#xD;
 &#xD;
+&#xD;
+&#xD;
+&#xD;
+&#xD;
+&#xD;
+&#xD;
+&#xD;
+&#xD;
+&#xD;
+&#xD;
+&#xD;
+&#xD;
+&#xD;
+&#xD;
+&#xD;
+&#xD;
 This is a human-readable summary of (and not a substitute for) the license. Disclaimer.&#xD;
+&#xD;
+&#xD;
+&#xD;
+&#xD;
+&#xD;
+&#xD;
+&#xD;
+&#xD;
+&#xD;
+&#xD;
+&#xD;
+&#xD;
+&#xD;
+&#xD;
+&#xD;
+&#xD;
+&#xD;
+&#xD;
+&#xD;
+&#xD;
+&#xD;
+&#xD;
+&#xD;
+&#xD;
+&#xD;
+&#xD;
+&#xD;
+&#xD;
+&#xD;
+&#xD;
+&#xD;
+&#xD;
 &#xD;
 &#xD;
 &#xD;
@@ -553,7 +621,55 @@ You are free to:&#xD;
 &#xD;
 &#xD;
 &#xD;
+&#xD;
+&#xD;
+&#xD;
+&#xD;
+&#xD;
+&#xD;
+&#xD;
+&#xD;
+&#xD;
+&#xD;
+&#xD;
+&#xD;
+&#xD;
+&#xD;
+&#xD;
+&#xD;
+&#xD;
+&#xD;
+&#xD;
+&#xD;
+&#xD;
+&#xD;
+&#xD;
+&#xD;
+&#xD;
+&#xD;
+&#xD;
+&#xD;
+&#xD;
+&#xD;
+&#xD;
+&#xD;
 Share — copy and redistribute the material in any medium or format&#xD;
+&#xD;
+&#xD;
+&#xD;
+&#xD;
+&#xD;
+&#xD;
+&#xD;
+&#xD;
+&#xD;
+&#xD;
+&#xD;
+&#xD;
+&#xD;
+&#xD;
+&#xD;
+&#xD;
 &#xD;
 &#xD;
 &#xD;
@@ -585,7 +701,39 @@ Adapt — remix, transform, and build upon the material&#xD;
 &#xD;
 &#xD;
 &#xD;
+&#xD;
+&#xD;
+&#xD;
+&#xD;
+&#xD;
+&#xD;
+&#xD;
+&#xD;
+&#xD;
+&#xD;
+&#xD;
+&#xD;
+&#xD;
+&#xD;
+&#xD;
+&#xD;
 The licensor cannot revoke these freedoms as long as you follow the license terms.&#xD;
+&#xD;
+&#xD;
+&#xD;
+&#xD;
+&#xD;
+&#xD;
+&#xD;
+&#xD;
+&#xD;
+&#xD;
+&#xD;
+&#xD;
+&#xD;
+&#xD;
+&#xD;
+&#xD;
 &#xD;
 &#xD;
 &#xD;
@@ -633,7 +781,55 @@ Under the following terms:&#xD;
 &#xD;
 &#xD;
 &#xD;
+&#xD;
+&#xD;
+&#xD;
+&#xD;
+&#xD;
+&#xD;
+&#xD;
+&#xD;
+&#xD;
+&#xD;
+&#xD;
+&#xD;
+&#xD;
+&#xD;
+&#xD;
+&#xD;
+&#xD;
+&#xD;
+&#xD;
+&#xD;
+&#xD;
+&#xD;
+&#xD;
+&#xD;
+&#xD;
+&#xD;
+&#xD;
+&#xD;
+&#xD;
+&#xD;
+&#xD;
+&#xD;
 Attribution — You must give appropriate credit, provide a link to the license, and indicate if changes were made. You may do so in any reasonable manner, but not in any way that suggests the licensor endorses you or your use.&#xD;
+&#xD;
+&#xD;
+&#xD;
+&#xD;
+&#xD;
+&#xD;
+&#xD;
+&#xD;
+&#xD;
+&#xD;
+&#xD;
+&#xD;
+&#xD;
+&#xD;
+&#xD;
+&#xD;
 &#xD;
 &#xD;
 &#xD;
@@ -665,6 +861,22 @@ Non-Commercial — You may not use the material for commercial purposes.&#xD;
 &#xD;
 &#xD;
 &#xD;
+&#xD;
+&#xD;
+&#xD;
+&#xD;
+&#xD;
+&#xD;
+&#xD;
+&#xD;
+&#xD;
+&#xD;
+&#xD;
+&#xD;
+&#xD;
+&#xD;
+&#xD;
+&#xD;
 ShareAlike — If you remix, transform, or build upon the material, you must distribute your contributions under the same license as the original.&#xD;
 &#xD;
 &#xD;
@@ -681,13 +893,23 @@ ShareAlike — If you remix, transform, or build upon the material, you must dis
 &#xD;
 &#xD;
 &#xD;
+&#xD;
+&#xD;
+&#xD;
+&#xD;
+&#xD;
+&#xD;
+&#xD;
+&#xD;
+&#xD;
+&#xD;
+&#xD;
+&#xD;
+&#xD;
+&#xD;
+&#xD;
+&#xD;
 No additional restrictions — You may not apply legal terms or technological measures that legally restrict others from doing anything the license permits.</td>
-    </tr>
-    <tr>
-      <th>name</th>
-      <td>
-        <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/au/" class="fa fa-external-link">CC BY-NC-SA 3.0 AU</a>
-      </td>
     </tr>
   </table>
 </div>
