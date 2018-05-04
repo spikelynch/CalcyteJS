@@ -27,7 +27,6 @@ module.exports = function(){
     var template = ejs.compile(temp);
     this.html = template({html: this.html_el.end({ pretty: true, allowEmpty: true}), citation: citation_text, zip_link: zip_link});
     if (out_path) {
-      console.log("WRITIng", out_path)
       fs.writeFileSync(out_path, this.html);
     }
 
@@ -211,7 +210,7 @@ module.exports = function(){
     }
     for (readme of readmes) {
       //var details = html.ele("details").att("open","open");
-      console.log("Making readme", readme.path)
+      //console.log("Making readme", readme.path)
       var frame = html.ele("iframe")
       frame.att("width","80%");
       frame.att("height","90%");

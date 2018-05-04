@@ -75,11 +75,9 @@ if (program.generateHtml) {
 
   })
 } else {
-  //console.log(dirs);
+  //console.log(dirs);  
 
   dirs.forEach(function (dir) {
-    console.log("JHERE")
-
     if (shell.test('-d', dir)) {
       var c = new Collection();
       c.read(dir);
@@ -98,11 +96,9 @@ if (program.generateHtml) {
             c.update();
             if (program.zip) {
               //TODO: This is REPEATING YOURSELF
-              console.log("GETTING IN THERE", c.dir)
               shell.cd(c.dir)
               var zipname = path.join("../", path.basename(c.dir) + ".zip")
               var zip_cmd = "zip -r " + zipname + " *"
-              console.log("Zip command", zip_cmd)
               shell.exec(zip_cmd)
               var index_maker = new Index();
               index_maker.make_index_html(path.join(c.dir, "CATALOG.json"));
