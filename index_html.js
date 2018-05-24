@@ -93,17 +93,18 @@ module.exports = function(){
     var i = 0;
     for (let part of data) {
       //console.log("PART", part)
-      if (part === undefined) {
+      if (!part) {
 
       } else if (k == "@type") {
         this.format_header(part, td_ele)
       }
       else if (k === 'name' && f["@id"].match(/^https?:\/\//i)) {
-        td_ele.ele("a", part).att('href', f["@id"]).att('class', 'fa fa-external-link');
+        td_ele.ele("a", part).att('href', f["@id"]).att('class', 'fa fa-external-link').att('title',f["@id"]);
+
       } else if (k === 'path') {
         td_ele.ele("a", part.replace(/\/$/,"").split('/').pop()).att('href', part) ;
       } else if (k === 'encodingFormat' && f.fileFormat && f.fileFormat.match(/^https?:\/\//i)){
-        td_ele.ele("a", part).att('href', f.fileFormat);
+        td_ele.ele("a", part).att('href', f.fileFormat).att('title',f.fileFormat);
       } else if (
         (k != "hasPart") &&
         this.json_by_id[part['@id']] &&
@@ -118,7 +119,7 @@ module.exports = function(){
 
       }
       else {
-        td_ele.txt(part);
+        td_ele.txt(part.replace(/\r/," "));
       }
       i++;
       if (i < data.length) {
@@ -160,7 +161,13 @@ module.exports = function(){
 
     keys.delete("@id");
     keys.delete("identifier");
+    keys.delete("filename");
+    if (keys.has("encodingFormat"  )) {
+      keys.delete("fileFormat");
+    }
+
     //keys.delete("@type");
+
     var row_el = table_el.ele("tr")
 
     //keys.delete("hasPart");
@@ -221,7 +228,9 @@ module.exports = function(){
 
     if (files.length > 0) {
       html.ele("h1", "Files: ")
-      this.items_to_html(files, html, toc);
+      for (let f of files) {
+        this.dataset_to_html(f, html, toc);
+      }
     }
 
     for (let [_, set] of Object.entries(datasets)) {

@@ -59,7 +59,7 @@ module.exports = function(){
     }
   //console.log("THIS JSON BY URL", this.json_by_url)
     var root = this.json_by_url["./"] ? this.json_by_url["./"] : this.json_by_url["data/"]  ;
-    //console.log(this.json_by_url)
+  
     var can_cite = true;
     var report = "";
     const ns = "http://datacite.org/schema/kernel-4"
@@ -122,7 +122,7 @@ module.exports = function(){
       }
     if (root["@id"]){
       var identifier = root["@id"];
-      if (identifier.match(/http:\/\/(dx\.)?doi.org\/10\./)) {
+      if (identifier.match(/https?:\/\/(dx\.)?doi.org\/10\./)) {
           //<identifier identifierType="DOI">10.5072/example-full</identifier>
           id_el = xml.ele("identifier", identifier.replace("http://dx.doi.org/",""))
           id_el. att("identifierType", "DOI");
@@ -218,7 +218,6 @@ module.exports = function(){
                 this.citation = report;
 
               }
-        console.log("OUTPATH", out_path)
         if (out_path) {
           fs.writeFileSync(out_path, xml.end({ pretty: true }));
         }
