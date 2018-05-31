@@ -98,6 +98,7 @@ module.exports = function(){
 
              item["path"] = [new_p]
            }
+        
 
          }
          fs.writeFileSync(catalog_path, JSON.stringify(catalog, null, 2),

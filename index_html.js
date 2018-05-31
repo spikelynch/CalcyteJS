@@ -5,7 +5,7 @@ context = require('./defaults/context.json');
 const path = require('path');
 const shell = require("shelljs");
 const jsonld = require("jsonld");
-const display_keys = ["@type", "name", "@id", "description", "datePublished", "creator", "path", "encodingFormat", "contentSize"]
+const display_keys = ["@type", "name", "@id", "description", "thumbnail", "datePublished", "creator", "path", "encodingFormat", "contentSize"]
 
 // TODO - Put this in a utility function
 const arrayify = function arrayify(something, callback) {
@@ -97,11 +97,13 @@ module.exports = function(){
 
       } else if (k == "@type") {
         this.format_header(part, td_ele)
-      }
-      else if (k === 'name' && f["@id"].match(/^https?:\/\//i)) {
+      } else if (k === 'name' && f["@id"].match(/^https?:\/\//i)) {
         td_ele.ele("a", part).att('href', f["@id"]).att('class', 'fa fa-external-link').att('title',f["@id"]);
 
-      } else if (k === 'path') {
+      } else if (k === 'thumbnail' && part["@id"]  && this.json_by_id[part["@id"]]) {
+          img_ele = td_ele.ele('img')
+          img_ele.att('src',  this.json_by_id[part["@id"]]["path"]);
+     } else if (k === 'path') {
         td_ele.ele("a", part.replace(/\/$/,"").split('/').pop()).att('href', part) ;
       } else if (k === 'encodingFormat' && f.fileFormat && f.fileFormat.match(/^https?:\/\//i)){
         td_ele.ele("a", part).att('href', f.fileFormat).att('class', 'fa fa-external-link').att('title',f.fileFormat);
@@ -118,6 +120,7 @@ module.exports = function(){
         link_ele.txt(target_name)
 
       }
+
       else {
         td_ele.txt(part);
       }
