@@ -104,7 +104,7 @@ module.exports = function(){
       } else if (k === 'path') {
         td_ele.ele("a", part.replace(/\/$/,"").split('/').pop()).att('href', part) ;
       } else if (k === 'encodingFormat' && f.fileFormat && f.fileFormat.match(/^https?:\/\//i)){
-        td_ele.ele("a", part).att('href', f.fileFormat).att('title',f.fileFormat);
+        td_ele.ele("a", part).att('href', f.fileFormat).att('class', 'fa fa-external-link').att('title',f.fileFormat);
       } else if (
         (k != "hasPart") &&
         this.json_by_id[part['@id']] &&
@@ -119,7 +119,7 @@ module.exports = function(){
 
       }
       else {
-        td_ele.txt(part.replace(/\r/," "));
+        td_ele.txt(part);
       }
       i++;
       if (i < data.length) {
