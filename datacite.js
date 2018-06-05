@@ -59,7 +59,7 @@ module.exports = function(){
     }
   //console.log("THIS JSON BY URL", this.json_by_url)
     var root = this.json_by_url["./"] ? this.json_by_url["./"] : this.json_by_url["data/"]  ;
-  
+
     var can_cite = true;
     var report = "";
     const ns = "http://datacite.org/schema/kernel-4"
