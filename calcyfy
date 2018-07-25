@@ -17,14 +17,16 @@ program
     dirs = directories;
   })
   .option('-g, --generate-html', 'Generate HTML from a "CATALOG.json" in a directory')
-  .option('-b  --bag [bag-dir]', 'Create Bagit Bag(s) under [bag-dir])' )
-  .option('-z  --zip', 'Create a zipped version of the bag' )
+  .option('-b,  --bag [bag-dir]', 'Create Bagit Bag(s) under [bag-dir])' )
+  .option('-z,  --zip', 'Create a zipped version of the bag' )
+  .option('-n,  --no', 'No Citation' )
+
 
 
 
 program.parse(process.argv);
 if (!program.rawArgs.length || !dirs) program.help();
-
+console.log(program.generateHtml, program.no)
 if (program.generateHtml) {
   console.log('Generating html from exsiting CATALOG.json file')
   dirs.forEach(function (dir) {
@@ -58,7 +60,9 @@ if (program.generateHtml) {
     index_maker.make_index_html(catalog);
     var citer = new Datacite();
     shell.mkdir(path.join(dir, 'metadata'))
-    var text_citation = citer.make_citation(catalog, path.join(dir, 'metadata','datacite.xml'));
+    if (program.no) {
+      var text_citation = citer.make_citation(catalog, path.join(dir, 'metadata','datacite.xml'));
+    }
     // TODO Make template relative to script not current dir
     index_maker.write_html(path.join(__dirname,'defaults/catalog_template.html'), path.join(dir, 'index.html'), text_citation);
     if (program.bag) {
@@ -75,7 +79,7 @@ if (program.generateHtml) {
 
   })
 } else {
-  //console.log(dirs);  
+  //console.log(dirs);
 
   dirs.forEach(function (dir) {
     if (shell.test('-d', dir)) {
@@ -89,7 +93,7 @@ if (program.generateHtml) {
       // TODO
       c.to_json_ld().then(
         function () {
-          c.to_html();
+          c.to_html(program.no);
           if (program.bag) {
             c.generate_bag_info();
             c.save_bag_info();
@@ -101,6 +105,9 @@ if (program.generateHtml) {
               var zip_cmd = "zip -r " + zipname + " *"
               shell.exec(zip_cmd)
               var index_maker = new Index();
+              if (program.no) {
+                var text_citation = citer.make_citation(catalog, path.join(dir, 'metadata','datacite.xml'));
+              }
               index_maker.make_index_html(path.join(c.dir, "CATALOG.json"));
               index_maker.write_html(path.join(__dirname,'defaults/catalog_template.html'), path.join(c.dir, 'index.html'), text_citation, zipname);
             }

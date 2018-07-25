@@ -15,6 +15,21 @@ const arrayify = function arrayify(something, callback) {
   return callback(something)
 }
 
+const ele  = function ele(name, atts={}) {
+
+  t = "<" + name;
+  for (let key in atts){
+    t += " " + key + " = '" + atts[key] + "'"
+  }
+  t += "\n>"
+  return t
+}
+
+
+
+const  close  = function close(name) {
+  return  "</" + name + "\n>"
+}
 
 module.exports = function(){
   return(
@@ -25,7 +40,7 @@ module.exports = function(){
     var zip_link = zip_path ? "<a href='" + zip_path + "'>Download a zip file</a>" : ""
     var temp = fs.readFileSync(template_path, { encoding: 'utf8' });
     var template = ejs.compile(temp);
-    this.html = template({html: this.html_el.end({ pretty: true, allowEmpty: true}), citation: citation_text, zip_link: zip_link});
+    this.html = template({html: this.html, citation: citation_text, zip_link: zip_link});
     if (out_path) {
       fs.writeFileSync(out_path, this.html);
     }
@@ -51,39 +66,6 @@ module.exports = function(){
     return keys_in_order;
   },
 
-  items_to_html : function items_to_html(node, html, toc) {
-      var table_el = html.ele("table").att("class", "table table-striped");
-      // Find all the keys
-      keys = [];
-      for (let [_, f] of Object.entries(node)) {
-        keys = keys.concat(Object.keys(f));
-      }
-      key_set = this.sort_keys(keys);
-
-      key_set.delete('@type');
-      key_set.delete('@id');
-      key_set.delete('identifier');
-      key_set.delete('fileFormat');
-      key_set.delete('filename');
-      var thead_l = table_el.ele("thead").att("class","thead-inverse");
-      var header_row_el = thead_l.ele("tr");
-      for (let k of key_set) {
-        el = header_row_el.ele("th")
-        this.format_header(k, el)
-       }
-      body_el = table_el.ele("tbody").att("class","table-striped");
-      for (let [_, property] of Object.entries(node)) {
-        var row_el = table_el.ele("tr").att("id", property['@id']);
-        for (let key of key_set) {
-          td_ele = row_el.ele("td");
-
-          this.format_cell(property, key, td_ele);
-
-        }
-
-        }
-      },
-
 
   format_cell : function(f, k, td_ele) {
     var data = f[k];
@@ -98,67 +80,75 @@ module.exports = function(){
       } else if (k == "@type") {
         this.format_header(part, td_ele)
       } else if (k === 'name' && f["@id"].match(/^https?:\/\//i)) {
-        td_ele.ele("a", part).att('href', f["@id"]).att('class', 'fa fa-external-link').att('title',f["@id"]);
+        td_ele += ele("a", {href: f["@id"], 'class': 'fa fa-external-link', 'title': f["@id"]})
+        //td_ele.ele("a", part).att('href', f["@id"]).att('class', 'fa fa-external-link').att('title',f["@id"]);
 
       } else if (k === 'thumbnail' && part["@id"]  && this.json_by_id[part["@id"]]) {
-          img_ele = td_ele.ele('img')
-          img_ele.att('src',  this.json_by_id[part["@id"]]["path"]);
+          td_ele += ele('img', {'src': this.json_by_id[part["@id"]]["path"]});
      } else if (k === 'path') {
-        td_ele.ele("a", part.replace(/\/$/,"").split('/').pop()).att('href', part) ;
+        td_ele += ele("a", {'href': part})
+        td_ele += part.replace(/\/$/,"").split('/').pop()
+        td_ele += close("a")
       } else if (k === 'encodingFormat' && f.fileFormat && f.fileFormat.match(/^https?:\/\//i)){
-        td_ele.ele("a", part).att('href', f.fileFormat).att('class', 'fa fa-external-link').att('title',f.fileFormat);
+        td_ele += ele("a", {'href': f.fileFormat, 'class': 'fa fa-external-link', 'title': f.fileFormat});
+        td_ele += part
+        td_ele += close("a")
       } else if (
         (k != "hasPart") &&
         this.json_by_id[part['@id']] &&
         !(this.json_by_id[part['@id']].name || this.json_by_id[part['@id']].description)) {
         // Embed small bits of info that don't have a name or description
-        this.dataset_to_html(this.json_by_id[part['@id']], td_ele);
+        td_ele += this.dataset_to_html(this.json_by_id[part['@id']], "");
       } else if (part['@id'] && this.json_by_id[part['@id']]) {
         var target_name = this.json_by_id[part['@id']].name ? this.json_by_id[part['@id']].name : part['@id'];
-        link_ele = td_ele.ele('a')
-        link_ele.att('href', '#' + part['@id']);
-        link_ele.txt(target_name)
+        td_ele += ele('a', {'href': '#' + part['@id']});
+        td_ele += target_name
+        td_ele += close('a')
 
       }
 
       else {
-        td_ele.txt(part);
+        td_ele += part;
       }
       i++;
       if (i < data.length) {
-        td_ele.txt(", ");
+        td_ele += ", ";
       }
     }
+    return td_ele;
   },
 
   format_header : function format_header(key, el){
     if (context[key]){
       // TODO deal with more complex case by using JSON-LD library
-      el = el.ele("a").att("class", "fa fa-external-link")
-      //var myDoc = {"@graph": [{key: "something"}]}
-      //From the jsonld docs - doesn't work in this context...
-      //const expanded = await jsonld.expand(doc, context);
-      //console.log("EXPANDED", expanded)
       var term = context[key]
       arrayify(term, function(term){
 
         term = term[0]
         var expand1 = term["@id"] ? term["@id"] : term
-        el.att("href", context[expand1.split(":")[0]]+expand1.split(":")[1])
+        href = context[expand1.split(":")[0]]+expand1.split(":")[1]
 
       })
+      el += ele("a", {"class": "fa fa-external-link", "href": href})
+      //var myDoc = {"@graph": [{key: "something"}]}
+      //From the jsonld docs - doesn't work in this context...
+      //const expanded = await jsonld.expand(doc, context);
+      //console.log("EXPANDED", expanded)
+      el += key
+      el += close("a")
 
     }
-    el.txt(key)
+    else {
+      el += key
+    }
+
+    return(el)
   },
 
   dataset_to_html : function dataset_to_html(node, html, toc, out_path) {
-    header = html.ele("hr")
+    html += ele("hr")
 
-    var table_el = html.ele("table").att("class", "table")
-    if (node["@id"]) {
-       table_el.att("id", node["@id"]);
-     }
+    html += ele("table", {"class": "table", "id": node["@id"]})
 
     var keys = new Set(Object.keys(node));
 
@@ -171,17 +161,22 @@ module.exports = function(){
 
     //keys.delete("@type");
 
-    var row_el = table_el.ele("tr")
 
     //keys.delete("hasPart");
     key_set = this.sort_keys(keys);
     for (let key of key_set) {
       var value = node[key];
-      var row_el = table_el.ele("tr")
-      el = row_el.ele("th")
-      this.format_header(key, el)//[0].toUpperCase() + key.substring(1))
-      this.format_cell(node, key, row_el.ele("td"))
+      html += ele("tr")
+      html += ele("th")
+      html += this.format_header(key, "")//[0].toUpperCase() + key.substring(1))
+      html += close("th")
+      html += ele("td")
+      html += this.format_cell(node, key, "")
+      html += close("td")
+      html += close("tr")
     }
+
+    html += close("table")
 
     var files = []
     var datasets = []
@@ -221,26 +216,25 @@ module.exports = function(){
     for (readme of readmes) {
       //var details = html.ele("details").att("open","open");
       //console.log("Making readme", readme.path)
-      var frame = html.ele("iframe")
-      frame.att("width","80%");
-      frame.att("height","90%");
-      frame.att("src", readme.path);
-      html.ele("hr");
-      frame.att("border",1);
+      html += ele("iframe", {"width": "80%", "height": "90%", "src": readme.path, "border": 1})
+      html += lose("iframe")
+      html += ele("hr")
+
     }
 
     if (files.length > 0) {
-      html.ele("h1", "Files: ")
+      html += ele("h1")
+      html += "Files: "
+      html += close("h1")
       for (let f of files) {
-        this.dataset_to_html(f, html, toc);
+        html += this.dataset_to_html(f, "", toc);
       }
     }
 
     for (let [_, set] of Object.entries(datasets)) {
-      this.dataset_to_html(set, html, toc);
+      html += this.dataset_to_html(set, "", toc);
     }
-
-
+   return html
 
 
   },
@@ -278,12 +272,13 @@ module.exports = function(){
         }
     }
     // A container for our page
-    var body_el = builder.create('div');
+    body_el = ""
+    body_el += ele('div');
     //console.log("DATA", this.json_by_url);
     // Get root of graph
     root_node = this.json_by_url["./"] ? this.json_by_url["./"] :  this.json_by_url["data/"];
     if (root_node) {
-      this.dataset_to_html(root_node, body_el);
+      body_el += this.dataset_to_html(root_node, "");
     }
 
     delete this.json_by_type["Dataset"];
@@ -291,15 +286,19 @@ module.exports = function(){
     delete this.json_by_type["RepositoryCollection"];
     delete this.json_by_type["RepositoryObject"];
     for (let type of Object.keys(this.json_by_type).sort()) {
-      h1 = body_el.ele("h1", "Contextual info: ");
-      el = h1.ele("span")
-      this.format_header(type, el)
+      body_el += ele("h1")
+      body_el += "Contextual info: ";
+      body_el += ele("span")
+      body_el += this.format_header("")
+      body_el += close("span")
+      body_el += close("h1")
       //this.items_to_html(this.json_by_type[type], body_el);
       for (let i of this.json_by_type[type]) {
-        this.dataset_to_html(i, body_el);
+        body_el += this.dataset_to_html(i, "");
       }//console.log(type);
     }
-    this.html_el = body_el
+    body_el += close("div")
+    this.html = body_el;
 
   }
 }

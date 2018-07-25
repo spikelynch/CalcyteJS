@@ -175,9 +175,10 @@ module.exports = function(){
       shell.exec("bagit updatetagmanifests " +  this.dir)
     },
 
-    to_html : function to_html() {
+    to_html : function to_html(noCite = false) {
         console.log("Saving html");
         var index_maker = new Index();
+        // TODO: Why don't we do the citation inside make_index_html?
         index_maker.make_index_html(this.json_ld);
         citer = new Datacite();
         var citation_path
@@ -185,7 +186,13 @@ module.exports = function(){
           citation_path = path.join(this.dir, 'metadata','datacite.xml')
           shell.mkdir(path.join(this.dir, 'metadata'))
         }
-        text_citation = citer.make_citation(this.json_ld, citation_path);
+        if (noCite) {
+          text_citation = undefined
+        }
+        else {
+          text_citation = citer.make_citation(this.json_ld, citation_path)
+        }
+
         console.log("Writing to", path.join(this.dir, "index.html"))
         index_maker.write_html(path.join(__dirname, "defaults/catalog_template.html"), path.join(this.dir, "index.html"), text_citation);
     },
