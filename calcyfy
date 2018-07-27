@@ -20,6 +20,7 @@ program
   .option('-b,  --bag [bag-dir]', 'Create Bagit Bag(s) under [bag-dir])' )
   .option('-z,  --zip', 'Create a zipped version of the bag' )
   .option('-n,  --no', 'No Citation' )
+  .option('-m, --multiple', "Output multiple files instead of a single index.html")
 
 
 
@@ -57,13 +58,19 @@ if (program.generateHtml) {
 
     }
     var index_maker = new Index();
-    index_maker.make_index_html(catalog);
+    var multiple
+    if (program.multiple){
+      multiple = path.join(dir, '__html__')
+      shell.mkdir(multiple)
+    }
+    index_maker.make_index_html(catalog, multiple);
     var citer = new Datacite();
     shell.mkdir(path.join(dir, 'metadata'))
     if (program.no) {
       var text_citation = citer.make_citation(catalog, path.join(dir, 'metadata','datacite.xml'));
     }
     // TODO Make template relative to script not current dir
+
     index_maker.write_html(path.join(__dirname,'defaults/catalog_template.html'), path.join(dir, 'index.html'), text_citation);
     if (program.bag) {
       bagger.update()

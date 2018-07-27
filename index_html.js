@@ -5,7 +5,7 @@ context = require('./defaults/context.json');
 const path = require('path');
 const shell = require("shelljs");
 const jsonld = require("jsonld");
-const display_keys = ["@type", "name", "@id", "description", "thumbnail", "datePublished", "creator", "path", "encodingFormat", "contentSize"]
+const display_keys = ["@type", "name", "memberOf", "@id", "description", "thumbnail", "datePublished", "creator", "path", "encodingFormat", "contentSize"]
 
 // TODO - Put this in a utility function
 const arrayify = function arrayify(something, callback) {
@@ -16,7 +16,6 @@ const arrayify = function arrayify(something, callback) {
 }
 
 const ele  = function ele(name, atts={}) {
-
   t = "<" + name;
   for (let key in atts){
     t += " " + key + " = '" + atts[key] + "'"
@@ -26,10 +25,38 @@ const ele  = function ele(name, atts={}) {
 }
 
 
-
 const  close  = function close(name) {
   return  "</" + name + "\n>"
 }
+
+const paginated_list_links = function paginated_list_links(list, page_size){
+  l = list.length
+  html = ""
+  if (l = 1){
+    html += list[0]["@id"]
+  }
+  if (l < page_size) {
+    html += ele("ul")
+    for (let i = 0; i < l ; i++) {
+      html += ele("li")
+      html += paginated_list_links(list.slice(0,1))
+      html += close("li")
+    }
+    html += close("ul")
+  }
+  else if (l < page_size * page_size) {
+      html += ele("details")
+      html += paginated_list_links(list.slice(0, page_size), page_size)
+      html += close("details")
+      html += paginated_list_links(list.slice(page_size, l), page_size)
+  }
+  else {
+    html += paginated_list_links(list.slice(0, page_size * page_size), page_size)
+    html += paginated_list_links(list.slice(page_size * page_size, l),  page_size)
+  }
+  return html
+}
+
 
 module.exports = function(){
   return(
@@ -67,7 +94,7 @@ module.exports = function(){
   },
 
 
-  format_cell : function(f, k, td_ele) {
+  format_cell : function(f, k, td_ele, recurse) {
     var data = f[k];
     if (!Array.isArray(data)) {
         data = [data];
@@ -78,7 +105,7 @@ module.exports = function(){
       if (!part) {
 
       } else if (k == "@type") {
-        this.format_header(part, td_ele)
+        td_ele += this.format_header(part, "")
       } else if (k === 'name' && f["@id"].match(/^https?:\/\//i)) {
         td_ele += ele("a", {href: f["@id"], 'class': 'fa fa-external-link', 'title': f["@id"]})
         //td_ele.ele("a", part).att('href', f["@id"]).att('class', 'fa fa-external-link').att('title',f["@id"]);
@@ -94,14 +121,18 @@ module.exports = function(){
         td_ele += part
         td_ele += close("a")
       } else if (
+        ! recurse &&
         (k != "hasPart") &&
         this.json_by_id[part['@id']] &&
         !(this.json_by_id[part['@id']].name || this.json_by_id[part['@id']].description)) {
         // Embed small bits of info that don't have a name or description
-        td_ele += this.dataset_to_html(this.json_by_id[part['@id']], "");
+               td_ele += this.dataset_to_html(this.json_by_id[part['@id']], "", true)
+
       } else if (part['@id'] && this.json_by_id[part['@id']]) {
         var target_name = this.json_by_id[part['@id']].name ? this.json_by_id[part['@id']].name : part['@id'];
-        td_ele += ele('a', {'href': '#' + part['@id']});
+
+        var href = this.multiple_files ? "./" + part['@id'].replace(/\//g,"_") + '.html' : '#' + part['@id']
+        td_ele += ele('a', {'href': href});
         td_ele += target_name
         td_ele += close('a')
 
@@ -136,18 +167,18 @@ module.exports = function(){
       //console.log("EXPANDED", expanded)
       el += key
       el += close("a")
+      return el
 
     }
     else {
       el += key
     }
-
     return(el)
   },
 
-  dataset_to_html : function dataset_to_html(node, html, toc, out_path) {
-    html += ele("hr")
+  dataset_to_html : function dataset_to_html(node, html, toc, out_path, recurse) {
 
+    html += ele("hr")
     html += ele("table", {"class": "table", "id": node["@id"]})
 
     var keys = new Set(Object.keys(node));
@@ -171,7 +202,7 @@ module.exports = function(){
       html += this.format_header(key, "")//[0].toUpperCase() + key.substring(1))
       html += close("th")
       html += ele("td")
-      html += this.format_cell(node, key, "")
+      html += this.format_cell(node, key, "", recurse = true)
       html += close("td")
       html += close("tr")
     }
@@ -234,13 +265,21 @@ module.exports = function(){
     for (let [_, set] of Object.entries(datasets)) {
       html += this.dataset_to_html(set, "", toc);
     }
+
+   if (this.multiple_files) {
+     out_path = path.join(this.multiple_files, node["@id"].replace(/\//g,"_") + ".html")
+     fs.writeFileSync(out_path, html);
+   }
    return html
 
-
   },
-  make_index_html : function make_index_html(crate_data) {
+  make_index_html : function make_index_html(crate_data, multiple_files) {
     // TODO change this interface to have a single parameter
     //console.log("JSON-path XXXXXXXXXXXXXXXXXXXXXXXXX", json_path);
+
+
+    this.multiple_files = multiple_files
+
     if (!crate_data['@graph']) {
       crate_data = require(crate_data);
     }
