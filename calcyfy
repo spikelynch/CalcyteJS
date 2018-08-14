@@ -79,7 +79,7 @@ if (program.generateHtml) {
       }
       catalog = path.join(dir, catalog_file_name);
       if (!program.no) {
-        shell.mkdir(path.join(dest, "metadata"));
+        shell.mkdir("-p", path.join(dest, "metadata"));
         var text_citation = citer.make_citation(
           catalog,
           path.join(dir, "metadata", "datacite.xml")
@@ -136,7 +136,7 @@ if (program.generateHtml) {
           c.save_bag_info();
           c.update();
           if (!program.no) {
-            shell.mkdir(path.join(c.dir, "metadata"));
+            shell.mkdir("-p", path.join(c.dir, "metadata"));
             text_citation = citer.make_citation(
               path.join(c.dir, defaults.catalog_json_file_name),
               path.join(c.dir, "metadata", "datacite.xml")

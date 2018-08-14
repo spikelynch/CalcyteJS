@@ -574,7 +574,7 @@ module.exports = function() {
         var out_dir = path.dirname(out_path);
         for (let d of defaults.html_multi_file_dirs) {
           out_dir += "/" + d;
-          shell.mkdir(out_dir);
+          shell.mkdir("-p", out_dir);
         }
         shell.rm(out_dir + "/*");
         this.out_dir = out_dir;

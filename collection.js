@@ -233,8 +233,8 @@ module.exports = function() {
       // TODO Generate a list of all files
       // FOR NOW: delete DataCrate files
       // Generate bag info later
-      shell.rm(path.join(this.dir, defaults.catalog_json_file_name));
-      shell.rm(path.join(this.dir, defaults.html_file_name));
+      shell.rm("-f", path.join(this.dir, defaults.catalog_json_file_name));
+      shell.rm("-f", path.join(this.dir, defaults.html_file_name));
       shell.exec(
         "bagit create --excludebaginfo " +
           bag_dir +
@@ -243,7 +243,6 @@ module.exports = function() {
       );
       this.bagged = true;
       this.dir = bag_dir;
-      console.log("Just bagged", this.dir);
     },
     to_json_ld: function to_json_ld() {
       // Turn the entire collection into a JSON-LD document
