@@ -138,13 +138,12 @@ module.exports = function() {
     },
 
     generate_bag_info: function generate_bag_info() {
-      //TODO: Remove this and us bag.js which is more generic
+      //TODO: Remove this and use bag.js which is more generic
       this.index_graph();
       this.bag_meta = {
-        "BagIt-Profile-Identifier":
-          "https://raw.githubusercontent.com/UTS-eResearch/datacrate/master/spec/0.2/profile-datacrate-v0.2.json",
+        "BagIt-Profile-Identifier": defaults.bagit_profile_identifier,
         "DataCrate-Specification-Identifier":
-          "https://github.com/UTS-eResearch/datacrate/blob/master/spec/0.2/data_crate_specification_v0.2.md"
+          defaults.datacrate_specification_identifier
       };
 
       if (this.root_node["contact"] && this.root_node["contact"]["@id"]) {
@@ -163,7 +162,7 @@ module.exports = function() {
       if (this.root_node["description"]) {
         this.bag_meta["Description"] = this.root_node["description"];
       }
-
+      this.bag_meta["Bagging-Date"] = new Date().toISOString();
       // Return a hash of BagIt style metadata by looking for it in the JSON-LD structure
     },
 

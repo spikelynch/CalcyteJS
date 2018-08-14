@@ -1,3 +1,20 @@
+/* This is part of Calcyte a tool for implementing the DataCrate data packaging
+spec.  Copyright (C) 2018  University of Technology Sydney
+
+This program is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program.  If not, see <http://www.gnu.org/licenses/>.
+*/
+
 const builder = require("xmlbuilder");
 const defaults = require("./defaults.js");
 var fs = require("fs");
@@ -151,33 +168,50 @@ module.exports = function() {
       }
       return html;
     },
-    write_html: function write_html(
-      out_path,
-      citation_text,
-      zip_path,
-      to_write
-    ) {
+    write_html: function write_html(out_path, to_write) {
+      var up_link;
       var catalog_json_link = "";
-      var zip_link = zip_path
-        ? "<a href='" + zip_path + "'>Download a zip file</a>"
-        : "";
+      var zip_link;
+      var name = this.root_node["name"];
+
       if (this.first_page) {
-        catalog_json_link = `<p>A machine-readable version of this page is available <a href='${
+        zip_link = this.zip_path
+          ? "<a href='" + this.zip_path + "'>Download a zip file</a>"
+          : "";
+        var catalog_actual_path = path.join(
+          path.dirname(out_path),
+          defaults.catalog_json_file_name
+        );
+        var stats = fs.statSync(catalog_actual_path);
+        var mtime = stats.mtime.toISOString();
+        catalog_json_link = `<p>A machine-readable version of this page, created at ${mtime} is available <a href='${
           defaults.catalog_json_file_name
         }'>${defaults.catalog_json_file_name}</a></p> `;
+
+        console.log(mtime);
+        if (this.multiple_files_dir) {
+          up_link = `<a href="" class="active"><button type="button" class="btn btn-default btn-sm"><span class="glyphicon glyphicon-home"></span>&nbsp;${name}</button></a>`;
+        }
+      } else if (this.multiple_files_dir) {
+        var href = this.get_href(this.root_node["@id"]);
+        up_link = `<a href=${href}><button type="button" class="btn btn-default btn-sm"><span class="glyphicon glyphicon-home"></span>&nbsp;${name}</button></a> `;
       }
 
-      if (out_path) {
-        fs.writeFileSync(
-          out_path,
-          this.template({
-            html: to_write,
-            citation: citation_text,
-            catalog_json_link: catalog_json_link,
-            zip_link: zip_link
-          })
-        );
-      }
+      var time = new Date().toISOString();
+
+      fs.writeFileSync(
+        out_path,
+        this.template({
+          html: to_write,
+          citation: this.text_citation,
+          catalog_json_link: catalog_json_link,
+          zip_link: zip_link,
+          up_link: up_link,
+          time_stamp: time,
+          DataCrate_version: defaults.DataCrate_version,
+          spec_id: defaults.DataCrate_Specification_Identifier
+        })
+      );
     },
     sort_keys: function(keys) {
       // Sort a set or array of keys to be in the same order as those in context.json
@@ -484,7 +518,7 @@ module.exports = function() {
         }
         //console.log("WRITING TO", out_path)
 
-        this.write_html(out_path, cite, this.zipname, html);
+        this.write_html(out_path, html);
         //fs.writeFileSync(out_path, html);
 
         this.first_page = false;
@@ -631,14 +665,20 @@ module.exports = function() {
       }
       // A container for our page
     },
-    make_index_html: function make_index_html(text_citation, zipname) {
+    make_index_html: function make_index_html(text_citation, zip_path) {
       var body_el = "";
+      console.log("ZIP path", zip_path);
+      this.zip_path = zip_path;
+      this.text_citation = text_citation;
+      this.first_page = true;
       body_el += ele("div");
       //console.log("DATA", this.json_by_url);
       // Get root of graph
       root_node = this.json_by_url["./"]
         ? this.json_by_url["./"]
         : this.json_by_url["data/"];
+
+      this.root_node = root_node;
 
       this.text_citation = text_citation;
       if (!text_citation) {
@@ -667,7 +707,7 @@ module.exports = function() {
       body_el += close("div");
 
       if (!this.multiple_files_dir) {
-        this.write_html(this.out_path, this.text_citation, zipname, body_el);
+        this.write_html(this.out_path, body_el);
       }
     }
   };

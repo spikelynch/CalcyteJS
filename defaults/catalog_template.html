@@ -1,3 +1,5 @@
+
+
 <html>
 <head>
   <style>
@@ -41,11 +43,21 @@
 
 </head>
 <body>
+
+  <nav class="navbar navbar-inverse">
+
+    <ul class="nav navbar-nav" >
+     <li >
+    <%- up_link %></li>
+ </ul>
+
+  </nav>
 <div class="container">
 <div class="jumbotron">
 <h3><%- citation %></h3>
-<h4> <%- zip_link %> </h4>
+<h4><%- zip_link %></h4>
 </div>
+
 
 
 
@@ -54,10 +66,10 @@
 
 <%- html %>
 
-<p>This file was made with
+<p>This file was created at <%- time_stamp %> by
 <a href='https://code.research.uts.edu.au/eresearch/calcytejs'>
-Calcyte</a> which implements the <a href='https://github.com/UTS-eResearch/datacrate/blob/master/spec/0.3/data_crate_specification_v0.3.md'>
-Draft DataCrate Packaging format v0.3</a>
+Calcyte</a> which implements the <a href='<%- spec_id %>'>
+Draft DataCrate Packaging format</a>, version <%- DataCrate_version %>
  </p>
 
 
