@@ -1,4 +1,5 @@
 {
+
           "@vocab": "http://schema.org/",
           "schema": "http://schema.org/",
           "cat": "http://www.w3.org/ns/dcat#",
@@ -2292,6 +2293,9 @@
           "hasMember": "pcdm:hasMember",
           "RepositoryCollection": "pcdm:Collection",
           "RepositoryObject": "pcdm:object",
+
+          "@label": "rdfs:label",
+
           "pcdm": "http://pcdm.org/models#",
           "bibo": "http://purl.org/ontology/bibo/",
           "cc": "http://creativecommons.org/ns#",

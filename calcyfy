@@ -1,128 +1,164 @@
 #!/usr/bin/env node
-const Collection = require('./collection.js');
-const Index = require('./index_html.js');
-const Datacite = require('./datacite.js');
-const Bag = require('./bag.js');
-const args = require('minimist')(process.argv.slice(2));
-const shell = require('shelljs');
-const program = require('commander');
-const path = require('path');
+const Collection = require("./collection.js");
+const Index = require("./index_html.js");
+const Datacite = require("./datacite.js");
+const Bag = require("./bag.js");
+const args = require("minimist")(process.argv.slice(2));
+const shell = require("shelljs");
+const program = require("commander");
+const path = require("path");
+const html_file_name = "CATALOG.html";
+const catalog_file_name = "CATALOG.json";
+const defaults = require("./defaults.js");
 
 var dirs = undefined;
 program
-  .version('0.1.0')
-  .description('To run calcyfy on a group of directories pass it a list of directories')
-  .arguments('<directories...>')
-  .action(function (directories) {
+  .version("0.1.0")
+  .description(
+    "To run calcyfy on a group of directories pass it a list of directories"
+  )
+  .arguments("<directories...>")
+  .action(function(directories) {
     dirs = directories;
   })
-  .option('-g, --generate-html', 'Generate HTML from a "CATALOG.json" in a directory')
-  .option('-b,  --bag [bag-dir]', 'Create Bagit Bag(s) under [bag-dir])' )
-  .option('-z,  --zip', 'Create a zipped version of the bag' )
-  .option('-n,  --no', 'No Citation' )
-  .option('-m, --multiple', "Output multiple files instead of a single index.html")
-
-
-
-
+  .option(
+    "-g, --generate-html",
+    'Generate HTML from a "' + catalog_file_name + '" in a directory'
+  )
+  .option("-b,  --bag [bag-dir]", "Create Bagit Bag(s) under [bag-dir])")
+  .option("-z,  --zip", "Create a zipped version of the bag")
+  .option("-n,  --no", "No Citation")
+  .option("-d,  --depth", "maximum depth to recurse into directories")
+  .option(
+    "-r,  --recurse",
+    "recurse into directories - up to " + defaults.max_depth
+  )
+  .option(
+    "-m, --multiple",
+    "Output multiple files instead of a single " + html_file_name
+  );
+var depth = 1;
 program.parse(process.argv);
+if (program.recurse) {
+  depth = defaults.max_depth;
+}
+if (program.depth) {
+  depth = program.depth;
+}
+var citer = new Datacite();
 if (!program.rawArgs.length || !dirs) program.help();
-console.log(program.generateHtml, program.no)
+var multiple = program.multiple;
+
 if (program.generateHtml) {
-  console.log('Generating html from exsiting CATALOG.json file')
-  dirs.forEach(function (dir) {
-    if (shell.test('-d', dir)) {
-      if(!path.isAbsolute(dir)) {
-        dir = path.join(process.cwd(), dir)
-
+  console.log("Generating html from exsiting " + catalog_file_name + " file");
+  dirs.forEach(function(dir) {
+    if (shell.test("-d", dir)) {
+      if (!path.isAbsolute(dir)) {
+        dir = path.join(process.cwd(), dir);
       }
-        var catalog = path.join(dir, 'CATALOG.json')
-    }
-    else if (shell.test('-f', dir)) {
-      if(!path.isAbsolute(dir)) {
-        dir = path.join(process.cwd(), dir)
+      var catalog = path.join(dir, catalog_file_name);
+    } else if (shell.test("-f", dir)) {
+      if (!path.isAbsolute(dir)) {
+        dir = path.join(process.cwd(), dir);
       }
-      var catalog = dir
-      dir = path.dirname(catalog)
+      var catalog = dir;
+      dir = path.dirname(catalog);
     }
 
-    if (program.bag) { //Bag the HTML
-        var bagger = new Bag();
-        var dest = path.join(program.bag,path.basename(dir))
-        shell.rm("-rf", dest)
-        dir = bagger.bag(dir, program.bag)
-        if(!path.isAbsolute(dir)) {
-          dir = path.join(process.cwd(), dir);
-        }
-        catalog = path.join(dir,"CATALOG.json")
-
+    if (program.bag) {
+      //Bag the HTML
+      var bagger = new Bag();
+      var dest = path.join(program.bag, path.basename(dir));
+      shell.rm("-rf", dest);
+      dir = bagger.bag(dir, program.bag);
+      if (!path.isAbsolute(dir)) {
+        dir = path.join(process.cwd(), dir);
+      }
+      catalog = path.join(dir, catalog_file_name);
+      if (!program.no) {
+        shell.mkdir(path.join(dest, "metadata"));
+        var text_citation = citer.make_citation(
+          catalog,
+          path.join(dir, "metadata", "datacite.xml")
+        );
+      }
     }
     var index_maker = new Index();
-    var multiple
-    if (program.multiple){
-      multiple = path.join(dir, '__html__')
-      shell.mkdir(multiple)
-    }
-    index_maker.make_index_html(catalog, multiple);
-    var citer = new Datacite();
-    shell.mkdir(path.join(dir, 'metadata'))
-    if (program.no) {
-      var text_citation = citer.make_citation(catalog, path.join(dir, 'metadata','datacite.xml'));
-    }
-    // TODO Make template relative to script not current dir
+    index_maker.init(
+      catalog,
+      path.join(dir, html_file_name),
+      multiple,
+      path.join(__dirname, "defaults/catalog_template.html")
+    );
 
-    index_maker.write_html(path.join(__dirname,'defaults/catalog_template.html'), path.join(dir, 'index.html'), text_citation);
     if (program.bag) {
-      bagger.update()
+      bagger.update();
       if (program.zip) {
-        shell.cd(bagger.target_dir)
-        var zipname = path.join("../", path.basename(bagger.target_dir) + ".zip")
-        shell.cd(bagger.target_dir)
-        shell.exec("zip -r " + zipname + " " + "*")
-        index_maker.write_html(path.join(__dirname,'defaults/catalog_template.html'), path.join(dir, 'index.html'), text_citation, zipname);
+        shell.cd(bagger.target_dir);
+        var zipname = path.join(
+          "../",
+          path.basename(bagger.target_dir) + ".zip"
+        );
+        shell.cd(bagger.target_dir);
+        index_maker.make_index_html(text_citation, "");
+
+        shell.exec("zip -r " + zipname + " " + "*");
       }
     }
 
-
-  })
+    index_maker.make_index_html(text_citation, zipname);
+  });
 } else {
-  //console.log(dirs);
+  //TODO - there is a lot of repetition here, sort it out
 
-  dirs.forEach(function (dir) {
-    if (shell.test('-d', dir)) {
+  dirs.forEach(function(dir) {
+    if (shell.test("-d", dir)) {
       var c = new Collection();
-      c.read(dir);
-      if (program.bag) {
-         //Get deepest dir
-         c.bag(path.join(program.bag, path.basename(dir)));
+      var output_dir = dir;
+      c.read(dir, "./", undefined, depth);
+      if (!path.isAbsolute(output_dir)) {
+        output_dir = path.join(process.cwd(), output_dir);
       }
-      // TODO - Change paths
-      // TODO
-      c.to_json_ld().then(
-        function () {
-          c.to_html(program.no);
-          if (program.bag) {
-            c.generate_bag_info();
-            c.save_bag_info();
-            c.update();
-            if (program.zip) {
-              //TODO: This is REPEATING YOURSELF
-              shell.cd(c.dir)
-              var zipname = path.join("../", path.basename(c.dir) + ".zip")
-              var zip_cmd = "zip -r " + zipname + " *"
-              shell.exec(zip_cmd)
-              var index_maker = new Index();
-              if (program.no) {
-                var text_citation = citer.make_citation(catalog, path.join(dir, 'metadata','datacite.xml'));
-              }
-              index_maker.make_index_html(path.join(c.dir, "CATALOG.json"));
-              index_maker.write_html(path.join(__dirname,'defaults/catalog_template.html'), path.join(c.dir, 'index.html'), text_citation, zipname);
-            }
+      if (program.bag) {
+        output_dir = path.join(program.bag, path.basename(dir));
+        c.bag(output_dir);
+        if (!path.isAbsolute(output_dir)) {
+          output_dir = path.join(process.cwd(), output_dir);
+        }
+      }
+      c.to_json_ld().then(function() {
+        var text_citation;
+        if (program.bag) {
+          c.generate_bag_info();
+          c.save_bag_info();
+          c.update();
+          if (!program.no) {
+            shell.mkdir(path.join(c.dir, "metadata"));
+            text_citation = citer.make_citation(
+              path.join(c.dir, defaults.catalog_json_file_name),
+              path.join(c.dir, "metadata", "datacite.xml")
+            );
           }
-        },
-        function (err) {
-          console.log(err)
-        });
+        }
+        var index_maker = new Index();
+        index_maker.init(
+          path.join(output_dir, catalog_file_name),
+          path.join(output_dir, html_file_name),
+          multiple,
+          path.join(__dirname, "defaults/catalog_template.html")
+        );
+
+        if (program.zip) {
+          //TODO: Refactor: This is REPEATING YOURSELF
+          shell.cd(c.dir);
+          var zipname = path.join("../", path.basename(c.dir) + ".zip");
+          var zip_cmd = "zip -r " + zipname + " *";
+          index_maker.make_index_html(text_citation, "");
+          shell.exec(zip_cmd);
+        }
+
+        index_maker.make_index_html(text_citation, zipname);
+      });
     }
   });
 }
