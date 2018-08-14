@@ -26,12 +26,15 @@ program
     'Generate HTML from a "' + catalog_file_name + '" in a directory'
   )
   .option("-b,  --bag [bag-dir]", "Create Bagit Bag(s) under [bag-dir])")
-  .option("-z,  --zip", "Create a zipped version of the bag")
-  .option("-n,  --no", "No Citation")
-  .option("-d,  --depth", "maximum depth to recurse into directories")
+  .option("-n,  --no", "No Citation - only applies ith --bag")
+  .option(
+    "-z,  --zip",
+    "Create a zipped version of the bag - only applies with --bag"
+  )
+  .option("-d,  --depth", "Maximum depth to recurse into directories")
   .option(
     "-r,  --recurse",
-    "recurse into directories - up to " + defaults.max_depth
+    "Recurse into directories - up to " + defaults.max_depth
   )
   .option(
     "-m, --multiple",
