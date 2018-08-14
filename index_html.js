@@ -6,6 +6,7 @@ context = require("./defaults/context.json");
 const path = require("path");
 const shell = require("shelljs");
 const jsonld = require("jsonld");
+const filesize = require("filesize");
 const display_keys = [
   "name",
   "@type",
@@ -266,6 +267,8 @@ module.exports = function() {
           .split("/")
           .pop();
         td_ele += close("a");
+      } else if (k === "contentSize") {
+        td_ele += filesize(part);
       } else if (
         k === "encodingFormat" &&
         part.fileFormat &&
@@ -413,6 +416,8 @@ module.exports = function() {
     },
 
     dataset_to_html: function dataset_to_html(node) {
+      // Turns any item into an HTML table
+
       //console.log("Processing dataset", node["@id"]);
       var html = "";
       var keys = new Set(Object.keys(node));
@@ -441,12 +446,9 @@ module.exports = function() {
       }
 
       html += ele("table", { class: "table", id: node["@id"] });
-
       html += ele("hr");
-
       //keys.delete("@type");
       //keys.delete("hasPart");
-
       html += ele("tr");
       html += ele("th", { style: "white-space: nowrap; width: 1%;" });
       html += "@id";
