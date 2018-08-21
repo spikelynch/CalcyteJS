@@ -90,6 +90,7 @@ if (program.generateHtml) {
       //Bag the HTML
       var bagger = new Bag();
       var dest = path.join(program.bag, path.basename(dir));
+      var zipname
       shell.rm("-rf", dest);
       dir = bagger.bag(dir, program.bag);
       if (!path.isAbsolute(dir)) {
@@ -128,7 +129,7 @@ if (program.generateHtml) {
   });
 } else {
   //TODO - there is a lot of repetition here, sort it out
-  var zip_path;
+  var zipname;
   dirs.forEach(function(dir) {
     if (shell.test("-d", dir)) {
       var c = new Collection();

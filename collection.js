@@ -87,9 +87,9 @@ module.exports = function() {
     existing_catalogs: this.existing_catalogs,
     bagged: this.bagged,
     root_node: this.root_node,
-    json_by_path: this.json_by_path,
-    json_by_id: this.json_by_id,
-    json_by_type: this.json_by_type,
+    item_by_path: this.item_by_path,
+    item_by_id: this.item_by_id,
+    item_by_type: this.item_by_type,
 
     get_unique_catalog_name: function get_unique_catalog_name(
       dir,
@@ -113,28 +113,28 @@ module.exports = function() {
 
     index_graph: function index_graph() {
       // TODO - PUT THIS IN A HELPER MODULE
-      this.json_by_id = {};
-      this.json_by_path = {};
-      this.json_by_type = {};
+      this.item_by_id = {};
+      this.item_by_path = {};
+      this.item_by_type = {};
       this.graph = this.json_ld["@graph"];
       for (let i = 0; i < this.graph.length; i++) {
         var item = this.graph[i];
         if (item["@id"]) {
-          this.json_by_id[item["@id"]] = item;
+          this.item_by_id[item["@id"]] = item;
         }
         if (item["path"]) {
-          this.json_by_path[item["path"]] = item;
+          this.item_by_path[item["path"]] = item;
         }
         if (item["@type"]) {
-          if (!this.json_by_type[item["@type"]]) {
-            this.json_by_type[item["@type"]] = [];
+          if (!this.item_by_type[item["@type"]]) {
+            this.item_by_type[item["@type"]] = [];
           }
-          this.json_by_type[item["@type"]].push(item);
+          this.item_by_type[item["@type"]].push(item);
         }
       }
-      this.root_node = this.json_by_path["./"]
-        ? this.json_by_path["./"]
-        : this.json_by_path["data/"];
+      this.root_node = this.item_by_path["./"]
+        ? this.item_by_path["./"]
+        : this.item_by_path["data/"];
     },
 
     generate_bag_info: function generate_bag_info() {
@@ -147,7 +147,7 @@ module.exports = function() {
       };
 
       if (this.root_node["contact"] && this.root_node["contact"]["@id"]) {
-        contact = this.json_by_id[this.root_node["contact"]["@id"]];
+        contact = this.item_by_id[this.root_node["contact"]["@id"]];
         map = {
           email: "Contact-Email",
           phone: "Contact-Telephone",
@@ -261,13 +261,13 @@ module.exports = function() {
       return promise.then(
         function(flattenated) {
           collection.json_ld = flattenated;
-          collection.json_by_id = {};
-          collection.json_by_url = {};
+          collection.item_by_id = {};
+          collection.item_by_url = {};
           for (let iid = 0; iid < flattenated["@graph"].length; iid++) {
             var item = flattenated["@graph"][iid];
-            collection.json_by_id[item["@id"]] = item;
+            collection.item_by_id[item["@id"]] = item;
             if (item.path) {
-              collection.json_by_url[item.path] = item;
+              collection.item_by_url[item.path] = item;
             }
           }
           fs.writeFileSync(

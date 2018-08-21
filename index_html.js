@@ -15,7 +15,6 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-const builder = require("xmlbuilder");
 const defaults = require("./defaults.js");
 var fs = require("fs");
 var ejs = require("ejs");
@@ -68,7 +67,7 @@ const close = function close(name) {
   return "</" + name + "\n>";
 };
 
-module.exports = function() {
+module.exports = function () {
   return {
     format_property_paginated: function format_property_paginated(
       item,
@@ -168,12 +167,13 @@ module.exports = function() {
       }
       return html;
     },
-    write_html: function write_html(out_path, to_write) {
+    write_html: function write_html(out_path, to_write, node) {
       var up_link;
       var catalog_json_link = "";
       var zip_link;
       var name = this.root_node["name"];
-
+      var json = JSON.stringify(node, null, 2);
+     
       if (this.first_page) {
         zip_link = this.zip_path
           ? "<a href='" + this.zip_path + "'>Download a zip file</a>"
@@ -186,9 +186,8 @@ module.exports = function() {
         var mtime = stats.mtime.toISOString();
         catalog_json_link = `<p>A machine-readable version of this page, created at ${mtime} is available <a href='${
           defaults.catalog_json_file_name
-        }'>${defaults.catalog_json_file_name}</a></p> `;
+          }'>${defaults.catalog_json_file_name}</a></p> `;
 
-        console.log(mtime);
         if (this.multiple_files_dir) {
           up_link = `<a href="" class="active"><button type="button" class="btn btn-default btn-sm"><span class="glyphicon glyphicon-home"></span>&nbsp;${name}</button></a>`;
         }
@@ -198,7 +197,7 @@ module.exports = function() {
       }
 
       var time = new Date().toISOString();
-
+  
       fs.writeFileSync(
         out_path,
         this.template({
@@ -209,11 +208,12 @@ module.exports = function() {
           up_link: up_link,
           time_stamp: time,
           DataCrate_version: defaults.DataCrate_version,
-          spec_id: defaults.DataCrate_Specification_Identifier
+          spec_id: defaults.DataCrate_Specification_Identifier,
+          json_ld: json
         })
       );
     },
-    sort_keys: function(keys) {
+    sort_keys: function (keys) {
       // Sort a set or array of keys to be in the same order as those in context.json
       // Returns set
       var keys_in_order = new Set();
@@ -236,7 +236,7 @@ module.exports = function() {
       for (let key of Object.keys(item)) {
         if (key != "@id" && key != "@reverse") {
           for (let part of item[key]) {
-            var target = this.json_by_id[part["@id"]];
+            var target = this.item_by_id[part["@id"]];
             var back_link = back_links[key];
             if (target && back_link) {
               if (!target[back_link]) {
@@ -289,10 +289,10 @@ module.exports = function() {
       } else if (
         k === "thumbnail" &&
         part["@id"] &&
-        this.json_by_id[part["@id"]]
+        this.item_by_id[part["@id"]]
       ) {
         td_ele += ele("img", {
-          src: this.get_file_ref(this.json_by_id[part["@id"]]["path"])
+          src: this.get_file_ref(this.item_by_id[part["@id"]]["path"])
         });
       } else if (k === "path") {
         td_ele += ele("a", { href: encodeURI(this.get_file_ref(part)) });
@@ -328,22 +328,22 @@ module.exports = function() {
         } else {
           td_ele += item["@id"];
         }
-      } else if (part["@id"] && this.json_by_id[part["@id"]]) {
+      } else if (part["@id"] && this.item_by_id[part["@id"]]) {
         /*else if (
         !item["@name"] &&
         k != "hasPart" &&
-        this.json_by_id[part["@id"]] &&
+        this.item_by_id[part["@id"]] &&
         !(
-          this.json_by_id[part["@id"]].name ||
-          this.json_by_id[part["@id"]].description
+          this.item_by_id[part["@id"]].name ||
+          this.item_by_id[part["@id"]].description
         )
       ) {
         // Embed small bits of info that don't have a name or description
 
-        td_ele += this.dataset_to_html(this.json_by_id[part["@id"]]);
+        td_ele += this.dataset_to_html(this.item_by_id[part["@id"]]);
       } */
-        var target_name = this.json_by_id[part["@id"]].name
-          ? this.json_by_id[part["@id"]].name
+        var target_name = this.item_by_id[part["@id"]].name
+          ? this.item_by_id[part["@id"]].name
           : part["@id"];
         var href = this.get_href(part["@id"]);
         td_ele += ele("a", { href: href });
@@ -366,8 +366,8 @@ module.exports = function() {
     },
     get_href: function get_href(id) {
       var path;
-      if (this.json_by_id[id]["path"]) {
-        path = this.json_by_id[id]["path"];
+      if (this.item_by_id[id]["path"]) {
+        path = this.item_by_id[id]["path"];
         if (Array.isArray(path)) {
           path = path[0];
         }
@@ -389,7 +389,7 @@ module.exports = function() {
       }
     },
 
-    format_cell: function(item, k) {
+    format_cell: function (item, k) {
       var data = item[k];
 
       if (k === "@reverse") {
@@ -424,7 +424,7 @@ module.exports = function() {
       if (context[key]) {
         // TODO deal with more complex case by using JSON-LD library
         var term = context[key];
-        arrayify(term, function(term) {
+        arrayify(term, function (term) {
           term = term[0];
           var expand1 = term["@id"] ? term["@id"] : term;
           href = context[expand1.split(":")[0]] + expand1.split(":")[1];
@@ -470,9 +470,9 @@ module.exports = function() {
               key != "@id" &&
               key != "@reverse" &&
               v["@id"] &&
-              this.json_by_id[v["@id"]]
+              this.item_by_id[v["@id"]]
             ) {
-              html += " | " + dataset_to_html(this.json_by_id[v["@id"]]);
+              html += " | " + dataset_to_html(this.item_by_id[v["@id"]]);
             }
           }
         }
@@ -516,9 +516,8 @@ module.exports = function() {
           );
           cite = node["name"];
         }
-        //console.log("WRITING TO", out_path)
-
-        this.write_html(out_path, html);
+        
+        this.write_html(out_path, html, node);
         //fs.writeFileSync(out_path, html);
 
         this.first_page = false;
@@ -541,8 +540,8 @@ module.exports = function() {
             node[part] = [node[part]];
           }
           for (let [key, value] of Object.entries(node[part])) {
-            if (value["@id"] && this.json_by_id[value["@id"]]) {
-              var child = this.json_by_id[value["@id"]];
+            if (value["@id"] && this.item_by_id[value["@id"]]) {
+              var child = this.item_by_id[value["@id"]];
               if (child["@type"]) {
                 // if (!Array.isArray(child['@type'])) {
                 //     child['@type'] = [child['@type']];
@@ -618,13 +617,17 @@ module.exports = function() {
         this.multiple_files_dir = false;
       }
       this.first_page = true;
+      // TODO: Use loadjson or somesuch
+      // Shift loading into the calcyte script
       if (!crate_data["@graph"]) {
         crate_data = require(crate_data);
       }
       //console.log(crate_data);
-      this.json_by_id = {};
-      this.json_by_url = {};
-      this.json_by_type = {};
+
+      this.json_ld = crate_data;
+      this.item_by_id = {};
+      this.item_by_url = {};
+      this.item_by_type = {}; // dict of arrays
       //console.log("CRATE-data", crate_data)
       graph = crate_data["@graph"];
 
@@ -642,10 +645,10 @@ module.exports = function() {
           }
         }
         if (item["@id"]) {
-          this.json_by_id[item["@id"]] = item;
+          this.item_by_id[item["@id"]] = item;
         }
         if (item["path"]) {
-          this.json_by_url[item["path"]] = item;
+          this.item_by_url[item["path"]] = item;
         }
         if (!item["@type"]) {
           item["@type"] = ["Thing"];
@@ -653,12 +656,13 @@ module.exports = function() {
         //console.log("TYPE", item['@type'])
         for (let t of item["@type"]) {
           //console.log(t)
-          if (!this.json_by_type[t]) {
-            this.json_by_type[t] = [];
+          if (!this.item_by_type[t]) {
+            this.item_by_type[t] = [];
           }
-          this.json_by_type[t].push(item);
+          this.item_by_type[t].push(item);
         }
       }
+      
       for (let i = 0; i < graph.length; i++) {
         var item = graph[i];
         this.make_back_links(item);
@@ -667,16 +671,15 @@ module.exports = function() {
     },
     make_index_html: function make_index_html(text_citation, zip_path) {
       var body_el = "";
-      console.log("ZIP path", zip_path);
       this.zip_path = zip_path;
       this.text_citation = text_citation;
       this.first_page = true;
       body_el += ele("div");
-      //console.log("DATA", this.json_by_url);
+      //console.log("DATA", this.item_by_url);
       // Get root of graph
-      root_node = this.json_by_url["./"]
-        ? this.json_by_url["./"]
-        : this.json_by_url["data/"];
+      root_node = this.item_by_url["./"]
+        ? this.item_by_url["./"]
+        : this.item_by_url["data/"];
 
       this.root_node = root_node;
 
@@ -688,26 +691,26 @@ module.exports = function() {
       body_el += this.dataset_to_html(root_node, true);
       //}
 
-      delete this.json_by_type["Dataset"];
-      delete this.json_by_type["File"];
-      delete this.json_by_type["RepositoryCollection"];
-      delete this.json_by_type["RepositoryObject"];
-      for (let type of Object.keys(this.json_by_type).sort()) {
+      delete this.item_by_type["Dataset"];
+      delete this.item_by_type["File"];
+      delete this.item_by_type["RepositoryCollection"];
+      delete this.item_by_type["RepositoryObject"];
+      for (let type of Object.keys(this.item_by_type).sort()) {
         body_el += ele("h1");
         body_el += "Contextual info: ";
         body_el += ele("span");
         body_el += this.format_header(type);
         body_el += close("span");
         body_el += close("h1");
-        //this.items_to_html(this.json_by_type[type], body_el);
-        for (let i of this.json_by_type[type]) {
+        //this.items_to_html(this.item_by_type[type], body_el);
+        for (let i of this.item_by_type[type]) {
           body_el += this.dataset_to_html(i, true);
         } //console.log(type);
       }
       body_el += close("div");
 
       if (!this.multiple_files_dir) {
-        this.write_html(this.out_path, body_el);
+        this.write_html(this.out_path, body_el, this.json_ld);
       }
     }
   };

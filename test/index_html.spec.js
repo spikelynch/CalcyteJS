@@ -41,7 +41,7 @@ describe("Test helper functions", function() {
     );
 
     assert.equal(
-      index_maker.json_by_id["http://orcid.org/0000-0002-3545-944X"][
+      index_maker.item_by_id["http://orcid.org/0000-0002-3545-944X"][
         "@reverse"
       ]["creator"][0]["@id"],
       "http://dx.doi.org/10.5281/zenodo.1009240"

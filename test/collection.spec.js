@@ -96,9 +96,9 @@ describe("Create a CATALOG", function() {
     return c.to_json_ld().then(
       function() {
         //console.log(JSON.stringify(c.json_ld, null, 2));
-        assert.equal(c.json_by_id["./"]["hasPart"].length, 11);
-        assert(!c.json_by_id["./1.pdf"]);
-        assert(c.json_by_id["1.sh"]);
+        assert.equal(c.item_by_id["./"]["hasPart"].length, 11);
+        assert(!c.item_by_id["./1.pdf"]);
+        assert(c.item_by_id["1.sh"]);
       },
       function(err) {
         console.log(err);
@@ -180,8 +180,8 @@ describe("GTM", function() {
     return c.to_json_ld().then(
       function() {
         //console.log(JSON.stringify(c.json_ld, null, 2));
-        assert.equal(c.json_by_url["./"]["hasPart"].length, 4);
-        assert.equal(c.json_by_url["./"]["name"], "GTM");
+        assert.equal(c.item_by_url["./"]["hasPart"].length, 4);
+        assert.equal(c.item_by_url["./"]["name"], "GTM");
       },
       function(err) {
         console.log(err);
@@ -205,19 +205,19 @@ describe("Glop Plot data", function() {
     return c.to_json_ld().then(
       function() {
         console.log(
-          c.json_by_id[
+          c.item_by_id[
             "https://dx.doi.org/10.1016/this_is_an_example_not_a_real_DOI"
           ]["hasPart"]
         );
         assert.equal(
-          c.json_by_id[
+          c.item_by_id[
             "https://dx.doi.org/10.1016/this_is_an_example_not_a_real_DOI"
           ]["hasPart"].length,
           5
         );
-        assert.equal(c.json_by_url["sketchsheets"]["hasPart"].length, 3);
-        //console.log("IDS", c.json_by_url["sketchsheets"]["hasPart"]);
-        var a_file = c.json_by_id["sketchsheets/CP7Glopsketch01.jpg"];
+        assert.equal(c.item_by_url["sketchsheets"]["hasPart"].length, 3);
+        //console.log("IDS", c.item_by_url["sketchsheets"]["hasPart"]);
+        var a_file = c.item_by_id["sketchsheets/CP7Glopsketch01.jpg"];
         assert.equal(a_file.contentSize, "179640");
         assert.equal(a_file.encodingFormat, "JPEG File Interchange Format");
         assert.equal(
@@ -247,7 +247,7 @@ describe("Glop Plot data - non recursive", function() {
       function() {
         //Still added parts for subdirs
         assert.equal(
-          c.json_by_id[
+          c.item_by_id[
             "https://dx.doi.org/10.1016/this_is_an_example_not_a_real_DOI"
           ]["hasPart"].length,
           5
@@ -276,23 +276,23 @@ describe("Sample data details", function() {
     return c.to_json_ld().then(
       function() {
         //console.log("JSON-LD", JSON.stringify(c.json_ld, null, 2));
-        //console.log("JSON BY ID", c.json_by_id)
+        //console.log("JSON BY ID", c.item_by_id)
         //console.log(JSON.stringify(flattenated, null, 2));
         assert.equal(
-          c.json_by_id["https://dx.doi.org/10.5281/zenodo.1009240"]["hasPart"]
+          c.item_by_id["https://dx.doi.org/10.5281/zenodo.1009240"]["hasPart"]
             .length,
           2
         );
         assert.equal(
-          c.json_by_id["http://www.geonames.org/8152662/catalina-park.html"]
+          c.item_by_id["http://www.geonames.org/8152662/catalina-park.html"]
             .name,
           "Catalina Park"
         );
-        //console.log("Place data", c.json_by_id["http://www.geonames.org/8152662/catalina-park.html"])
+        //console.log("Place data", c.item_by_id["http://www.geonames.org/8152662/catalina-park.html"])
         var catalina_location_id =
-          c.json_by_id["http://www.geonames.org/8152662/catalina-park.html"]
+          c.item_by_id["http://www.geonames.org/8152662/catalina-park.html"]
             .geo["@id"];
-        var catalina_geo = c.json_by_id[catalina_location_id];
+        var catalina_geo = c.item_by_id[catalina_location_id];
         assert.equal(catalina_geo.latitude, "-33.7152");
         assert.equal(catalina_geo.longitude, "150.30119");
       },
@@ -320,21 +320,21 @@ describe("Sample data bagged", function() {
         assert(shell.test("-e", "test_output/bags/sample/CATALOG.json"));
 
         assert.equal(
-          c.json_by_id["https://dx.doi.org/10.5281/zenodo.1009240"]["hasPart"]
+          c.item_by_id["https://dx.doi.org/10.5281/zenodo.1009240"]["hasPart"]
             .length,
           2
         );
 
         assert.equal(
-          c.json_by_id["http://www.geonames.org/8152662/catalina-park.html"]
+          c.item_by_id["http://www.geonames.org/8152662/catalina-park.html"]
             .name,
           "Catalina Park"
         );
-        //console.log("Place data", c.json_by_id["http://www.geonames.org/8152662/catalina-park.html"])
+        //console.log("Place data", c.item_by_id["http://www.geonames.org/8152662/catalina-park.html"])
         var catalina_location_id =
-          c.json_by_id["http://www.geonames.org/8152662/catalina-park.html"]
+          c.item_by_id["http://www.geonames.org/8152662/catalina-park.html"]
             .geo["@id"];
-        var catalina_geo = c.json_by_id[catalina_location_id];
+        var catalina_geo = c.item_by_id[catalina_location_id];
         assert.equal(catalina_geo.latitude, "-33.7152");
         assert.equal(catalina_geo.longitude, "150.30119");
       },
