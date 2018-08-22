@@ -28,6 +28,8 @@ const path = require("path");
 const html_file_name = "CATALOG.html";
 const catalog_file_name = "CATALOG.json";
 const defaults = require("./defaults.js");
+const JSON_helper = require("./jsonldhelper.js")
+const fs = require("fs")
 
 var dirs = undefined;
 program
@@ -130,6 +132,7 @@ if (program.generateHtml) {
 } else {
   //TODO - there is a lot of repetition here, sort it out
   var zipname;
+
   dirs.forEach(function(dir) {
     if (shell.test("-d", dir)) {
       var c = new Collection();
@@ -147,6 +150,10 @@ if (program.generateHtml) {
       }
       c.to_json_ld().then(function() {
         var text_citation;
+        var json_helper = new JSON_helper()
+        json_helper.init(c.json_ld)
+        json_helper.trim_context()
+        fs.writeFileSync(path.join(c.dir, defaults.catalog_json_file_name), JSON.stringify(json_helper.json_ld))
         if (program.bag) {
           c.generate_bag_info();
           c.save_bag_info();
