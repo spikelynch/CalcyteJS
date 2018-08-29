@@ -217,7 +217,7 @@ describe("Sample data bagged", function(){
     c.read("test_data/sample");
     shell.rm('-rf', "test_output/bags/sample");
     c.bag("test_output/bags/sample");
-    //console.log(c.collection_metadata.properties);
+    console.log(c.collection_metadata.properties);
 
     return c.to_json_ld().then(
       function() {
@@ -250,7 +250,7 @@ describe("HTML from JSON", function(){
   it("Should create an HTML page from JSON-LD", function() {
     var c = new Collection();
     c.read("test_data/sample");
-    //console.log(c.collection_metadata.properties);
+    console.log(c.collection_metadata.properties);
 
     return c.to_json_ld().then(
       function() {
