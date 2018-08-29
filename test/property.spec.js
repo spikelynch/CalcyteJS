@@ -1,4 +1,4 @@
-const Property = require("../property.js");
+const Property = require("../lib/property.js");
 const assert = require("assert");
 
 describe("Simple ID", function(){

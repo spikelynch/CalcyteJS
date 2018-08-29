@@ -1,6 +1,6 @@
-const Item = require("../item.js");
+const Item = require("../lib/item.js");
 const assert = require("assert");
-const Collection = require("../collection.js")
+const Collection = require("../lib/collection.js")
 
 
 

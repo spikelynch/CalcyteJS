@@ -1,11 +1,11 @@
 
-const Collection = require("../collection.js");
+const Collection = require("../lib/collection.js");
 const assert = require("assert");
 const shell = require("shelljs");
 var fs = require('fs');
 var path = require('path');
 const XLSX = require('xlsx');
-const Datacite = require('../datacite.js')
+const Datacite = require('../lib/datacite.js')
 
 
 

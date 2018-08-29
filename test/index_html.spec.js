@@ -1,8 +1,8 @@
 const shell = require('shelljs');
 const builder = require('xmlbuilder');
-const Index = require('../index_html.js');
+const Index = require('../lib/index_html.js');
 const default_test_dir = "test_output";
-const Datacite = require('../datacite.js')
+const Datacite = require('../lib/datacite.js')
 const text_citation_1 = "Peter Sefton (2017) Sample dataset for DataCrate v0.2. University of Technology Sydney. Datacrate. http://dx.doi.org/10.5281/zenodo.1009240";
 
 
