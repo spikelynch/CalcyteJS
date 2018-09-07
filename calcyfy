@@ -154,7 +154,7 @@ if (program.generateHtml) {
         var json_helper = new JSON_helper()
         json_helper.init(c.json_ld)
         json_helper.trim_context()
-        fs.writeFileSync(path.join(c.dir, defaults.catalog_json_file_name), JSON.stringify(json_helper.json_ld))
+        fs.writeFileSync(path.join(c.dir, defaults.catalog_json_file_name), JSON.stringify(json_helper.json_ld, null, 2))
         if (program.bag) {
           c.generate_bag_info();
           c.save_bag_info();
