@@ -1,8 +1,3 @@
-<<<<<<< HEAD
-const shell = require('shelljs');
-const builder = require('xmlbuilder');
-const Datacite = require('../lib/datacite.js')
-=======
 /* This is part of Calcyte a tool for implementing the DataCrate data packaging
 spec.  Copyright (C) 2018  University of Technology Sydney
 
@@ -22,8 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 const shell = require("shelljs");
 const builder = require("xmlbuilder");
-const Datacite = require("../datacite.js");
->>>>>>> master
+const Datacite = require("../lib/datacite.js");
 const assert = require("assert");
 const default_test_dir = "test_output";
 const text_citation_1 =

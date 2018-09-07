@@ -17,7 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 const shell = require("shelljs");
 const builder = require("xmlbuilder");
-const Index = require("../index_html.js");
+const Index = require("../lib/index_html.js");
 const default_test_dir = "test_output";
 const Datacite = require("../lib/datacite.js");
 const text_citation_1 =

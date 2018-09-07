@@ -16,7 +16,7 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-const Item = require("../item.js");
+const Item = require("../lib/item.js");
 const assert = require("assert");
 const Collection = require("../lib/collection.js");
 

@@ -17,7 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 /* Test for collection.js */
 
-const Collection = require("../collection.js");
+const Collection = require("../lib/collection.js");
 const assert = require("assert");
 const shell = require("shelljs");
 var fs = require("fs");
