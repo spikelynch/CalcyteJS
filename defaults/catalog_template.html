@@ -1,3 +1,5 @@
+
+
 <html>
 <head>
   <style>
@@ -11,15 +13,14 @@
   td {
       margin-right: 2em;
       white-space: normal;
-      //
-      //max-width: 100px;
-    //overflow: hidden;
+    
+  }
+  details {
+    margin-left: 2em;
   }
 
   .break {
-   //max-width: 20em;
-   //overflow: hidden;
-   //text-overflow: ellipsis;
+
    word-break: break-all;
   }
 
@@ -27,6 +28,11 @@
       margin-left: +1em;
   }
   </style>
+  
+  <script type="application/ld+json">
+   
+    <%- json_ld %>
+  </script>
 <link rel="stylesheet"
       href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
       integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
@@ -38,26 +44,34 @@
 
 </head>
 <body>
+
+  <nav class="navbar navbar-inverse">
+
+    <ul class="nav navbar-nav" >
+     <li >
+    <%- up_link %></li>
+ </ul>
+
+  </nav>
 <div class="container">
 <div class="jumbotron">
-Cite this work: <h3><%- citation %></h3>
-<h4> <%- zip_link %> </h4>
+<h3><%- citation %></h3>
+<h4><%- zip_link %></h4>
 </div>
 
-<p>This catalog file describes a dataset.
-It uses the <a href='https://github.com/UTS-eResearch/datacrate/blob/master/spec/0.2/data_crate_specification_v0.1.md'>
-Draft DataCrate Packaging format v0.2</a>.
-<p>This file was made with
-<a href='https://code.research.uts.edu.au/eresearch/calcytejs'>
-Calcyte</a>.
- </p>
-A machine-readable version of this page is available:
-<a href='CATALOG.json'>CATALOG.json</a></p>
+
+
+
+<%- catalog_json_link %>
 
 
 <%- html %>
 
-
+<p>This file was created at <%- time_stamp %> by
+<a href='https://code.research.uts.edu.au/eresearch/calcytejs'>
+Calcyte</a> which implements the <a href='<%- spec_id %>'>
+Draft DataCrate Packaging format</a>, version <%- DataCrate_version %>
+ </p>
 
 
 </body>

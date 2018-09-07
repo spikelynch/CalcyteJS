@@ -17,6 +17,7 @@
   "dependencies": {
     "cheerio": "^1.0.0-rc.2",
     "ejs": "^2.5.7",
+    "filesize": "^3.6.1",
     "gladstone": "^0.2.4",
     "html-entities": "^1.2.1",
     "jquery": "^3.3.1",
@@ -26,6 +27,7 @@
     "node-json2html": "^1.1.1",
     "shelljs": "^0.8.1",
     "tmp": "0.0.33",
+    "uri-js": "^4.2.2",
     "xlsx": "^0.11.17",
     "xmlbuilder": "^9.0.4"
   }
