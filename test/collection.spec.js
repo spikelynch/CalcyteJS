@@ -354,8 +354,8 @@ describe("Datacite", function() {
       function() {
         citer = new Datacite();
         text_citation = citer.make_citation(
-          "./test_data/Glop_Pot/CATALOG.json",
-          "./test_data/Glop_pot/datacite.xml"
+          "../test_data/Glop_Pot/CATALOG.json",
+          "./test_data/Glop_Pot/datacite.xml"
         );
         assert.equal(
           text_citation,

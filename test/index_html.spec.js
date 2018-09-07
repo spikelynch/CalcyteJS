@@ -37,7 +37,7 @@ describe("Test helper functions", function() {
     var index_maker = new Index();
     // Single page version
     index_maker.init(
-      "./test_data/sample_CATALOG.json",
+      "../test_data/sample_CATALOG.json",
       "./test/test_output/index.html",
       false
     );
@@ -48,7 +48,7 @@ describe("Test helper functions", function() {
 
     // Multi page version
     index_maker.init(
-      "./test_data/sample_CATALOG.json",
+      "../test_data/sample_CATALOG.json",
       "./test/test_output/index.html",
       true
     );

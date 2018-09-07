@@ -36,7 +36,7 @@ describe("Create an Datactite citation", function() {
     set_up_a_dir();
     citer = new Datacite();
     text_citation = citer.make_citation(
-      "./test_data/sample_CATALOG.json",
+      "../test_data/sample_CATALOG.json",
       "./test/test_output/datacite.xml"
     );
     assert.equal(text_citation, text_citation_1);
