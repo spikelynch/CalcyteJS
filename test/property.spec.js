@@ -93,9 +93,18 @@ describe("Nested", function() {
       "Creator>TYPE:Person>",
       "Name: Peter Sefton, ID: http://orcid.org/0000-0002-3545-944X"
     );
+
+    
     //console.log("SPILT TEST", "This:http://B;ah.asdsad.asdasd".split(":",2));
     assert.equal(f.property, "schema:creator");
-    console.log(f.to_json);
+
+    f.parse(
+      "distribution>TYPE:DataDownload>",
+      "contentUrl: ./"
+    );
+    assert.equal(f.property, "schema:distribution");
+    console.log(f.nested_item_json);
+
     done();
   });
 });

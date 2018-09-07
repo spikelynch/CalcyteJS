@@ -137,7 +137,8 @@ module.exports = function() {
           this.id = path.join(this.collection.rel_path, value);
           this.types.push("File");
           var pr = new metadata_property_name();
-          pr.parse("path", this.id);
+          pr.parse("distribution>TYPE:DataDownload>", `contentUrl: ${this.id}, ID: download_${this.id}`);
+          console.log("nested", pr.nested_item_json)
           this.properties[pr.name] = pr;
           this.is_file = value;
         } else if (property.is_id) {
@@ -162,12 +163,13 @@ module.exports = function() {
         // Add name to lookup table too
         if (property.nested_item_json.length > 0) {
           // Need to make new items later
-          for (var i = 0; i < property.nested_item_json.length; i++) {
+         for (var i = 0; i < property.nested_item_json.length; i++) {
             var nested_json = property.nested_item_json[i];
             //console.log("NESTED", nested_json);
             var nest_this_item = new module.exports();
             nest_this_item.load_json(nested_json, this.collection);
             this.nested_items[property.name] = nest_this_item;
+            console.log ("json ld", nest_this_item.to_json_ld_fragment())
           }
         } else {
           this.properties[property.name] = property;
