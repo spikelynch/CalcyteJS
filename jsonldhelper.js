@@ -123,7 +123,9 @@ module.exports = function () {
                     this.item_by_type[t].push(item);
                 }
             }
-
+            this.root_node = this.item_by_url["./"]
+            ? this.item_by_url["./"]
+            : this.item_by_url["data/"];
         },
         make_back_links: function (item) {
             for (let key of Object.keys(item)) {
