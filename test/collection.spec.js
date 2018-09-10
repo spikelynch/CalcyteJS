@@ -204,16 +204,14 @@ describe("Glop Plot data", function() {
 
     return c.to_json_ld().then(
       function() {
-        console.log(
-          c.item_by_id[
-            "https://dx.doi.org/10.1016/this_is_an_example_not_a_real_DOI"
-          ]["hasPart"]
-        );
+        const items = c.item_by_id[
+         "https://dx.doi.org/10.1016/this_is_an_example_not_a_real_DOI"
+        ]["hasPart"];
+        console.log(items);
         assert.equal(
-          c.item_by_id[
-            "https://dx.doi.org/10.1016/this_is_an_example_not_a_real_DOI"
-          ]["hasPart"].length,
-          5
+          items.length,
+          5, 
+          "Expected 5 items in " + JSON.stringify(items)
         );
         assert.equal(c.item_by_url["sketchsheets"]["hasPart"].length, 3);
         //console.log("IDS", c.item_by_url["sketchsheets"]["hasPart"]);
