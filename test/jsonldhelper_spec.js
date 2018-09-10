@@ -80,8 +80,10 @@ describe("JSON-LD helper simple tests", function () {
     assert.equal(helper2.get_uri_for_term("foaf:name"), "http://xmlns.com/foaf/0.1/name")
     assert.equal(helper2.get_uri_for_term("picture"), "http://xmlns.com/foaf/0.1/depiction")
     assert.equal(helper2.get_uri_for_term("foaf:homepage"), "http://xmlns.com/foaf/0.1/homepage")
+    assert.equal(helper2.get_uri_for_term("foaf:Person"), "http://xmlns.com/foaf/0.1/Person")
+
     helper2.trim_context()
-    assert.equal(Object.keys(helper2.json_ld["@context"]).length, 3)
+    assert.equal(Object.keys(helper2.json_ld["@context"]).length, 4)
 
 
     // Try with a real CATALOG
@@ -91,8 +93,7 @@ describe("JSON-LD helper simple tests", function () {
     assert.equal(helper3.get_uri_for_term("Person"), "http://schema.org/Person")
     assert.equal(helper3.get_uri_for_term("Project"), "http://purl.org/cerif/frapo/Project")
     helper3.trim_context()
-
-    assert.equal(Object.keys(helper3.json_ld["@context"]).length, 22)
+    assert.equal(Object.keys(helper3.json_ld["@context"]).length, 29)
     done();
   });
 
