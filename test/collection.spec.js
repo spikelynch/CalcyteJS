@@ -218,6 +218,7 @@ describe("Glop Plot data", function() {
         assert.equal(c.item_by_url["sketchsheets"]["hasPart"].length, 3);
         //console.log("IDS", c.item_by_url["sketchsheets"]["hasPart"]);
         var a_file = c.item_by_id["sketchsheets/CP7Glopsketch01.jpg"];
+        console.log("*** " + JSON.stringify(a_file));
         assert.equal(a_file.contentSize, "179640");
         assert.equal(a_file.encodingFormat, "JPEG File Interchange Format");
         assert.equal(
