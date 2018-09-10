@@ -60,6 +60,9 @@ program
   .option(
     "-m, --multiple",
     "Output multiple files instead of a single " + html_file_name
+  ).option(
+    "-u, --url [distro]",
+    "Distribution URL"
   );
 var depth = 1;
 program.parse(process.argv);
@@ -152,13 +155,33 @@ if (program.generateHtml) {
       c.to_json_ld().then(function() {
         var text_citation;
         var json_helper = new JSON_helper()
+             
         json_helper.init(c.json_ld)
+        if (program.url){
+          if (!json_helper.root_node["distribution"]) {
+            json_helper.root_node["distribution"] = []
+          }
+          json_helper.root_node["distribution"].push(
+            {
+              "@id": program.url
+            }
+          )
+          json_helper.json_ld["@graph"].push(
+            {
+              "@id": program.url,
+              "contentUrl": program.url,
+              "@type": "DataDownload",
+              "encodingFormat": "zip"
+           }
+          )
+        }   
         json_helper.trim_context()
-        fs.writeFileSync(path.join(c.dir, defaults.catalog_json_file_name), JSON.stringify(json_helper.json_ld, null, 2))
+        fs.writeFileSync(path.join(c.dir, defaults.catalog_json_file_name), JSON.stringify(json_helper.json_ld, null, 2 ))
         if (program.bag) {
           c.generate_bag_info();
           c.save_bag_info();
           c.update();
+
           if (!program.no) {
             shell.mkdir("-p", path.join(c.dir, "metadata"));
             text_citation = citer.make_citation(
@@ -183,7 +206,6 @@ if (program.generateHtml) {
           index_maker.make_index_html(text_citation, "");
           shell.exec(zip_cmd);
         }
-        console.log("making final zip", zipname);
         index_maker.make_index_html(text_citation, zipname);
       });
     }
