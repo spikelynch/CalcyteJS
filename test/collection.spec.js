@@ -25,45 +25,8 @@ var path = require("path");
 const XLSX = require("xlsx");
 const Datacite = require("../lib/datacite.js");
 
-const test_dir = "test_data";
-const fixtures_dir = path.join(test_dir, "fixtures");
-const working_dir = path.join(test_dir, "working");
+const fixtures = require("./fixtures");
 
-const default_test_dir = path.join(working_dir, "test_dir");
-
-function buildup(test_dir = default_test_dir) {
-  // Set up a test directory with some files.
-  shell.rm("-rf", test_dir);
-  shell.mkdir("-p", test_dir);
-  ["1", "two", "three file", "2 times 2"].forEach(function(f) {
-    [".txt", ".pdf", ".sh"].forEach(function(e) {
-      fs.writeFileSync(path.join(test_dir, f + e));
-    });
-  });
-  return test_dir;
-}
-
-function teardown(test_dir = default_test_dir) {
-  shell.rm("-rf", test_dir);
-}
-
-
-function remove_test_file(f, test_dir = default_test_dir) {
-  shell.rm("-rf", path.join(test_dir, f));
-}
-
-
-function buildup_fixture(dataset) {
-  const src = path.join(fixtures_dir, dataset);
-  const dest = path.join(working_dir, dataset);
-  shell.rm("-rf", dest);
-  shell.cp("-r", src, dest);
-  return dest;
-}
-
-function teardown_fixture(dataset) {
-  shell.rm("-rf", path.join(working_dir,dataset));
-}
 
 describe("Create unique CATALOG.xlsx filenames", function() {
 
@@ -104,8 +67,8 @@ describe("Create a CATALOG", function() {
 
   var test_path;
 
-  before(function () { test_path = buildup(); });
-  after(function () { teardown(); });
+  before(function () { test_path = fixtures.buildup(); });
+  after(function () { fixtures.teardown(); });
 
   it("Should create a catalog from scratch for test files", function() {
     this.timeout(15000);
@@ -115,7 +78,7 @@ describe("Create a CATALOG", function() {
     var sheet_json = XLSX.utils.sheet_to_json(c.workbook.Sheets["Files"]);
     assert.equal(sheet_json[0]["FILE:Filename"], "1.pdf");
 
-    remove_test_file("1.pdf");
+    fixtures.remove_test_file("1.pdf");
     var c = new Collection();
     c.read(test_path, "./", false, 1000);
     sheet_json = XLSX.utils.sheet_to_json(c.workbook.Sheets["Files"]);
@@ -143,8 +106,8 @@ describe("Create MANY CATALOGS", function() {
 
   var test_path;
 
-  before(function () { test_path = buildup(); });
-  after(function () { teardown(); });
+  before(function () { test_path = fixtures.buildup(); });
+  after(function () { fixtures.teardown(); });
 
   it("Should create appropriately named catalogs", function(done) {
     this.timeout(15000);
@@ -174,8 +137,8 @@ describe("Create SOME CATALOGS", function() {
 
   var test_path;
 
-  before(function () { test_path = buildup(); });
-  after(function () { teardown(); });
+  before(function () { test_path = fixtures.buildup(); });
+  after(function () { fixtures.teardown(); });
 
   it("Should create appropriately named catalogs but only to a depth of two", function(done) {
     this.timeout(15000);
@@ -215,8 +178,8 @@ describe("Create empty collection", function() {
 describe("GTM", function() {
   var test_path;
 
-  before(function () { test_path = buildup_fixture('GTM') });
-  after(function() { teardown_fixture('GTM') })
+  before(function () { test_path = fixtures.buildup('GTM') });
+  after(function() { fixtures.teardown('GTM') })
 
   it("Should create an non-empty metadata set", function() {
     var c = new Collection();
@@ -246,8 +209,8 @@ describe("Glop Plot data", function() {
 
   var test_path;
 
-  before(function () { test_path = buildup_fixture('Glop_Pot') });
-  after(function() { teardown_fixture('Glop_Pot') })
+  before(function () { test_path = fixtures.buildup('Glop_Pot') });
+  after(function() { fixtures.teardown('Glop_Pot') })
 
   it("Test basic metadata", function() {
     var c = new Collection();
@@ -294,8 +257,8 @@ describe("Glop Plot data - non recursive", function() {
 
   var test_path;
 
-  before(function () { test_path = buildup_fixture('Glop_Pot') });
-  after(function() { teardown_fixture('Glop_Pot') })
+  before(function () { test_path = fixtures.buildup('Glop_Pot') });
+  after(function() { fixtures.teardown('Glop_Pot') })
 
   it("Test basic metadata for base directory only", function() {
     var c = new Collection();
@@ -329,8 +292,8 @@ describe("Sample data details", function() {
 
   var test_path;
 
-  before(function () { test_path = buildup_fixture('sample') });
-  after(function() { teardown_fixture('sample') })
+  before(function () { test_path = fixtures.buildup('sample') });
+  after(function() { fixtures.teardown('sample') })
 
   it("Should create an non-empty metadata set", function() {
     var c = new Collection();
@@ -379,8 +342,8 @@ describe("Sample data bagged", function() {
 
   var test_path;
 
-  before(function () { test_path = buildup_fixture('sample') });
-  after(function() { teardown_fixture('sample') });
+  before(function () { test_path = fixtures.buildup('sample') });
+  after(function() { fixtures.teardown('sample') });
 
   it("Should create a bag", function() {
     var c = new Collection();
@@ -430,8 +393,8 @@ describe("Datacite", function() {
 
   var test_path;
 
-  before(function () { test_path = buildup_fixture('Glop_Pot') });
-  after(function() { teardown_fixture('Glop_Pot') })
+  before(function () { test_path = fixtures.buildup('Glop_Pot') });
+  after(function() { fixtures.teardown('Glop_Pot') })
 
   it("Should create a data citation", function() {
     var c = new Collection();
