@@ -380,7 +380,7 @@ describe("Sample data bagged", function() {
   var test_path;
 
   before(function () { test_path = buildup_fixture('sample') });
-  after(function() { teardown_fixture('sample') })
+  after(function() { teardown_fixture('sample') });
 
   it("Should create a bag", function() {
     var c = new Collection();
@@ -396,8 +396,8 @@ describe("Sample data bagged", function() {
         //console.log("JSON-LD", JSON.stringify(c.json_ld, null, 2));
         c.generate_bag_info();
         c.save_bag_info();
-        assert.equal(c.bag_meta["Contact-Email"], "pt@ptsefton.com");
-        assert(shell.test("-e", "test_output/bags/sample/CATALOG.json"));
+        assert.equal(c.bag_meta["Contact-Email"], "pt@ptsefton.com", "email");
+        assert(shell.test("-e", path.join(bag_dir, "CATALOG.json")));
 
         assert.equal(
           c.item_by_id["https://dx.doi.org/10.5281/zenodo.1009240"]["hasPart"]
