@@ -16,13 +16,19 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
 const fs = require("fs");
-const jsonld = require("../lib/jsonldhelper.js")
+const jsonld = require("../lib/jsonldhelper.js");
+const path = require("path");
 const assert = require("assert");
 
+const fixtures = require("./fixtures");
 
 
 describe("JSON-LD helper simple tests", function () {
 
+  var test_path;
+
+  before(function () { test_path = fixtures.buildup('context_trimming'); });
+  after(function () { fixtures.teardown('context_trimming'); });
 
   it("Test context resolving", function (done) {
 
@@ -87,7 +93,8 @@ describe("JSON-LD helper simple tests", function () {
 
 
     // Try with a real CATALOG
-    json_content = JSON.parse(fs.readFileSync("test_data/context_trimming/CATALOG.json"));
+    var catalog = path.join(test_path, 'CATALOG.json');
+    json_content = JSON.parse(fs.readFileSync(catalog));
     const helper3 = new jsonld()
     helper3.init(json_content)
     assert.equal(helper3.get_uri_for_term("Person"), "http://schema.org/Person")
