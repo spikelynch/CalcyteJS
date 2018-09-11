@@ -1,6 +1,6 @@
 {
   "name": "calcyte",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "description": "Javascript version of the Calcyte tool for data packaging",
   "main": "index.js",
   "bin": {
@@ -11,6 +11,7 @@
   },
   "author": "Peter Sefton",
   "license": "GPL-3.0",
+  "repository": "https://code.research.uts.edu.au/eresearch/CalcyteJS.git",
   "devDependencies": {
     "mocha": "^4.1.0"
   },
