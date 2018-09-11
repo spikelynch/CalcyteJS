@@ -25,9 +25,13 @@ var path = require("path");
 const XLSX = require("xlsx");
 const Datacite = require("../lib/datacite.js");
 
-const default_test_dir = "test_output";
+const test_dir = "test_data";
+const fixtures_dir = path.join(test_dir, "fixtures");
+const working_dir = path.join(test_dir, "working");
 
-function setup_a_dir(test_dir = default_test_dir) {
+const default_test_dir = path.join(working_dir, "test_dir");
+
+function buildup(test_dir = default_test_dir) {
   // Set up a test directory with some files.
   shell.rm("-rf", test_dir);
   shell.mkdir("-p", test_dir);
@@ -39,11 +43,31 @@ function setup_a_dir(test_dir = default_test_dir) {
   return test_dir;
 }
 
+function teardown(test_dir = default_test_dir) {
+  shell.rm("-rf", test_dir);
+}
+
+
 function remove_test_file(f, test_dir = default_test_dir) {
   shell.rm("-rf", path.join(test_dir, f));
 }
 
+
+function buildup_fixture(dataset) {
+  const src = path.join(fixtures_dir, dataset);
+  const dest = path.join(working_dir, dataset);
+  shell.rm("-rf", dest);
+  shell.cp("-r", src, dest);
+  return dest;
+}
+
+function teardown_fixture(dataset) {
+  shell.rm("-rf", path.join(working_dir,dataset));
+}
+
 describe("Create unique CATALOG.xlsx filenames", function() {
+
+
   it("Should create nice names", function(done) {
     var c = new Collection();
 
@@ -74,10 +98,17 @@ describe("Create unique CATALOG.xlsx filenames", function() {
   });
 });
 
+
+
 describe("Create a CATALOG", function() {
+
+  var test_path;
+
+  before(function () { test_path = buildup(); });
+  after(function () { teardown(); });
+
   it("Should create a catalog from scratch for test files", function() {
     this.timeout(15000);
-    var test_path = setup_a_dir();
     var c = new Collection();
 
     c.read(test_path, "./", false, 1000);
@@ -107,10 +138,16 @@ describe("Create a CATALOG", function() {
   });
 });
 
+
 describe("Create MANY CATALOGS", function() {
+
+  var test_path;
+
+  before(function () { test_path = buildup(); });
+  after(function () { teardown(); });
+
   it("Should create appropriately named catalogs", function(done) {
     this.timeout(15000);
-    var test_path = setup_a_dir();
     shell.mkdir("-p", path.join(test_path, "a", "a", "a", "b"));
     shell.mkdir("-p", path.join(test_path, "b", "a", "a", "b"));
     console.log(test_path);
@@ -132,10 +169,16 @@ describe("Create MANY CATALOGS", function() {
   });
 });
 
+
 describe("Create SOME CATALOGS", function() {
+
+  var test_path;
+
+  before(function () { test_path = buildup(); });
+  after(function () { teardown(); });
+
   it("Should create appropriately named catalogs but only to a depth of two", function(done) {
     this.timeout(15000);
-    var test_path = setup_a_dir();
     shell.mkdir("-p", path.join(test_path, "a", "a", "a", "b"));
     shell.mkdir("-p", path.join(test_path, "b", "a", "a", "b"));
     var c = new Collection();
@@ -155,7 +198,9 @@ describe("Create SOME CATALOGS", function() {
   });
 });
 
+
 describe("Create empty collection", function() {
+
   it("Should create an empty metadata set", function(done) {
     var c = new Collection();
     assert.deepEqual(c.collection_metadata.properties, {});
@@ -166,10 +211,16 @@ describe("Create empty collection", function() {
   });
 });
 
+
 describe("GTM", function() {
+  var test_path;
+
+  before(function () { test_path = buildup_fixture('GTM') });
+  after(function() { teardown_fixture('GTM') })
+
   it("Should create an non-empty metadata set", function() {
     var c = new Collection();
-    c.read("test_data/GTM", "./", false, 1000);
+    c.read(test_path, "./", false, 1000);
     //console.log("Props", c.collection_metadata.properties);
     assert.equal(c.collection_metadata.properties["name"].data, "GTM");
     assert.equal(c.children.length, 0);
@@ -190,10 +241,17 @@ describe("GTM", function() {
   });
 });
 
+
 describe("Glop Plot data", function() {
+
+  var test_path;
+
+  before(function () { test_path = buildup_fixture('Glop_Pot') });
+  after(function() { teardown_fixture('Glop_Pot') })
+
   it("Test basic metadata", function() {
     var c = new Collection();
-    c.read("test_data/Glop_Pot", "./", false, 1000);
+    c.read(test_path, "./", false, 1000);
     assert.equal(
       c.collection_metadata.properties["name"].data,
       "Glop Pot data"
@@ -231,10 +289,17 @@ describe("Glop Plot data", function() {
   });
 });
 
+
 describe("Glop Plot data - non recursive", function() {
+
+  var test_path;
+
+  before(function () { test_path = buildup_fixture('Glop_Pot') });
+  after(function() { teardown_fixture('Glop_Pot') })
+
   it("Test basic metadata for base directory only", function() {
     var c = new Collection();
-    c.read("test_data/Glop_Pot", "./", false, 1);
+    c.read(test_path, "./", false, 1);
     assert.equal(
       c.collection_metadata.properties["name"].data,
       "Glop Pot data"
@@ -259,10 +324,17 @@ describe("Glop Plot data - non recursive", function() {
   });
 });
 
+
 describe("Sample data details", function() {
+
+  var test_path;
+
+  before(function () { test_path = buildup_fixture('sample') });
+  after(function() { teardown_fixture('sample') })
+
   it("Should create an non-empty metadata set", function() {
     var c = new Collection();
-    c.read("test_data/sample", "./", false, 1000);
+    c.read(test_path, "./", false, 1000);
     //console.log(c.collection_metadata.properties);
     assert.equal(
       c.collection_metadata.properties["name"].data,
@@ -302,12 +374,21 @@ describe("Sample data details", function() {
   });
 });
 
+
 describe("Sample data bagged", function() {
+
+  var test_path;
+
+  before(function () { test_path = buildup_fixture('sample') });
+  after(function() { teardown_fixture('sample') })
+
   it("Should create a bag", function() {
     var c = new Collection();
-    c.read("test_data/sample", "./", false, 1000);
-    shell.rm("-rf", "test_output/bags/sample");
-    c.bag("test_output/bags/sample");
+    c.read(test_path, "./", false, 1000);
+    const bag_dir = path.join(working_dir, "bags", "sample");
+    shell.rm("-rf", bag_dir);
+    shell.mkdir("-p", bag_dir);
+    c.bag(bag_dir);
     console.log(c.collection_metadata.properties);
 
     return c.to_json_ld().then(
@@ -344,17 +425,24 @@ describe("Sample data bagged", function() {
   });
 });
 
+
 describe("Datacite", function() {
+
+  var test_path;
+
+  before(function () { test_path = buildup_fixture('Glop_Pot') });
+  after(function() { teardown_fixture('Glop_Pot') })
+
   it("Should create a data citation", function() {
     var c = new Collection();
-    c.read("test_data/sample");
+    c.read(test_path);
     console.log(c.collection_metadata.properties);
     return c.to_json_ld().then(
       function() {
         citer = new Datacite();
         text_citation = citer.make_citation(
-          "../test_data/Glop_Pot/CATALOG.json",
-          "./test_data/Glop_Pot/datacite.xml"
+          path.join("../", test_path, "CATALOG.json"),
+          path.join("./", test_path, "datacite.xml")
         );
         assert.equal(
           text_citation,
