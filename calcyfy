@@ -18,18 +18,18 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-const Collection = require("./collection.js");
-const Index = require("./index_html.js");
-const Datacite = require("./datacite.js");
-const Bag = require("./bag.js");
+const Collection = require("./lib/collection.js");
+const Index = require("./lib/index_html.js");
+const Datacite = require("./lib/datacite.js");
+const Bag = require("./lib/bag.js");
 const args = require("minimist")(process.argv.slice(2));
 const shell = require("shelljs");
 const program = require("commander");
 const path = require("path");
 const html_file_name = "CATALOG.html";
 const catalog_file_name = "CATALOG.json";
-const defaults = require("./defaults.js");
-const JSON_helper = require("./jsonldhelper.js")
+const defaults = require("./lib/defaults.js");
+const JSON_helper = require("./lib/jsonldhelper.js")
 const fs = require("fs")
 
 var dirs = undefined;
